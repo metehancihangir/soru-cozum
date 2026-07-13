@@ -1,4 +1,12 @@
-/* index.css — Global reset */
+/* ── Renk Tokenları (Design Tokens) ─────────────── */
+:root {
+  --color-correct:  #22c55e;   /* yeşil — doğru şık */
+  --color-wrong:    #ef4444;   /* kırmızı — yanlış şık */
+  --color-default:  #3b82f6;   /* mavi — seçilmemiş şık */
+  --color-disabled: #6b7280;   /* gri — cevap sonrası pasif */
+}
+
+/* ── Global Reset ────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
