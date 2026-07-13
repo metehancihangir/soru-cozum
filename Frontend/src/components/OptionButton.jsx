@@ -16,9 +16,13 @@ function OptionButton({ option, text, isAnswered, selectedOption, correctOption,
       disabled={isAnswered}
       onClick={onClick}
     >
-      {/* G-23: Şık harfi ve metin ayrı span'larda */}
-      <span className="option-letter">{option}</span>
-      <span className="option-text rtl">{text}</span>
+      {/* G-10, G-11: option-content sarıcısı — RTL'de harf sağda, metin solda */}
+      <span className="option-content">
+        {/* G-12: Şık harfi LTR (direction: ltr CSS ile ayarlı) */}
+        <span className="option-letter">{option}</span>
+        {/* G-13: Şık metni RTL */}
+        <span className="option-text">{text}</span>
+      </span>
     </button>
   )
 }
