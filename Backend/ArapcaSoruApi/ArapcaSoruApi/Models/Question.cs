@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ArapcaSoruApi.Models
 {
-    public class Question
+    public class Question : IValidatableObject
     {
         // G-8: Id — PK, auto-increment
         [Key]
@@ -38,6 +38,7 @@ namespace ArapcaSoruApi.Models
         // G-13: Doğru şık harfi — Required, max 1 karakter ("A"/"B"/"C"/"D"/"E")
         [Required]
         [MaxLength(1)]
+        [RegularExpression("^[A-E]$", ErrorMessage = "CorrectOption must be one of A, B, C, D, or E.")]
         public string CorrectOption { get; set; } = string.Empty;
 
         // G-14: Yanlış cevapta gösterilecek çözüm açıklaması — nullable
@@ -46,5 +47,29 @@ namespace ArapcaSoruApi.Models
 
         // G-15: Kayıt tarihi — default: UTC şimdiki zaman
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (string.IsNullOrWhiteSpace(CorrectOption))
+                yield break;
+
+            var optionText = CorrectOption.ToUpperInvariant() switch
+            {
+                "A" => OptionA,
+                "B" => OptionB,
+                "C" => OptionC,
+                "D" => OptionD,
+                "E" => OptionE,
+                _ => null
+            };
+
+            if (string.IsNullOrWhiteSpace(optionText))
+            {
+                yield return new ValidationResult(
+                    "CorrectOption must reference a non-empty option.",
+                    [nameof(CorrectOption)]
+                );
+            }
+        }
     }
 }
