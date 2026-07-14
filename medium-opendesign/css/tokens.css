@@ -1,0 +1,81 @@
+/* ═══════════════════════════════════════════════════════════
+   Medium Design System — CSS Design Tokens
+   Source: medium.com · Extracted: 2026-07-14 (Dembrandt)
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Colors: Core ──────────────────────────────────────── */
+  --color-primary:            #191919;
+  --color-primary-hover:      #000000;
+  --color-on-primary:         #ffffff;
+  --color-background:         #ffffff;
+  --color-text:               rgba(0, 0, 0, 0.8);
+
+  /* ── Colors: Neutral Scale ─────────────────────────────── */
+  --color-neutral-dark:       #242424;
+  --color-neutral-dark-hover: #2b2b2b;
+  --color-neutral-mid:        #6b6b6b;
+  --color-neutral-mid-hover:  #808080;
+  --color-black:              #000000;
+  --color-hover-dark:         #101010;
+
+  /* ── Colors: Accent (use sparingly) ────────────────────── */
+  --color-accent:             #1a8917;
+  --color-accent-bg:          #bbdbba;
+  --color-accent-bg-light:    #d2e7d1;
+
+  /* ── Medium CSS Variable Aliases (as found in DOM) ─────── */
+  --color-fg-accent-primary:   #1a8917;
+  --color-bg-accent-secondary: #bbdbba;
+  --color-bg-accent-tertiary:  #d2e7d1;
+  --color-fg-neutral-primary:  #242424;
+
+  /* ── Typography: Font Families ─────────────────────────── */
+  --font-display: 'gt-super', Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-ui:      'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-system:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+                  Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  /* ── Typography: Size Scale ─────────────────────────────── */
+  --font-size-display:  120px;
+  --font-size-h3:        22px;
+  --font-size-ui-lg:     20px;
+  --font-size-body-md:   16px;
+  --font-size-body-sm:   14px;
+  --font-size-body-xs:   13px;
+
+  /* ── Typography: Weight & Line Height ──────────────────── */
+  --font-weight-regular:    400;
+  --line-height-display:    0.83;
+  --line-height-h3:         1.27;
+  --line-height-ui-lg:      1.40;
+  --line-height-body-sm:    1.43;
+  --line-height-body-xs:    1.54;
+  --letter-spacing-display: -6.6px;
+
+  /* ── Spacing: 8px base grid ─────────────────────────────── */
+  --spacing-1:   8px;
+  --spacing-2:  10px;
+  --spacing-3:  24px;
+  --spacing-4:  25px;
+  --spacing-5:  48px;
+  --spacing-6:  75px;
+
+  /* ── Border Radius ──────────────────────────────────────── */
+  --radius-pill:  9999px;
+  --radius-badge:    2px;
+
+  /* ── Borders ────────────────────────────────────────────── */
+  --border-button:  1px solid var(--color-primary);
+  --border-divider: 1px solid var(--color-neutral-dark);
+  --border-light:   1px solid #e8e8e8;
+
+  /* ── Shadows ────────────────────────────────────────────── */
+  --shadow-overlay: rgb(128, 128, 128) 0px 0px 5px 0px;
+
+  /* ── Motion (effectively instant — Medium is animation-free) */
+  --transition-duration: 0.001s;
+  --transition-button:   background-color var(--transition-duration) linear,
+                         color            var(--transition-duration) linear;
+  --transition-link:     color var(--transition-duration) ease;
+}

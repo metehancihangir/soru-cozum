@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Soru Çözüm — Arapça-2 soru çözümü" />
+  <title>Arapça-2 · Soru Çözüm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Playfair+Display:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    :root {
+      --font-display: 'gt-super', 'Playfair Display', Georgia, serif;
+      --font-ui: 'sohne', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="app" data-od-id="app-quiz">
+    <!-- Quiz flow -->
+    <section class="quiz" id="quiz-screen" data-od-id="screen-quiz" data-screen-label="02 Soru Çözüm" aria-label="Soru çözümü">
+      <div class="quiz__top" data-od-id="quiz-top">
+        <a href="index.html" class="quiz__back" data-od-id="quiz-back">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+          Ana menü
+        </a>
+        <p class="quiz__counter" id="quiz-counter" data-od-id="quiz-counter">Soru 1 / 5</p>
+      </div>
+
+      <div class="quiz__progress" aria-hidden="true" data-od-id="quiz-progress">
+        <div class="quiz__progress-bar" id="quiz-progress-bar"></div>
+      </div>
+
+      <div class="quiz__question" data-od-id="quiz-question">
+        <h1 class="quiz__prompt is-placeholder" id="quiz-prompt" data-od-id="quiz-prompt" lang="ar" dir="rtl">
+          [Soru metni]
+        </h1>
+
+        <div class="quiz__options" id="quiz-options" role="group" aria-label="Cevap şıkları" data-od-id="quiz-options">
+          <!-- filled by JS -->
+        </div>
+      </div>
+
+      <div class="quiz__footer" data-od-id="quiz-footer">
+        <button type="button" class="btn btn--primary quiz__next" id="quiz-next" data-od-id="quiz-next">
+          Sonraki Soru
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- Complete -->
+    <section class="complete" id="complete-screen" data-od-id="screen-complete" data-screen-label="03 Tamamlandı" aria-label="Quiz tamamlandı">
+      <div class="complete__icon" aria-hidden="true" data-od-id="complete-icon">
+        <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
+      </div>
+      <h1 class="complete__title" data-od-id="complete-title">Tamamladın!</h1>
+      <p class="complete__score" id="complete-score" data-od-id="complete-score">5 / 5 doğru</p>
+      <div class="complete__actions">
+        <a href="index.html" class="btn btn--primary btn--full" data-od-id="complete-home">Ana Menüye Dön</a>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" data-od-id="toast"></div>
+
+  <script src="js/quiz.js"></script>
+</body>
+</html>

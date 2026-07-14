@@ -2,80 +2,100 @@ import { useState } from 'react'
 import './HomeScreen.css'
 
 function HomeScreen({ onSelectCategory }) {
-  const [comingSoon, setComingSoon] = useState(false)
+  const [toastMsg, setToastMsg] = useState('')
+  const [toastVisible, setToastVisible] = useState(false)
+  let toastTimer = null
 
-  const handleArabic4Click = () => {
-    setComingSoon(true)
-    setTimeout(() => setComingSoon(false), 2800)
+  const showToast = (msg) => {
+    setToastMsg(msg)
+    setToastVisible(true)
+    clearTimeout(toastTimer)
+    toastTimer = setTimeout(() => setToastVisible(false), 2200)
+  }
+
+  const handleLockedClick = () => {
+    showToast('Arapça-4 yakında geliyor 🔒')
   }
 
   return (
-    <div className="home-container">
-      {/* Arka plan dekoratif şekiller */}
-      <div className="home-bg-orb home-bg-orb--1" aria-hidden="true" />
-      <div className="home-bg-orb home-bg-orb--2" aria-hidden="true" />
+    <div className="app-container">
+      <main className="home" aria-label="Kategori seçimi">
 
-      <header className="home-header">
-        <div className="home-logo" aria-label="Arapça Soru uygulaması logosu">
-          <span className="home-logo-icon">📖</span>
+        {/* ── Marka / Logo ── */}
+        <header className="home__brand">
+          <div className="home__logo" aria-hidden="true">س</div>
+          <h1 className="home__title">Soru Çözüm</h1>
+          <p className="home__tagline">Arapça dil becerilerini geliştir</p>
+        </header>
+
+        {/* ── Kategori Kartları ── */}
+        <div className="home__categories" role="list">
+
+          {/* Arapça-2 — aktif */}
+          <button
+            type="button"
+            className="cat-card cat-card--active"
+            role="listitem"
+            id="btn-arabic-2"
+            aria-label="Arapça-2, 100 soru"
+            onClick={() => onSelectCategory('arabic2')}
+          >
+            <span className="cat-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3c-1.5 3-4 5-7 6 3 1 5.5 3 7 6 1.5-3 4-5 7-6-3-1-5.5-3-7-6z" />
+              </svg>
+            </span>
+            <span className="cat-card__body">
+              <span className="cat-card__name">Arapça-2</span>
+              <span className="cat-card__meta">100 Soru</span>
+            </span>
+            <span className="cat-card__arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </span>
+          </button>
+
+          {/* Arapça-4 — kilitli */}
+          <button
+            type="button"
+            className="cat-card cat-card--locked"
+            role="listitem"
+            id="btn-arabic-4"
+            aria-disabled="true"
+            aria-label="Arapça-4, yakında"
+            onClick={handleLockedClick}
+          >
+            <span className="cat-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
+              </svg>
+            </span>
+            <span className="cat-card__body">
+              <span className="cat-card__name">Arapça-4</span>
+              <span className="cat-card__meta">
+                <span className="badge">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="5" y="11" width="14" height="10" rx="1.5" />
+                    <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+                  </svg>
+                  Yakında
+                </span>
+              </span>
+            </span>
+          </button>
+
         </div>
-        <h1 className="home-title">ArapçaSoru</h1>
-        <p className="home-subtitle">
-          Arapça dil becerilerini geliştirmek için interaktif soru çözüm platformu
-        </p>
-      </header>
+      </main>
 
-      <section className="home-categories" aria-label="Kategori seçimi">
-        <h2 className="home-categories-heading">Kategori Seç</h2>
-
-        {/* Arapça-2 Butonu */}
-        <button
-          id="btn-arabic-2"
-          className="category-card category-card--active"
-          onClick={() => onSelectCategory('arabic2')}
-          aria-label="Arapça-2 kategorisini başlat"
-        >
-          <span className="category-card__badge">100 Soru</span>
-          <div className="category-card__icon" aria-hidden="true">🌙</div>
-          <div className="category-card__body">
-            <h3 className="category-card__title">Arapça-2</h3>
-            <p className="category-card__desc">
-              Temel ve orta düzey Arapça soruları ile dil becerilerini pekiştir
-            </p>
-          </div>
-          <span className="category-card__arrow" aria-hidden="true">→</span>
-        </button>
-
-        {/* Arapça-4 Butonu */}
-        <button
-          id="btn-arabic-4"
-          className="category-card category-card--soon"
-          onClick={handleArabic4Click}
-          aria-label="Arapça-4 kategorisi henüz hazır değil"
-          aria-disabled="true"
-        >
-          <span className="category-card__badge category-card__badge--soon">Yakında</span>
-          <div className="category-card__icon" aria-hidden="true">⭐</div>
-          <div className="category-card__body">
-            <h3 className="category-card__title">Arapça-4</h3>
-            <p className="category-card__desc">
-              İleri düzey Arapça soruları — çok yakında hizmetinizde
-            </p>
-          </div>
-          <span className="category-card__lock" aria-hidden="true">🔒</span>
-        </button>
-      </section>
-
-      {/* "Yakında" toast bildirimi */}
-      {comingSoon && (
-        <div className="home-toast" role="alert" aria-live="assertive">
-          🔒 Arapça-4 çok yakında geliyor!
-        </div>
-      )}
-
-      <footer className="home-footer">
-        <p>Kategori seçerek quize başlayabilirsin</p>
-      </footer>
+      {/* Toast */}
+      <div
+        className={`toast${toastVisible ? ' is-visible' : ''}`}
+        role="status"
+        aria-live="polite"
+      >
+        {toastMsg}
+      </div>
     </div>
   )
 }
