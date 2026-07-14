@@ -1,173 +1,324 @@
-/* ── RTL Yardımcı Sınıf ───────────────────────── */
-/* G-4: unicode-bidi eklendi — karışık Arapça/Türkçe metinlerde yön hatalarını önler */
-/* G-8: Noto Naskh Arabic font ailesi eklendi */
-.rtl {
-  direction: rtl;
-  text-align: right;
-  font-family: 'Noto Naskh Arabic', 'Arial Unicode MS', serif;
-  unicode-bidi: embed;
+/* ═══════════════════════════════════════════════════════════
+   Soru Çözüm — App & Quiz Styles (Medium DS)
+   ═══════════════════════════════════════════════════════════ */
+
+/* Google Fonts fallback (gt-super / sohne yerine) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Playfair+Display:wght@400&display=swap');
+
+/* ── Reset & Base ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  font-family:      var(--font-ui), var(--font-system);
+  font-size:        var(--font-size-body);
+  font-weight:      var(--font-weight-regular);
+  line-height:      var(--line-height-body);
+  color:            var(--color-text);
+  background-color: var(--color-background);
+  min-height:       100dvh;
 }
 
-/* ── Layout ───────────────────────────────────── */
-/* G-16: width:100% ve max-width doğrulandı/güncellendi */
+button {
+  font-family: inherit;
+  font-weight: var(--font-weight-regular);
+  cursor:      pointer;
+  border:      none;
+  background:  none;
+  color:       inherit;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ── App shell ──────────────────────────────────────────── */
 .app-container {
-  width: 100%;
-  max-width: 700px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
-.app-title {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-/* ── Soru Kartı ───────────────────────────────── */
-.question-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1.5rem;
-  display: flex;
+  max-width:  var(--app-max);
+  margin:     0 auto;
+  min-height: 100dvh;
+  padding:    var(--spacing-5) var(--spacing-3);
+  display:    flex;
   flex-direction: column;
-  gap: 1rem;
 }
 
-.question-counter {
-  font-size: 0.85rem;
-  color: #666;
+@media (min-width: 480px) {
+  .app-container { padding: var(--spacing-6) var(--spacing-5); }
 }
 
-/* G-5: .question-text.rtl için direction ve text-align açıkça belirtildi */
-.question-text {
-  font-size: 1.25rem;
-  line-height: 1.8;
-  padding: 0.75rem;
-  background: #f9f9f9;
-  border-radius: 6px;
-  direction: rtl;
-  text-align: right;
+/* ── Buttons ─────────────────────────────────────────────── */
+.btn {
+  display:        inline-flex;
+  align-items:    center;
+  justify-content: center;
+  gap:            8px;
+  min-height:     44px;
+  padding:        10px 20px;
+  border-radius:  var(--radius-pill);
+  font-size:      var(--font-size-body);
+  line-height:    1.4;
+  transition:     background-color var(--transition-fast),
+                  color            var(--transition-fast),
+                  border-color     var(--transition-fast),
+                  opacity          var(--transition-fast);
 }
 
-/* ── Şık Butonları ───────────────────────────── */
-.options-list {
-  display: flex;
+.btn--primary {
+  background: var(--color-primary);
+  color:      var(--color-on-primary);
+}
+.btn--primary:hover  { background: var(--color-primary-hover); }
+.btn--primary:active { background: var(--color-hover-dark); }
+
+.btn--ghost {
+  background: transparent;
+  color:      var(--color-neutral-dark);
+  border:     var(--border-button);
+}
+.btn--ghost:hover { background: var(--color-surface); }
+
+.btn--full { width: 100%; }
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity:        0.45;
+  cursor:         not-allowed;
+  pointer-events: none;
+}
+
+/* ── Quiz screen ─────────────────────────────────────────── */
+.quiz {
+  flex:           1;
+  display:        flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap:            var(--spacing-5);
+  padding-block:  var(--spacing-3);
 }
 
-/* G-2: hard-coded renkler CSS değişkenleriyle değiştirildi */
-/* G-14: transition genişletildi */
-.option-btn {
-  display: flex;
+.quiz__top {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  gap:             var(--spacing-3);
+}
+
+.quiz__back {
+  display:    inline-flex;
   align-items: center;
-  padding: 0.75rem 1rem;
-  border: 2px solid var(--color-default);
-  border-radius: 6px;
-  background: var(--color-btn-bg);
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.25s ease, border-color 0.25s ease;
-  width: 100%;
+  gap:        6px;
+  min-height: 44px;
+  padding:    0 4px;
+  font-size:  var(--font-size-small);
+  color:      var(--color-neutral-mid);
+  transition: color var(--transition-fast);
+}
+.quiz__back:hover { color: var(--color-neutral-dark); }
+.quiz__back svg {
+  width:            16px;
+  height:           16px;
+  stroke:           currentColor;
+  fill:             none;
+  stroke-width:     1.6;
+  stroke-linecap:   round;
+  stroke-linejoin:  round;
 }
 
-.option-btn:hover:not(:disabled) {
-  background: #eff6ff;
+.quiz__counter {
+  font-size:            var(--font-size-small);
+  color:                var(--color-neutral-mid);
+  font-variant-numeric: tabular-nums;
 }
 
-/* G-3: disabled stili opacity ile güncellendi */
-.option-btn:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-  border-color: var(--color-disabled);
+.quiz__progress {
+  height:        2px;
+  background:    var(--color-surface);
+  border-radius: 1px;
+  overflow:      hidden;
+}
+.quiz__progress-bar {
+  height:     100%;
+  width:      0%;
+  background: var(--color-neutral-dark);
+  transition: width var(--transition-fast);
 }
 
-/* G-2: Doğru şık — CSS değişkeni */
-.option-btn.correct {
-  background: #dcfce7;
-  border-color: var(--color-correct);
-  color: #166534;
+.quiz__question {
+  flex:           1;
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--spacing-5);
+  min-height:     0;
 }
 
-/* G-2: Yanlış şık — CSS değişkeni */
-.option-btn.wrong {
-  background: #fee2e2;
-  border-color: var(--color-wrong);
-  color: #991b1b;
+.quiz__prompt {
+  font-family: var(--font-display);
+  font-size:   var(--font-size-arabic);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.35;
+  color:       var(--color-neutral-dark);
+  direction:   rtl;
+  text-align:  right;
+  min-height:  2.7em;
 }
 
-/* G-11: .option-content sarıcı — RTL'de harf sağda, metin solda */
-.option-content {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  gap: 0.75rem;
-  width: 100%;
+.quiz__options {
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--spacing-2);
 }
 
-/* G-12: Şık harfi LTR olmalı (Latin harf, Arapça değil) */
-.option-letter {
-  font-weight: bold;
-  min-width: 2rem;
-  text-align: center;
-  direction: ltr;
-  flex-shrink: 0;
+/* ── Şık butonları ───────────────────────────────────────── */
+.option {
+  width:          100%;
+  min-height:     48px;
+  padding:        12px 18px;
+  border-radius:  var(--radius-pill);
+  border:         var(--border-option);
+  background:     var(--color-background);
+  color:          var(--color-neutral-dark);
+  font-size:      var(--font-size-option);
+  text-align:     left;
+  display:        flex;
+  align-items:    center;
+  gap:            12px;
+  transition:     background-color var(--transition-fast),
+                  border-color     var(--transition-fast),
+                  color            var(--transition-fast);
+}
+.option:hover:not(:disabled):not(.is-correct):not(.is-wrong) {
+  background: var(--color-surface);
+}
+.option:focus-visible {
+  outline:        2px solid var(--color-neutral-dark);
+  outline-offset: 2px;
+}
+.option:disabled { cursor: default; }
+
+.option__key {
+  flex-shrink:   0;
+  width:         22px;
+  height:        22px;
+  border-radius: 50%;
+  border:        1px solid currentColor;
+  display:       grid;
+  place-items:   center;
+  font-size:     11px;
+  line-height:   1;
+  opacity:       0.7;
 }
 
-/* G-13: .option-text doğrulandı — direction:rtl ve flex:1 mevcut */
-.option-text {
-  flex: 1;
-  direction: rtl;
-  text-align: right;
+.option__label {
+  flex:      1;
+  min-width: 0;
 }
 
-/* ── Açıklama ────────────────────────────────── */
-/* G-5: .explanation.rtl için direction ve text-align doğrulandı */
-.explanation {
-  background: #fef9c3;
-  border-left: 4px solid #facc15;
-  border-radius: 4px;
-  padding: 0.75rem 1rem;
-  font-size: 0.95rem;
-  line-height: 1.7;
-  direction: rtl;
-  text-align: right;
+.option.is-correct {
+  background:   var(--color-accent-bg);
+  border-color: var(--color-accent-border);
+  color:        var(--color-accent);
+}
+.option.is-wrong {
+  background:   var(--color-error-bg);
+  border-color: var(--color-error-border);
+  color:        var(--color-error);
 }
 
-/* ── Navigasyon Butonu ───────────────────────── */
-.next-btn {
-  align-self: flex-end;
-  padding: 0.6rem 1.5rem;
-  background: var(--color-default);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+/* ── Quiz footer ─────────────────────────────────────────── */
+.quiz__footer {
+  display:         flex;
+  justify-content: flex-end;
+  min-height:      48px;
+  padding-top:     var(--spacing-2);
 }
 
-.next-btn:hover {
-  background: var(--color-default-hover);
+/* ── Complete ekranı ─────────────────────────────────────── */
+.complete {
+  flex:           1;
+  display:        flex;
+  flex-direction: column;
+  align-items:    center;
+  justify-content: center;
+  text-align:     center;
+  gap:            var(--spacing-4);
+  padding:        var(--spacing-7) var(--spacing-3);
 }
 
-/* ── Durum Metinleri ─────────────────────────── */
+.complete__icon {
+  width:         56px;
+  height:        56px;
+  border-radius: 50%;
+  background:    var(--color-accent-bg);
+  color:         var(--color-accent);
+  display:       grid;
+  place-items:   center;
+}
+.complete__icon svg {
+  width:          28px;
+  height:         28px;
+  stroke:         currentColor;
+  fill:           none;
+  stroke-width:   1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.complete__title {
+  font-family: var(--font-display);
+  font-size:   var(--font-size-title);
+  line-height: var(--line-height-title);
+  color:       var(--color-neutral-dark);
+}
+
+.complete__score {
+  font-size: var(--font-size-body);
+  color:     var(--color-neutral-mid);
+}
+
+.complete__actions {
+  margin-top: var(--spacing-3);
+  width:      100%;
+  max-width:  280px;
+}
+
+/* ── Durum metinleri (yükleme / hata) ───────────────────── */
 .status-text {
   text-align: center;
-  margin-top: 3rem;
-  font-size: 1.1rem;
+  margin-top: var(--spacing-7);
+  font-size:  var(--font-size-body);
+  color:      var(--color-neutral-mid);
 }
 
-.status-text.error {
-  color: var(--color-wrong);
+.status-text.error { color: var(--color-error); }
+
+/* ── Toast ───────────────────────────────────────────────── */
+.toast {
+  position:   fixed;
+  left:       50%;
+  bottom:     28px;
+  transform:  translateX(-50%) translateY(12px);
+  z-index:    200;
+  max-width:  calc(100vw - 32px);
+  padding:    12px 18px;
+  border-radius: var(--radius-card);
+  background: var(--color-neutral-dark);
+  color:      var(--color-on-primary);
+  font-size:  var(--font-size-small);
+  line-height: 1.4;
+  box-shadow: var(--shadow-toast);
+  opacity:    0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  white-space: nowrap;
+}
+.toast.is-visible {
+  opacity:   1;
+  transform: translateX(-50%) translateY(0);
 }
 
-/* ── G-17: Responsive — Tablet ve üzeri ─────── */
-@media (min-width: 768px) {
-  .question-card {
-    padding: 2.5rem;
-  }
+/* ── Yardımcı ────────────────────────────────────────────── */
+.is-hidden { display: none !important; }
 
-  .question-text {
-    font-size: 1.35rem;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.001ms !important;
   }
 }

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Medium.com design system — colors, typography, spacing, and components extracted via Dembrandt." />
+  <title>Medium Design System</title>
+
+  <!-- Design Tokens & Styles -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+
+  <!-- ── Sticky Navigation ──────────────────────────────── -->
+  <nav class="sg-nav" role="navigation" aria-label="Design system navigation">
+    <a href="#" class="sg-nav__brand">Medium DS</a>
+    <ul class="sg-nav__links">
+      <li><a href="#colors">Colors</a></li>
+      <li><a href="#typography">Typography</a></li>
+      <li><a href="#spacing">Spacing</a></li>
+      <li><a href="#components">Components</a></li>
+      <li><a href="#tokens">Tokens</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Main Content ───────────────────────────────────── -->
+  <main class="sg-wrapper">
+
+    <!-- ── Hero ─────────────────────────────────────────── -->
+    <header class="sg-hero">
+      <p class="sg-hero__eyebrow">Design System</p>
+      <h1 class="sg-hero__headline">Medium</h1>
+      <p class="sg-hero__sub">
+        Visual tokens, typography, components, and spacing extracted from
+        <strong>medium.com</strong> using Dembrandt headless browser analysis.
+      </p>
+      <div class="sg-hero__meta">
+        <span class="sg-hero__tag">Source: medium.com</span>
+        <span class="sg-hero__tag">Extracted: 2026-07-14</span>
+        <span class="sg-hero__tag">Tool: Dembrandt</span>
+        <span class="sg-hero__tag">Vanilla HTML/CSS/JS</span>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════════
+         1. COLORS
+    ══════════════════════════════════════════════════════ -->
+    <section id="colors">
+      <p class="sg-section-label">01 — Colors</p>
+      <h2 class="sg-section-title">Color Palette</h2>
+      <p class="sg-section-desc">
+        Medium uses a deliberately monochromatic palette. Brand identity is
+        carried by typography, not color. The accent green appears only in
+        success states and the applause button. Click any swatch to copy the hex value.
+      </p>
+
+      <div class="sg-colors">
+        <!-- Primary -->
+        <div class="sg-swatch">
+          <div class="sg-swatch__block"
+               style="background:#191919;"
+               data-copy="#191919"
+               role="button"
+               tabindex="0"
+               aria-label="Copy #191919"></div>
+          <span class="sg-swatch__name">Primary</span>
+          <span class="sg-swatch__hex" data-copy="#191919">#191919</span>
+          <span class="sg-swatch__role">button · CTA</span>
+        </div>
+
+        <!-- Primary Hover -->
+        <div class="sg-swatch">
+          <div class="sg-swatch__block"
+               style="background:#000000;"
+               data-copy="#000000"
+               role="button" tabindex="0"
+               aria-label="Copy #000000"></div>
+          <span class="sg-swatch__name">Primary Hover</span>
+          <span class="sg-swatch__hex" data-copy="#000000">#000000</span>
+          <span class="sg-swatch__role">hover state</span>
+        </div>
+
+        <!-- Background -->
+        <div class="sg-swatch">
+          <div class="sg-swatch__block"
+               style="background:#ffffff; border:1px solid #e8e8e8;"
+               data-copy="#ffffff"
+               role="button" tabindex="0"
+               aria-label="Copy #ffffff"></div>
+          <span class="sg-swatch__name">Background</span>
+          <span class="sg-swatch__hex" data-copy="#ffffff">#ffffff</span>
+          <span class="sg-swatch__role">surface</span>
+        </div>
+
+        <!-- Neutral Dark -->
+        <div class="sg-swatch">
+          <div class="sg-swatch__block"
+               style="background:#242424;"
+               data-copy="#242424"
+               role="button" tabindex="0"
+               aria-label="Copy #242424"></div>
+          <span class="sg-swatch__name">Neutral Dark</span>
+          <span class="sg-swatch__hex" data-copy="#242424">#242424</span>
+          <span class="sg-swatch__role">icons · headings</span>
+        </div>
+
+        <!-- Neutral Mid -->
+        <div class="sg-swatch">
+          <div class="sg-swatch__block"
+               style="background:#6b6b6b;"
+               data-copy="#6b6b6b"
+               role="button" tabindex="0"
+               aria-label="Copy #6b6b6b"></div>
+          <span class="sg-swatch__name">Neutral Mid</span>
+          <span class="sg-swatch__hex" data-copy="#6b6b6b">#6b6b6b</span>
+          <span class="sg-swatch__role">secondary text</span>
+        </div>
+
+        <!-- Text -->
+        <div class="sg-swatch">
+          <div class="sg-swatch__block"
+               style="background:rgba(0,0,0,0.8);"
+               data-copy="rgba(0,0,0,0.8)"
+               role="button" tabindex="0"
+               aria-label="Copy rgba(0,0,0,0.8)"></div>
+          <span class="sg-swatch__name">Text</span>
+          <span class="sg-swatch__hex" data-copy="rgba(0,0,0,0.8)">rgba(0,0,0,0.8)</span>
+          <span class="sg-swatch__role">body text</span>
+        </div>
+
+        <!-- Accent Green -->
+        <div class="sg-swatch">
+          <div class="sg-swatch__block"
+               style="background:#1a8917;"
+               data-copy="#1a8917"
+               role="button" tabindex="0"
+               aria-label="Copy #1a8917"></div>
+          <span class="sg-swatch__name">Accent</span>
+          <span class="sg-swatch__hex" data-copy="#1a8917">#1a8917</span>
+          <span class="sg-swatch__role">success · applause</span>
+        </div>
+
+        <!-- Accent BG -->
+        <div class="sg-swatch">
+          <div class="sg-swatch__block"
+               style="background:#bbdbba;"
+               data-copy="#bbdbba"
+               role="button" tabindex="0"
+               aria-label="Copy #bbdbba"></div>
+          <span class="sg-swatch__name">Accent BG</span>
+          <span class="sg-swatch__hex" data-copy="#bbdbba">#bbdbba</span>
+          <span class="sg-swatch__role">accent surface</span>
+        </div>
+
+        <!-- Accent BG Light -->
+        <div class="sg-swatch">
+          <div class="sg-swatch__block"
+               style="background:#d2e7d1; border:1px solid #e8e8e8;"
+               data-copy="#d2e7d1"
+               role="button" tabindex="0"
+               aria-label="Copy #d2e7d1"></div>
+          <span class="sg-swatch__name">Accent BG Light</span>
+          <span class="sg-swatch__hex" data-copy="#d2e7d1">#d2e7d1</span>
+          <span class="sg-swatch__role">tertiary surface</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+         2. TYPOGRAPHY
+    ══════════════════════════════════════════════════════ -->
+    <section id="typography">
+      <p class="sg-section-label">02 — Typography</p>
+      <h2 class="sg-section-title">Type Scale</h2>
+      <p class="sg-section-desc">
+        Two typefaces: <strong>GT Super</strong> (serif, display) and
+        <strong>Sohne</strong> (sans-serif, UI). Both are self-hosted.
+        Font weight is always 400 — Medium does not use bold.
+      </p>
+
+      <div class="sg-type-specimen">
+        <div class="sg-type-row">
+          <span class="sg-type-label">display<br>GT Super · 120px<br>lh 0.83 · ls −6.6px</span>
+          <div class="sg-type-sample">
+            <span class="sg-type-display">Medium</span>
+          </div>
+        </div>
+        <div class="sg-type-row">
+          <span class="sg-type-label">heading-3<br>Sohne · 22px<br>lh 1.27</span>
+          <div class="sg-type-sample">
+            <span class="sg-type-h3">The world's most powerful design</span>
+          </div>
+        </div>
+        <div class="sg-type-row">
+          <span class="sg-type-label">ui-large<br>Sohne · 20px<br>lh 1.40</span>
+          <div class="sg-type-sample">
+            <span class="sg-type-ui-lg">Start reading</span>
+          </div>
+        </div>
+        <div class="sg-type-row">
+          <span class="sg-type-label">body-md<br>system · 16px</span>
+          <div class="sg-type-sample">
+            <span class="sg-type-body">Every idea deserves a great audience. Start here.</span>
+          </div>
+        </div>
+        <div class="sg-type-row">
+          <span class="sg-type-label">body-sm<br>Sohne · 14px<br>lh 1.43</span>
+          <div class="sg-type-sample">
+            <span class="sg-type-body-sm">
+              Stories, ideas, and perspectives from thinkers and creators.
+              Medium is an open platform where readers find dynamic thinking.
+            </span>
+          </div>
+        </div>
+        <div class="sg-type-row">
+          <span class="sg-type-label">body-xs<br>Sohne · 13px<br>lh 1.54</span>
+          <div class="sg-type-sample">
+            <span class="sg-type-xs">
+              2 min read · Oct 14, 2024 · Member-only story
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+         3. SPACING
+    ══════════════════════════════════════════════════════ -->
+    <section id="spacing">
+      <p class="sg-section-label">03 — Spacing</p>
+      <h2 class="sg-section-title">Spacing Scale</h2>
+      <p class="sg-section-desc">8px base grid. Click a token name to copy the value.</p>
+
+      <div class="sg-spacing-list">
+        <div class="sg-spacing-row">
+          <div class="sg-spacing-bar" style="width:8px;" data-copy="8px"></div>
+          <span class="sg-spacing-meta" data-copy="8px">--spacing-1 · 8px / 0.50rem · component padding (most used)</span>
+        </div>
+        <div class="sg-spacing-row">
+          <div class="sg-spacing-bar" style="width:10px;" data-copy="10px"></div>
+          <span class="sg-spacing-meta" data-copy="10px">--spacing-2 · 10px / 0.63rem · compact spacing</span>
+        </div>
+        <div class="sg-spacing-row">
+          <div class="sg-spacing-bar" style="width:24px;" data-copy="24px"></div>
+          <span class="sg-spacing-meta" data-copy="24px">--spacing-3 · 24px / 1.50rem · section gap</span>
+        </div>
+        <div class="sg-spacing-row">
+          <div class="sg-spacing-bar" style="width:25px;" data-copy="25px"></div>
+          <span class="sg-spacing-meta" data-copy="25px">--spacing-4 · 25px / 1.56rem · section gap (variant)</span>
+        </div>
+        <div class="sg-spacing-row">
+          <div class="sg-spacing-bar" style="width:48px;" data-copy="48px"></div>
+          <span class="sg-spacing-meta" data-copy="48px">--spacing-5 · 48px / 3.00rem · large separation</span>
+        </div>
+        <div class="sg-spacing-row">
+          <div class="sg-spacing-bar" style="width:75px;" data-copy="75px"></div>
+          <span class="sg-spacing-meta" data-copy="75px">--spacing-6 · 75px / 4.69rem · hero / page-level</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+         4. COMPONENTS
+    ══════════════════════════════════════════════════════ -->
+    <section id="components">
+      <p class="sg-section-label">04 — Components</p>
+      <h2 class="sg-section-title">Components</h2>
+      <p class="sg-section-desc">
+        Interactive live demos. Hover to see state changes.
+      </p>
+
+      <!-- Buttons -->
+      <p class="sg-section-label" style="margin-top:var(--spacing-3);">Buttons</p>
+      <div class="sg-component-row" style="margin-bottom:var(--spacing-5);">
+        <button class="btn btn--sm" id="btn-demo-sm" type="button">Get started</button>
+        <button class="btn btn--lg" id="btn-demo-lg" type="button">Start reading</button>
+      </div>
+
+      <table class="sg-token-table" style="margin-bottom:var(--spacing-5);">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Small ("Get started")</th>
+            <th>Large CTA ("Start reading")</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>background</td><td><code data-copy="#191919">#191919</code></td><td><code data-copy="#191919">#191919</code></td></tr>
+          <tr><td>color</td><td><code data-copy="#ffffff">#ffffff</code></td><td><code data-copy="#ffffff">#ffffff</code></td></tr>
+          <tr><td>padding</td><td><code>8px 16px</code></td><td><code>8px 20px</code></td></tr>
+          <tr><td>border-radius</td><td><code data-copy="9999px">9999px (pill)</code></td><td><code data-copy="9999px">9999px (pill)</code></td></tr>
+          <tr><td>font-size</td><td><code>14px</code></td><td><code>20px</code></td></tr>
+          <tr><td>font-weight</td><td><code>400</code></td><td><code>400</code></td></tr>
+          <tr><td>hover background</td><td><code data-copy="#000000">#000000</code></td><td><code data-copy="#000000">#000000</code></td></tr>
+        </tbody>
+      </table>
+
+      <!-- Links -->
+      <p class="sg-section-label">Links</p>
+      <div class="sg-component-row" style="margin-bottom:var(--spacing-5);">
+        <a href="#" class="sg-link" id="link-demo">Follow this publication</a>
+        <a href="#" class="sg-link" id="link-demo-2" style="color:var(--color-neutral-dark);">Explore topics</a>
+      </div>
+
+      <!-- Badges -->
+      <p class="sg-section-label">Badges / Tags</p>
+      <div class="sg-component-row" style="margin-bottom:var(--spacing-5);">
+        <span class="sg-badge">Design</span>
+        <span class="sg-badge">Technology</span>
+        <span class="sg-badge">Writing</span>
+        <span class="sg-badge">Culture</span>
+      </div>
+
+      <!-- Border Radius -->
+      <p class="sg-section-label">Border Radius</p>
+      <div class="sg-component-row" style="align-items:flex-end; gap:var(--spacing-3); margin-bottom:var(--spacing-5);">
+        <div style="text-align:center;">
+          <div style="width:64px;height:64px;background:var(--color-neutral-dark);border-radius:var(--radius-badge);margin:0 auto var(--spacing-1);"></div>
+          <code style="font-size:11px;color:var(--color-neutral-mid);">2px · badge</code>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:120px;height:40px;background:var(--color-primary);border-radius:var(--radius-pill);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;margin:0 auto var(--spacing-1);"></div>
+          <code style="font-size:11px;color:var(--color-neutral-mid);">9999px · pill button</code>
+        </div>
+      </div>
+
+      <!-- Shadow -->
+      <p class="sg-section-label">Shadow</p>
+      <div style="margin-bottom:var(--spacing-5);">
+        <div style="display:inline-block;padding:var(--spacing-3) var(--spacing-5);border-radius:4px;box-shadow:var(--shadow-overlay);font-size:var(--font-size-body-xs);color:var(--color-neutral-mid);">
+          Only one shadow detected — soft overlay diffusion
+        </div>
+      </div>
+
+      <!-- Motion -->
+      <p class="sg-section-label">Motion</p>
+      <table class="sg-token-table">
+        <thead>
+          <tr><th>Token</th><th>Value</th><th>Context</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>transition-duration</td><td><code>0.001s</code></td><td>All interactive elements — effectively instant</td></tr>
+          <tr><td>easing — links</td><td><code>ease</code></td><td>color shift on hover</td></tr>
+          <tr><td>easing — buttons</td><td><code>linear</code></td><td>background-color, color</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+         5. ALL TOKENS
+    ══════════════════════════════════════════════════════ -->
+    <section id="tokens">
+      <p class="sg-section-label">05 — All Tokens</p>
+      <h2 class="sg-section-title">Design Token Reference</h2>
+      <p class="sg-section-desc">
+        Complete token table. Click any value to copy it. Import
+        <code>css/tokens.css</code> to use these in your project.
+      </p>
+
+      <table class="sg-token-table">
+        <thead>
+          <tr><th>Token</th><th>Value</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <!-- Color tokens -->
+          <tr><td><code>--color-primary</code></td><td><span class="sg-token-swatch-sm" style="background:#191919;"></span><code data-copy="#191919">#191919</code></td><td>Buttons, CTAs</td></tr>
+          <tr><td><code>--color-primary-hover</code></td><td><span class="sg-token-swatch-sm" style="background:#000000;"></span><code data-copy="#000000">#000000</code></td><td>Button hover state</td></tr>
+          <tr><td><code>--color-on-primary</code></td><td><span class="sg-token-swatch-sm" style="background:#ffffff;border:1px solid #e8e8e8;"></span><code data-copy="#ffffff">#ffffff</code></td><td>Text on primary bg</td></tr>
+          <tr><td><code>--color-background</code></td><td><span class="sg-token-swatch-sm" style="background:#ffffff;border:1px solid #e8e8e8;"></span><code data-copy="#ffffff">#ffffff</code></td><td>Page background</td></tr>
+          <tr><td><code>--color-text</code></td><td><code data-copy="rgba(0,0,0,0.8)">rgba(0,0,0,0.8)</code></td><td>Body text</td></tr>
+          <tr><td><code>--color-neutral-dark</code></td><td><span class="sg-token-swatch-sm" style="background:#242424;"></span><code data-copy="#242424">#242424</code></td><td>Icons, high-contrast UI (×26)</td></tr>
+          <tr><td><code>--color-neutral-dark-hover</code></td><td><span class="sg-token-swatch-sm" style="background:#2b2b2b;"></span><code data-copy="#2b2b2b">#2b2b2b</code></td><td>Neutral dark hover</td></tr>
+          <tr><td><code>--color-neutral-mid</code></td><td><span class="sg-token-swatch-sm" style="background:#6b6b6b;"></span><code data-copy="#6b6b6b">#6b6b6b</code></td><td>Secondary text, metadata (×22)</td></tr>
+          <tr><td><code>--color-neutral-mid-hover</code></td><td><span class="sg-token-swatch-sm" style="background:#808080;"></span><code data-copy="#808080">#808080</code></td><td>Neutral mid hover</td></tr>
+          <tr><td><code>--color-accent</code></td><td><span class="sg-token-swatch-sm" style="background:#1a8917;"></span><code data-copy="#1a8917">#1a8917</code></td><td>Brand green — use sparingly</td></tr>
+          <tr><td><code>--color-accent-bg</code></td><td><span class="sg-token-swatch-sm" style="background:#bbdbba;"></span><code data-copy="#bbdbba">#bbdbba</code></td><td>Accent surface (secondary)</td></tr>
+          <tr><td><code>--color-accent-bg-light</code></td><td><span class="sg-token-swatch-sm" style="background:#d2e7d1;"></span><code data-copy="#d2e7d1">#d2e7d1</code></td><td>Accent surface (tertiary)</td></tr>
+          <!-- Spacing -->
+          <tr><td><code>--spacing-1</code></td><td><code data-copy="8px">8px</code></td><td>Base unit — component padding</td></tr>
+          <tr><td><code>--spacing-2</code></td><td><code data-copy="10px">10px</code></td><td>Compact spacing</td></tr>
+          <tr><td><code>--spacing-3</code></td><td><code data-copy="24px">24px</code></td><td>Section gap</td></tr>
+          <tr><td><code>--spacing-4</code></td><td><code data-copy="25px">25px</code></td><td>Section gap (variant)</td></tr>
+          <tr><td><code>--spacing-5</code></td><td><code data-copy="48px">48px</code></td><td>Large section separation</td></tr>
+          <tr><td><code>--spacing-6</code></td><td><code data-copy="75px">75px</code></td><td>Hero / page-level spacing</td></tr>
+          <!-- Radius -->
+          <tr><td><code>--radius-pill</code></td><td><code data-copy="9999px">9999px</code></td><td>All buttons — full pill</td></tr>
+          <tr><td><code>--radius-badge</code></td><td><code data-copy="2px">2px</code></td><td>Topic tags — near-square</td></tr>
+          <!-- Motion -->
+          <tr><td><code>--transition-duration</code></td><td><code data-copy="0.001s">0.001s</code></td><td>Effectively instant</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Footer -->
+    <footer class="sg-footer">
+      <p>Medium Design System · Extracted 2026-07-14 via Dembrandt ·
+         <code>npx -y dembrandt https://medium.com --json-only --slow</code>
+      </p>
+    </footer>
+
+  </main><!-- /.sg-wrapper -->
+
+  <!-- Toast -->
+  <div id="sg-toast" class="sg-toast" role="status" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+</body>
+</html>

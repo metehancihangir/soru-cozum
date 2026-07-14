@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Soru Çözüm — Arapça dil öğrenme quiz uygulaması" />
+  <title>Soru Çözüm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Playfair+Display:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    :root {
+      --font-display: 'gt-super', 'Playfair Display', Georgia, serif;
+      --font-ui: 'sohne', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="app" data-od-id="app-home">
+    <main class="home" data-od-id="screen-home" data-screen-label="01 Ana Sayfa">
+      <header class="home__brand" data-od-id="home-brand">
+        <div class="home__logo" aria-hidden="true" data-od-id="home-logo">س</div>
+        <h1 class="home__title" data-od-id="home-title">Soru Çözüm</h1>
+        <p class="home__tagline" data-od-id="home-tagline">Arapça dil becerilerini geliştir</p>
+      </header>
+
+      <div class="home__categories" data-od-id="home-categories" role="list">
+        <a
+          href="quiz.html"
+          class="cat-card cat-card--active"
+          role="listitem"
+          data-od-id="cat-card-arapca-2"
+          aria-label="Arapça-2, 100 soru"
+        >
+          <span class="cat-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3c-1.5 3-4 5-7 6 3 1 5.5 3 7 6 1.5-3 4-5 7-6-3-1-5.5-3-7-6z" />
+              <path d="M19 14c-.7 1.4-1.9 2.4-3.3 2.9" />
+            </svg>
+          </span>
+          <span class="cat-card__body">
+            <span class="cat-card__name">Arapça-2</span>
+            <span class="cat-card__meta">100 Soru</span>
+          </span>
+          <span class="cat-card__arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </span>
+        </a>
+
+        <button
+          type="button"
+          class="cat-card cat-card--locked"
+          role="listitem"
+          data-od-id="cat-card-arapca-4"
+          aria-disabled="true"
+          aria-label="Arapça-4, yakında"
+          id="locked-category"
+        >
+          <span class="cat-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9" />
+            </svg>
+          </span>
+          <span class="cat-card__body">
+            <span class="cat-card__name">Arapça-4</span>
+            <span class="cat-card__meta">
+              <span class="badge" data-od-id="badge-yakinda">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="5" y="11" width="14" height="10" rx="1.5" />
+                  <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+                </svg>
+                Yakında
+              </span>
+            </span>
+          </span>
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" data-od-id="toast"></div>
+
+  <script src="js/home.js"></script>
+</body>
+</html>

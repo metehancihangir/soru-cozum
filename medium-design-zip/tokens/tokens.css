@@ -1,0 +1,196 @@
+/**
+ * Medium Design System — CSS Custom Properties
+ * Source: https://medium.com  ·  Extracted: 2026-07-14
+ * Tool: Dembrandt (headless Chromium + computed CSS analysis)
+ *
+ * Usage:
+ *   @import './tokens.css';
+ *   Then reference: var(--color-primary), var(--font-display), etc.
+ */
+
+/* ─────────────────────────────────────────────
+   COLORS
+───────────────────────────────────────────── */
+:root {
+  /* Semantic roles */
+  --color-primary:           #191919;           /* buttons, CTAs */
+  --color-primary-hover:     #000000;           /* button hover — pure black */
+  --color-on-primary:        #ffffff;           /* text on primary background */
+  --color-background:        #ffffff;           /* page background */
+  --color-text:              rgba(0, 0, 0, 0.8); /* body text — soft black */
+
+  /* Neutral scale */
+  --color-neutral-dark:      #242424;           /* icons, high-contrast UI (×26) */
+  --color-neutral-dark-hover:#2b2b2b;           /* hover state for neutral-dark */
+  --color-neutral-mid:       #6b6b6b;           /* secondary text, metadata (×22) */
+  --color-neutral-mid-hover: #808080;           /* hover state for neutral-mid */
+  --color-black:             #000000;           /* pure black (theme color) */
+  --color-hover-dark:        #101010;           /* focus/hover deep near-black */
+
+  /* Accent — Medium brand green (use sparingly) */
+  --color-accent:            #1a8917;           /* applause, success, highlights */
+  --color-accent-bg:         #bbdbba;           /* accent surface (secondary) */
+  --color-accent-bg-light:   #d2e7d1;           /* accent surface (tertiary) */
+
+  /* Medium CSS variable aliases (as found in DOM) */
+  --color-fg-accent-primary:    #1a8917;
+  --color-bg-accent-secondary:  #bbdbba;
+  --color-bg-accent-tertiary:   #d2e7d1;
+  --color-fg-neutral-primary:   #242424;        /* referenced by link hover */
+}
+
+/* ─────────────────────────────────────────────
+   TYPOGRAPHY — Font Families
+───────────────────────────────────────────── */
+:root {
+  --font-display: 'gt-super', Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-ui:      'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-system:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+                  Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* ─────────────────────────────────────────────
+   TYPOGRAPHY — Size Scale
+───────────────────────────────────────────── */
+:root {
+  --font-size-display:  120px;   /* 7.50rem — GT Super hero heading */
+  --font-size-h3:        22px;   /* 1.38rem — Sohne heading */
+  --font-size-ui-lg:     20px;   /* 1.25rem — large UI / CTA label */
+  --font-size-body-md:   16px;   /* 1.00rem — default body / links */
+  --font-size-body-sm:   14px;   /* 0.88rem — small body / UI (most common) */
+  --font-size-body-xs:   13px;   /* 0.81rem — captions / extra small */
+}
+
+/* ─────────────────────────────────────────────
+   TYPOGRAPHY — Weight & Line Height
+───────────────────────────────────────────── */
+:root {
+  /* Medium uses weight 400 everywhere — no bold */
+  --font-weight-regular:  400;
+
+  --line-height-display:  0.83;
+  --line-height-h3:       1.27;
+  --line-height-ui-lg:    1.40;
+  --line-height-body-sm:  1.43;
+  --line-height-body-xs:  1.54;
+
+  --letter-spacing-display: -6.6px;  /* tight tracking on hero headings */
+}
+
+/* ─────────────────────────────────────────────
+   SPACING — 8px base grid
+───────────────────────────────────────────── */
+:root {
+  --spacing-1:   8px;    /* 0.50rem — base unit, component padding */
+  --spacing-2:  10px;    /* 0.63rem — compact spacing */
+  --spacing-3:  24px;    /* 1.50rem — section gap */
+  --spacing-4:  25px;    /* 1.56rem — section gap (variant) */
+  --spacing-5:  48px;    /* 3.00rem — large section separation */
+  --spacing-6:  75px;    /* 4.69rem — hero / page-level spacing */
+}
+
+/* ─────────────────────────────────────────────
+   BORDER RADIUS
+───────────────────────────────────────────── */
+:root {
+  --radius-pill:  9999px;  /* all buttons — full pill / oval */
+  --radius-badge:    2px;  /* topic tags — near-square */
+}
+
+/* ─────────────────────────────────────────────
+   BORDERS
+───────────────────────────────────────────── */
+:root {
+  --border-button:  1px solid var(--color-primary);  /* filled pill button border */
+  --border-divider: 1px solid var(--color-neutral-dark); /* section divider */
+}
+
+/* ─────────────────────────────────────────────
+   SHADOWS
+───────────────────────────────────────────── */
+:root {
+  /* Medium uses virtually no shadows — one overlay shadow detected */
+  --shadow-overlay: rgb(128, 128, 128) 0px 0px 5px 0px;
+}
+
+/* ─────────────────────────────────────────────
+   MOTION
+───────────────────────────────────────────── */
+:root {
+  /* Effectively instant — Medium is animation-free by philosophy */
+  --transition-duration: 0.001s;
+  --transition-button:   background-color var(--transition-duration) linear,
+                         color            var(--transition-duration) linear;
+  --transition-link:     color var(--transition-duration) ease;
+}
+
+/* ─────────────────────────────────────────────
+   UTILITY CLASSES
+   (Optional convenience — mirrors token values)
+───────────────────────────────────────────── */
+
+/* Typography */
+.type-display {
+  font-family:    var(--font-display);
+  font-size:      var(--font-size-display);
+  font-weight:    var(--font-weight-regular);
+  line-height:    var(--line-height-display);
+  letter-spacing: var(--letter-spacing-display);
+  font-feature-settings: "lnum", "pnum";
+}
+
+.type-h3 {
+  font-family: var(--font-ui);
+  font-size:   var(--font-size-h3);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-h3);
+}
+
+.type-body {
+  font-family: var(--font-ui);
+  font-size:   var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body-sm);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--color-primary);
+  color:            var(--color-on-primary);
+  border:           var(--border-button);
+  border-radius:    var(--radius-pill);
+  font-family:      var(--font-ui);
+  font-weight:      var(--font-weight-regular);
+  transition:       var(--transition-button);
+  cursor:           pointer;
+  display:          inline-flex;
+  align-items:      center;
+  justify-content:  center;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+  border-color:     var(--color-primary-hover);
+}
+
+.btn-sm {
+  padding:   var(--spacing-1) 16px;
+  font-size: var(--font-size-body-sm);
+}
+
+.btn-lg {
+  padding:   var(--spacing-1) 20px;
+  font-size: var(--font-size-ui-lg);
+}
+
+/* Links */
+.link-default {
+  color:           var(--color-text);
+  text-decoration: none;
+  font-weight:     var(--font-weight-regular);
+  transition:      var(--transition-link);
+}
+
+.link-default:hover {
+  color: var(--color-fg-neutral-primary);
+}

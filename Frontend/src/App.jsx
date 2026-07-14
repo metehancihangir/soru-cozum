@@ -5,37 +5,33 @@ import QuestionCard from './components/QuestionCard'
 import HomeScreen from './components/HomeScreen'
 
 function App() {
-  // ── Ekran Yönetimi ───────────────────────────────────────
-  // "home"  → Karşılama ekranı (varsayılan)
-  // "quiz"  → Soru çözüm ekranı
+  // ── Ekran yönetimi ────────────────────────────────────────
+  // "home"     → Karşılama / kategori seçimi
+  // "quiz"     → Soru çözüm ekranı
+  // "complete" → Tamamlandı ekranı
   const [screen, setScreen] = useState('home')
 
-  // ── Quiz State'leri (FAZ 3-4'ten gelenler) ───────────────
-  const [questions, setQuestions] = useState([])
-  const [loading, setLoading]     = useState(false)
-  const [error, setError]         = useState(null)
-
-  // G-4: FAZ 4 state makinesi
-  const [currentIndex, setCurrentIndex]   = useState(0)
+  // ── Quiz state'leri ───────────────────────────────────────
+  const [questions, setQuestions]       = useState([])
+  const [loading, setLoading]           = useState(false)
+  const [error, setError]               = useState(null)
+  const [currentIndex, setCurrentIndex] = useState(0)
   const [selectedOption, setSelectedOption] = useState(null)
-  const [isAnswered, setIsAnswered]         = useState(false)
-  const [isCorrect, setIsCorrect]           = useState(false)
+  const [isAnswered, setIsAnswered]     = useState(false)
+  const [score, setScore]               = useState(0)
 
-  // ── Kategori Seçimi: Home → Quiz ─────────────────────────
+  // ── Kategori seçilince quiz'e geç ────────────────────────
   const handleSelectCategory = async (category) => {
-    // Şimdilik yalnızca 'arabic2' aktif; diğer kategoriler HomeScreen tarafında bloke edilir
     if (category !== 'arabic2') return
 
     setLoading(true)
     setError(null)
     setScreen('quiz')
-
-    // Quiz state'ini sıfırla (önceki oturumun kalıntısı olmasın)
     setQuestions([])
     setCurrentIndex(0)
     setSelectedOption(null)
     setIsAnswered(false)
-    setIsCorrect(false)
+    setScore(0)
 
     try {
       const data = await getQuestions()
@@ -47,93 +43,123 @@ function App() {
     }
   }
 
-  // ── Ana Menüye Dön ────────────────────────────────────────
+  // ── Ana menüye dön ────────────────────────────────────────
   const handleBackToHome = () => {
     setScreen('home')
     setQuestions([])
     setCurrentIndex(0)
     setSelectedOption(null)
     setIsAnswered(false)
-    setIsCorrect(false)
+    setScore(0)
     setError(null)
   }
 
-  // ── G-5: Türetilmiş değişken ──────────────────────────────
-  const currentQuestion = questions[currentIndex]
-
-  // ── G-6: Şık tıklandığında ───────────────────────────────
+  // ── Şık seçildi ───────────────────────────────────────────
   const handleOptionClick = (option) => {
+    const correct = questions[currentIndex].correctOption
     setSelectedOption(option)
     setIsAnswered(true)
-    setIsCorrect(option === currentQuestion.correctOption)
+    if (option === correct) setScore(prev => prev + 1)
   }
 
-  // ── G-7: Sonraki soruya geç — tüm state'leri sıfırla ─────
+  // ── Sonraki soru ──────────────────────────────────────────
   const handleNextQuestion = () => {
+    if (currentIndex >= questions.length - 1) {
+      setScreen('complete')
+      return
+    }
     setCurrentIndex(prev => prev + 1)
     setSelectedOption(null)
     setIsAnswered(false)
-    setIsCorrect(false)
   }
 
-  // ── Ekran Render Mantığı ──────────────────────────────────
+  // ── Render ────────────────────────────────────────────────
 
   // Karşılama ekranı
   if (screen === 'home') {
     return <HomeScreen onSelectCategory={handleSelectCategory} />
   }
 
-  // Quiz ekranı — yükleniyor
+  // Quiz — yükleniyor
   if (loading) {
     return (
-      <main className="app-container">
-        <h1 className="app-title">ArapçaSoru</h1>
-        <p className="status-text">Sorular yükleniyor...</p>
-      </main>
+      <div className="app-container">
+        <p className="status-text">Sorular yükleniyor…</p>
+      </div>
     )
   }
 
-  // Quiz ekranı — hata
+  // Quiz — hata
   if (error) {
     return (
-      <main className="app-container">
-        <h1 className="app-title">ArapçaSoru</h1>
+      <div className="app-container">
         <p className="status-text error">Hata: {error}</p>
-        <button className="next-btn" style={{ margin: '1rem auto', display: 'block' }} onClick={handleBackToHome}>
-          ← Ana Menüye Dön
-        </button>
-      </main>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '24px' }}>
+          <button className="btn btn--ghost" onClick={handleBackToHome}>
+            ← Ana Menüye Dön
+          </button>
+        </div>
+      </div>
     )
   }
 
-  // G-8: Guard clause — sorular boş veya index aşıldıysa
+  // Tamamlandı ekranı
+  if (screen === 'complete') {
+    return (
+      <div className="app-container">
+        <div className="complete">
+          <div className="complete__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h1 className="complete__title">Tamamladın!</h1>
+          <p className="complete__score">
+            {score} / {questions.length} doğru
+          </p>
+          <div className="complete__actions">
+            <button
+              type="button"
+              className="btn btn--primary btn--full"
+              onClick={handleBackToHome}
+            >
+              Ana Menüye Dön
+            </button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Quiz ekranı
+  const currentQuestion = questions[currentIndex]
+
   if (!currentQuestion) {
     return (
-      <main className="app-container">
-        <h1 className="app-title">ArapçaSoru</h1>
+      <div className="app-container">
         <p className="status-text">✅ Tüm sorular tamamlandı!</p>
-        <button className="next-btn" style={{ margin: '1.5rem auto', display: 'block' }} onClick={handleBackToHome}>
-          ← Ana Menüye Dön
-        </button>
-      </main>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '24px' }}>
+          <button className="btn btn--ghost" onClick={handleBackToHome}>
+            ← Ana Menüye Dön
+          </button>
+        </div>
+      </div>
     )
   }
 
-  // G-9: QuestionCard render et
   return (
-    <main className="app-container">
-      <h1 className="app-title">ArapçaSoru</h1>
+    <div className="app-container">
       <QuestionCard
         question={currentQuestion}
         currentIndex={currentIndex}
         questionsTotal={questions.length}
         selectedOption={selectedOption}
         isAnswered={isAnswered}
-        isCorrect={isCorrect}
         onOptionClick={handleOptionClick}
         onNext={handleNextQuestion}
+        onBack={handleBackToHome}
       />
-    </main>
+    </div>
   )
 }
 
