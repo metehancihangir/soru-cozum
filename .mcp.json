@@ -1,0 +1,13 @@
+{
+    "mcpServers": {
+        "dembrandt": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "--package",
+                "dembrandt",
+                "dembrandt-mcp"
+            ]
+        }
+    }
+}
