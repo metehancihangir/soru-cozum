@@ -13,7 +13,7 @@ const question = {
   optionB: 'كتاب',
   optionC: 'مدرسة',
   optionD: 'بيت',
-  optionE: '',
+  optionE: null,
   correctOption: 'B',
   explanation: 'كلمة كتاب تعني kitap.',
 }

@@ -37,7 +37,7 @@ function QuestionCard({
 
       {isAnswered && !isCorrect && (
         <div className="explanation rtl">
-          <strong>✅ Doğru Cevap: {question.correctOption}</strong>
+          <strong>❌ Yanlış! Doğru Cevap: {question.correctOption}</strong>
           {question.explanation && <p>{question.explanation}</p>}
         </div>
       )}
