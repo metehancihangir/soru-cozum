@@ -1,9 +1,11 @@
 /* ── Renk Tokenları (Design Tokens) ─────────────── */
 :root {
-  --color-correct:  #22c55e;   /* yeşil — doğru şık */
-  --color-wrong:    #ef4444;   /* kırmızı — yanlış şık */
-  --color-default:  #3b82f6;   /* mavi — seçilmemiş şık */
-  --color-disabled: #6b7280;   /* gri — cevap sonrası pasif */
+  --color-correct:        #22c55e;   /* yeşil — doğru şık */
+  --color-wrong:          #ef4444;   /* kırmızı — yanlış şık */
+  --color-default:        #3b82f6;   /* mavi — seçilmemiş şık / buton */
+  --color-default-hover:  #2563eb;   /* koyu mavi — hover durumu */
+  --color-disabled:       #6b7280;   /* gri — cevap sonrası pasif */
+  --color-btn-bg:         #ffffff;   /* beyaz — buton varsayılan arka plan */
 }
 
 /* ── Global Reset ────────────────────────────────── */

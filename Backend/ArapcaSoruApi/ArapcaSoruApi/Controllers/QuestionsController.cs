@@ -75,8 +75,23 @@ namespace ArapcaSoruApi.Controllers
             if (id != question.Id)
                 return BadRequest();
 
-            // G-27: EF Core'a "bu entity değişti" sinyali ver
-            _context.Entry(question).State = EntityState.Modified;
+            // G-27: Mevcut kaydı bul; bulunamazsa 404 dön
+            var existing = await _context.Questions.FindAsync(id);
+            if (existing == null)
+                return NotFound();
+
+            // Sadece güncellenmesi gereken alanları aktar;
+            // CreatedAt istemciden gelen değere göre DEĞİŞTİRİLMEZ —
+            // kayıt tarihinin üzerine yazmak bir veri bütünlüğü sorununa yol açar.
+            existing.QuestionText = question.QuestionText;
+            existing.OptionA      = question.OptionA;
+            existing.OptionB      = question.OptionB;
+            existing.OptionC      = question.OptionC;
+            existing.OptionD      = question.OptionD;
+            existing.OptionE      = question.OptionE;
+            existing.CorrectOption = question.CorrectOption;
+            existing.Explanation  = question.Explanation;
+            // CreatedAt kasıtlı olarak güncellenmez
 
             // G-28, G-29: Eş zamanlı silme durumuna karşı try/catch
             try

@@ -16,15 +16,18 @@ function App() {
   const [isCorrect, setIsCorrect] = useState(false)
 
   useEffect(() => {
-    getQuestions()
-      .then(data => {
+    const fetchQuestions = async () => {
+      try {
+        const data = await getQuestions()
         setQuestions(data)
-        setLoading(false)
-      })
-      .catch(err => {
+      } catch (err) {
         setError(err.message)
+      } finally {
         setLoading(false)
-      })
+      }
+    }
+
+    fetchQuestions()
   }, [])
 
   // G-5: Türetilmiş değişken
