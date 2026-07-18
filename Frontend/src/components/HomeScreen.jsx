@@ -1,8 +1,14 @@
 import { useState } from 'react'
 import './HomeScreen.css'
 
-function HomeScreen({ onSelectCategory }) {
-  const [toastMsg, setToastMsg] = useState('')
+// Ders kataloğu — App.jsx ile senkronize
+const COURSE_META = {
+  'Arapça-2': { questionCount: 20, active: true },
+  'Arapça-4': { questionCount: 0,  active: false },
+}
+
+function HomeScreen({ onSelectCourse }) {
+  const [toastMsg,     setToastMsg]     = useState('')
   const [toastVisible, setToastVisible] = useState(false)
   let toastTimer = null
 
@@ -11,10 +17,6 @@ function HomeScreen({ onSelectCategory }) {
     setToastVisible(true)
     clearTimeout(toastTimer)
     toastTimer = setTimeout(() => setToastVisible(false), 2200)
-  }
-
-  const handleLockedClick = () => {
-    showToast('Arapça-4 yakında geliyor 🔒')
   }
 
   return (
@@ -37,8 +39,8 @@ function HomeScreen({ onSelectCategory }) {
             className="cat-card cat-card--active"
             role="listitem"
             id="btn-arabic-2"
-            aria-label="Arapça-2, 100 soru"
-            onClick={() => onSelectCategory('arabic2')}
+            aria-label={`Arapça-2, ${COURSE_META['Arapça-2'].questionCount} soru`}
+            onClick={() => onSelectCourse('Arapça-2')}
           >
             <span className="cat-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -47,7 +49,9 @@ function HomeScreen({ onSelectCategory }) {
             </span>
             <span className="cat-card__body">
               <span className="cat-card__name">Arapça-2</span>
-              <span className="cat-card__meta">100 Soru</span>
+              <span className="cat-card__meta">
+                {COURSE_META['Arapça-2'].questionCount} Soru
+              </span>
             </span>
             <span className="cat-card__arrow" aria-hidden="true">
               <svg viewBox="0 0 24 24">
@@ -64,7 +68,7 @@ function HomeScreen({ onSelectCategory }) {
             id="btn-arabic-4"
             aria-disabled="true"
             aria-label="Arapça-4, yakında"
-            onClick={handleLockedClick}
+            onClick={() => showToast('Arapça-4 yakında geliyor 🔒')}
           >
             <span className="cat-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" aria-hidden="true">
