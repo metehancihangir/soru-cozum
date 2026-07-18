@@ -10,8 +10,15 @@ const COURSES = {
     examTypes: ['Dönem Sonu', 'Yaz Okulu'],
     // Her exam type için mevcut yıllar (gerçek veri API'den gelecek; şimdi sabit)
     years: {
-      'Dönem Sonu': [],      // Henüz veri yok
-      'Yaz Okulu': [2021],
+      'Dönem Sonu': ['2022', '2023-2024', '2024-2025', '2026'],
+      'Yaz Okulu': ['2021', '2022', '2023', '2024', '2025'],
+    },
+  },
+  'Arapça-4': {
+    examTypes: ['Dönem Sonu', 'Yaz Okulu'],
+    years: {
+      'Dönem Sonu': ['2022', '2023-2024', '2024-2025', '2026'],
+      'Yaz Okulu': ['2021', '2022', '2023', '2024', '2025'],
     },
   },
 }
@@ -21,18 +28,18 @@ function App() {
   const [screen, setScreen] = useState('home')
 
   // ── Seçim state'leri
-  const [selectedCourse,   setSelectedCourse]   = useState(null)   // "Arapça-2"
+  const [selectedCourse, setSelectedCourse] = useState(null)   // "Arapça-2"
   const [selectedExamType, setSelectedExamType] = useState(null)   // "Yaz Okulu"
-  const [selectedYear,     setSelectedYear]     = useState(null)   // 2021
+  const [selectedYear, setSelectedYear] = useState(null)   // 2021
 
   // ── Quiz state'leri
-  const [questions,      setQuestions]      = useState([])
-  const [loading,        setLoading]        = useState(false)
-  const [error,          setError]          = useState(null)
-  const [currentIndex,   setCurrentIndex]   = useState(0)
+  const [questions, setQuestions] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [currentIndex, setCurrentIndex] = useState(0)
   const [selectedOption, setSelectedOption] = useState(null)
-  const [isAnswered,     setIsAnswered]     = useState(false)
-  const [score,          setScore]          = useState(0)
+  const [isAnswered, setIsAnswered] = useState(false)
+  const [score, setScore] = useState(0)
 
   // ── Ders seçildi → ExamType ekranına geç
   const handleSelectCourse = (courseName) => {
