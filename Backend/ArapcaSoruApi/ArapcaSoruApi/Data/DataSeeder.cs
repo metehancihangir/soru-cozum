@@ -32,6 +32,15 @@ namespace ArapcaSoruApi.Data
                 await context.SaveChangesAsync();
             }
 
+            var existing2023 = await context.Questions.Where(q => q.CourseName == "Arapça-2" && q.ExamType == "Yaz Okulu" && q.Year == "2023").ToListAsync();
+            if (existing2023.Any()) { context.Questions.RemoveRange(existing2023); await context.SaveChangesAsync(); }
+
+            var existing2024 = await context.Questions.Where(q => q.CourseName == "Arapça-2" && q.ExamType == "Yaz Okulu" && q.Year == "2024").ToListAsync();
+            if (existing2024.Any()) { context.Questions.RemoveRange(existing2024); await context.SaveChangesAsync(); }
+
+            var existing2025 = await context.Questions.Where(q => q.CourseName == "Arapça-2" && q.ExamType == "Yaz Okulu" && q.Year == "2025").ToListAsync();
+            if (existing2025.Any()) { context.Questions.RemoveRange(existing2025); await context.SaveChangesAsync(); }
+
             // ─────────────────────────────────────────────────────────────────
             // Arapça-2 | Yaz Okulu | 2021 — Cevap anahtarından okunan veriler
             // ─────────────────────────────────────────────────────────────────
@@ -101,26 +110,26 @@ namespace ArapcaSoruApi.Data
                 // Answers for 2023: 1-A, 2-B, 3-E, 4-A, 5-B, 6-D, 7-C, 8-D, 9-E, 10-A, 11-D, 12-D, 13-C, 14-C, 15-C, 16-B, 17-E, 18-A, 19-B, 20-E.
                 questions.AddRange(new List<Question>
                 {
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2023/q1.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2023/q2.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2023/q3.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2023/q4.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2023/q5.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2023/q6.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2023/q7.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2023/q8.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2023/q9.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2023/q10.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2023/q11.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2023/q12.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2023/q13.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2023/q14.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2023/q15.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2023/q16.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2023/q17.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2023/q18.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2023/q19.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2023/q20.png" },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2023/q1.png", Explanation = "Mübteda ve haber arasında cinsiyet ve sayı yönünden tam bir uyum olmak zorundadır. Soru kökündeki mübteda müfred müennes (tekil dişil) olduğu için haberin de müfred müennes olması gerekir. İlgili şık bu kuralı sağlayan yegane seçenektir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2023/q2.png", Explanation = "Zaman ve mekan zarfları (Mef'ulun fih), cümlenin içinde ne zaman veya nerede sorusuna cevap verir. Kural olarak zarflar daima mansub (üstün) irab alırlar. Fiilin gerçekleştiği zamanı bildiren bu zarf mansub olarak kullanılmalıdır." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2023/q3.png", Explanation = "İzafet tamlamalarında muzafun ileyh daima mecrur (esre) olur. Burada kelime tesniye (ikil) veya cemi (çoğul) formunda kullanıldığından, mecrur alameti olarak son harfin 'ya' (ي) olması gerekmektedir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2023/q4.png", Explanation = "Muzari fiilin nasb edatları (en, len, key, izen) fiilin sonunu üstün yapar. Boşluğa gelmesi gereken edat, gelecek zamanda olumsuzluk bildiren 'len' (لن) edatıdır, bu sebeple fiil nasbedilmiş şekilde doğru seçenekteki gibi kalır." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2023/q5.png", Explanation = "Sülasi (üç harfli) fiillerden ism-i fail türetirken 'fâil' (فَاعِل) vezni kullanılır. Eğer fiilin kökünde illet harfi varsa (ecvef fiil), bu harf hemzeye dönüşür. Doğru şık, bu yapısal değişimi tam olarak göstermektedir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2023/q6.png", Explanation = "Kâne ve kardeşleri isim cümlesinin başına geldiğinde, mübtedayı kendi ismi yapıp merfu, haberi ise kendi haberi yapıp mansub kılar. Bu gramer değişikliğinden dolayı cümlenin ikinci ögesi üstünlü olmalıdır." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2023/q7.png", Explanation = "İnne (إنّ) cümleye tekit ve vurgu katar. İsmini mansub (üstün), haberini merfu (ötre) yapar. İsim tamlaması konumundaki kelimenin harekesi tam olarak bu tekit bağlacından etkilenmektedir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2023/q8.png", Explanation = "Sayılar ve sayılanlar (aded ve ma'dud) arasındaki kurallara göre; 3 ile 10 arasındaki sayılarda, sayılan kelime çoğul ve mecrur olmalıdır. Cinsiyet bakımından ise sayı ile sayılan zıt cinsten gelir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2023/q9.png", Explanation = "Arapçada muttasıl (bitişik) zamirler isme eklendiklerinde iyelik (aitlik) bildirir ve irab olarak mahallen mecrurdur. Fiile eklendiklerinde ise nesne (mef'ul) konumundadır." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2023/q10.png", Explanation = "Mezid fiiller (kök harflerine ilave edilen fiiller), anlam zenginliği oluşturur (geçişlilik, dönüşlülük, işteşlik vb.). Buradaki fiil kalıbı eylemin ortaklaşa (müşareket) yapıldığını ifade eder." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2023/q11.png", Explanation = "İsm-i mef'ul (eylemden etkilenen nesneyi gösteren kalıp), sülasi fiillerde 'mef'ul' (مَفْعُول) kalıbında gelir. Çekim yapılırken cinsiyet uyumuna dikkat edilerek kelime seçilmiştir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2023/q12.png", Explanation = "Gayr-ı munsarif kelimeler (esre ve tenvin alamayan özel isim ve sıfatlar) mecrur olmaları gereken durumda esre yerine fetha (üstün) alırlar. Soru kökündeki özel isim bu sebeple üstünlüdür." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2023/q13.png", Explanation = "Hal, cümlenin failinin veya mef'ulunun durumunu bildiren mansub, nekra (belirsiz) ve müştak (türemiş) isimdir. Doğru cevap, öznenin eylemi gerçekleştirme anındaki fiziki veya ruhani durumunu tasvir eder." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2023/q14.png", Explanation = "İstisna edatları (İlla vb.) ile kurulan cümlelerde, müstesna minhin zikredilip edilmemesine göre irab değişir. Tam ve olumlu bir cümlede illa'dan sonra gelen kelime (müstesna) daima mansub olur." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2023/q15.png", Explanation = "Akılsız varlıkların (cansız nesneler veya hayvanlar) çoğulları, dilbilgisi kuralı olarak daima müfred müennes (tekil dişil) kabul edilir. Bu nedenle, sıfatı veya haberi tekil-dişil şık olmalıdır." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2023/q16.png", Explanation = "Emir fiil oluşturulurken muzari fiilin başındaki muzaraat harfi atılır, sonu cezimlenir. Eğer atıldıktan sonra ilk harf sakinse, fiilin ayn-el fiil harekesine göre uygun bir hemze getirilir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2023/q17.png", Explanation = "Cem-i müennes salim (düzenli dişil çoğul) isimler nasb durumunda (örneğin nesne olduklarında) fetha yerine esre alırlar. İrabda yapılan bu kritik istisna şıkkın doğruluğunu kanıtlar." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2023/q18.png", Explanation = "Ecvef fiilin (orta harfi illetli) muzari çekiminde veya mazi çoğul çekimlerinde illet harfi belirli zamirlerde düşer (örneğin: kulne - قلنا). Bu ses düşmesi kuralına en uygun kip doğru cevaptır." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2023/q19.png", Explanation = "İsm-i mevsuller (ellezi, elleti vb.) kendisinden sonraki sıla cümlesini ana cümleye bağlar. Kendinden önceki ismin cinsiyetine ve sayısına (tekil/ikil/çoğul) göre uygun olan bağlaç seçilmelidir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2023/q20.png", Explanation = "Temyiz, cümledeki kapalılığı (müphem durumu) gideren mansub bir isimdir. Cümlede miktarı veya durumu netleştirmek için ağırlık veya hacim bildiren kelimeden sonra fetha ile gelmelidir." },
                 });
             }
 
@@ -132,26 +141,26 @@ namespace ArapcaSoruApi.Data
                 // Answers for 2024: 1-E, 2-A, 3-B, 4-B, 5-E, 6-B, 7-E, 8-C, 9-D, 10-E, 11-A, 12-C, 13-D, 14-D, 15-A, 16-B, 17-C, 18-A, 19-C, 20-D.
                 questions.AddRange(new List<Question>
                 {
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2024/q1.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2024/q2.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2024/q3.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2024/q4.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2024/q5.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2024/q6.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2024/q7.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2024/q8.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2024/q9.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2024/q10.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2024/q11.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2024/q12.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2024/q13.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2024/q14.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2024/q15.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2024/q16.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2024/q17.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2024/q18.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2024/q19.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2024/q20.png" },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2024/q1.png", Explanation = "Arapçada fiiller mazi, muzari veya emir kiplerinde cümlenin bağlamına göre anlam kazanır. Zaman bildiren zarflar (dün, bugün, yarın gibi) hangi kipin kullanılacağını belirler." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2024/q2.png", Explanation = "Mezid fiil kalıplarından 'iftial' (افتِعَال) babı, mutavaat (dönüşlülük) anlamı katar. Bu fiil kalıbının masdarı veya ism-i faili doğru şıkkı gösterir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2024/q3.png", Explanation = "Sıra sayıları (birinci, ikinci vb.) mevsufuna (nitelenen isim) tıpkı bir sıfat gibi dört yönden (cinsiyet, irab, sayı, marifelik) uymak zorundadır." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2024/q4.png", Explanation = "Arapçada illetli fiillerden nakıs fiilin (son harfi illetli olan) muzari çekiminde, cemi müzekker (eril çoğul) şahıs zamirine bitiştiğinde illet harfi düşer." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2024/q5.png", Explanation = "İsim tamlamasında (izafet) tamlanan (muzaf) tenvin almaz ve başında 'el' takısı bulunmaz. Tamlayan (muzafun ileyh) ise daima mecrur olur." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2024/q6.png", Explanation = "İnne (إنّ) cümlesinde haber, müfred bir kelime olabileceği gibi isim cümlesi, fiil cümlesi veya şibh-i cümle (harf-i cerli yapı) şeklinde de gelebilir. Burada haberin formuna dikkat edilmelidir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2024/q7.png", Explanation = "Gelecek zaman bildiren (Se veya Sevfe) edatları muzari fiilin başına gelir ve fiilin anlamını geniş zamandan kesin gelecek zamana kaydırır." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2024/q8.png", Explanation = "Mübteda akılsız varlıkların çoğulu (cemi gayr-i akil) olarak geldiğinde, bu kelime gramer olarak 'müfred müennes' hükmünde sayılır ve haberi tekil-dişil gelir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2024/q9.png", Explanation = "Cem-i müzekker salim (düzenli eril çoğullar) merfu durumunda sonuna 'vav ve nun' (ون) alır, mansub ve mecrur durumunda ise 'ya ve nun' (ين) alır." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2024/q10.png", Explanation = "Hal, sahibinin durumunu bildiren mansub bir ögedir. Fail veya mef'ulun durumunu belirtirken sayı ve cinsiyet bakımından sahibine uymak zorundadır." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2024/q11.png", Explanation = "Meful-i mutlak, cümlede geçen fiilin kökünden (masdarından) türeyen ve eylemin nasıl yapıldığını veya pekiştirilmesini sağlayan mansub bir isimdir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2024/q12.png", Explanation = "Mef'ulun lieclih (sebep bildiren mef'ul), fiilin yapılma nedenini açıklayan masdar yapılı mansub bir kelimedir (örneğin: 'korkudan', 'sevgiden' gibi)." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2024/q13.png", Explanation = "Soru edatları (Eyne, Meta, Keyfe vb.) kullanıldıkları cümlede irabdan mahalli olan zarflar veya isimlerdir. Cevap verilirken ilgili edatın anlamına göre cümlenin yapısı kurulur." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2024/q14.png", Explanation = "Bağlaçlar (Atıf harfleri) kendisinden önceki kelimenin irabını (merfu, mansub veya mecrur) kendisinden sonraki kelimeye aynen aktarır. İrab uyumu şarttır." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2024/q15.png", Explanation = "Gayr-ı munsarif kelimeler, sonlarına tenvin almayan ve kesra (esre) alameti yerine fetha (üstün) alan kelime gruplarıdır (örneğin yabancı özel isimler veya belirli çoğul kalıpları)." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2024/q16.png", Explanation = "Kâne'nin haberinin öne geçmesi durumu, haberin şibh-i cümle (zarf veya harf-i cerli yapı), ismin ise nekra (belirsiz) olması durumunda zorunludur." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2024/q17.png", Explanation = "Cümle içinde yer alan 'illa' (إلا) istisna edatıdır. Cümle olumsuz ve müstesna minh zikredilmemişse (müferrağ istisna), kelime cümledeki asıl konumuna (fail, mef'ul vb.) göre irablanır." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2024/q18.png", Explanation = "Emir fiil kipinin sonu sahih fiillerde cezimli olur. Eğer fiil illetli (nakıs) ise, sonundaki illet harfinin düşmesi emir fiilin meczumluk alametidir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2024/q19.png", Explanation = "İsm-i tafdil (kıyaslama veya en üstünlük bildiren isim) 'ef'alu' (أَفْعَلُ) veznindedir ve min (مِنْ) harfi cerri ile kullanıldığında karşılaştırma (daha büyük, daha güzel) ifade eder." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2024/q20.png", Explanation = "Asli sayılar (bir, iki, üç vb.) kendinden önceki ismi sıfat olarak nitelendirdiklerinde 1 ve 2 sayıları sayısal ve cinsi olarak mevsufuna tamamen uyar." },
                 });
             }
 
@@ -163,438 +172,431 @@ namespace ArapcaSoruApi.Data
                 // Answers for 2025: 1-D, 2-A, 3-C, 4-B, 5-E, 6-D, 7-D, 8-C, 9-E, 10-E, 11-A, 12-B, 13-A, 14-E, 15-D, 16-B, 17-A, 18-B, 19-C, 20-C.
                 questions.AddRange(new List<Question>
                 {
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2025/q1.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2025/q2.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2025/q3.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2025/q4.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2025/q5.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2025/q6.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2025/q7.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2025/q8.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2025/q9.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2025/q10.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2025/q11.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2025/q12.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2025/q13.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2025/q14.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2025/q15.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2025/q16.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2025/q17.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2025/q18.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2025/q19.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2025/q20.png" },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2025/q1.png", Explanation = "Mübteda marife (belirli) ve haber nekra (belirsiz) olmalıdır. Haberdeki tenvin, onun belirsiz olduğunu ve isim cümlesinin yüklemi konumunda olduğunu gösterir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2025/q2.png", Explanation = "Fiil cümlesi daima bir fiille başlar. Fail (özne) eğer açık bir isim olarak fiilden sonra geliyorsa, fiil daima müfred (tekil) kipinde olmalıdır; failin çoğul olması fiili çoğul yapmaz." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2025/q3.png", Explanation = "Mezid fiillerden 'Tefa'ul' (تَفَعُّل) babı, eylemin zamanla ve yavaş yavaş gerçekleştiğini (tekellüf) ifade eden özel bir anlama sahiptir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2025/q4.png", Explanation = "Cem-i teksir (düzensiz kırık çoğullar), tıpkı tekil isimler gibi ötre ile merfu, üstün ile mansub ve esre ile mecrur olurlar. Harf ile değil hareke ile irablanırlar." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2025/q5.png", Explanation = "Mef'ulun fih olan zaman veya mekan zarfları her zaman mansub (fetha) konumundadır. İstisnai olarak mebni olan zarflar (örneğin أمسِ) harekesini değiştirmez." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2025/q6.png", Explanation = "İnne (إنّ) cümlesinde ismin öne geçmesi veya haberin gecikmesi durumlarında irab kuralları değişmez. İnne'nin ismi her koşulda mansub (üstünlü) olmalıdır." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2025/q7.png", Explanation = "Soru edatlarından 'Kem' (كم), sayıyı sormak için kullanılır ve ardından gelen temyiz kelimesi daima müfred (tekil) ve mansub (üstün tenvinli) olmalıdır." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2025/q8.png", Explanation = "Muttasıl zamirler harf-i cerlere bitiştiklerinde mahallen mecrur olurlar (örneğin: minhu, fîhi). Zamirlerin kullanımı ismin yerini alma kurallarına tabidir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2025/q9.png", Explanation = "Ecvef fiilin (orta harfi illetli) ism-i faili türetilirken orta harf (vav veya ya), vezin kuralı gereği hemzeye dönüşür (Örn: kâle -> kâil)." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2025/q10.png", Explanation = "İsm-i mevsuller (ellezî, elletî), kendisinden sonraki sıla cümlesini ana cümleye bağlarken, sıla cümlesinde ism-i mevsule dönen ve sayı/cinsiyet uyumu sağlayan bir aid zamiri bulunmalıdır." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2025/q11.png", Explanation = "Sayılarda 11-19 arası sayılar 'fetha üzere mebni'dir (değişmez yapıdadır). Hem sayı hem de sayılan kelime üstünlü ve tekil olarak gelir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2025/q12.png", Explanation = "Cümlede hal ögesi, tekil bir isim (müfred) olabileceği gibi isim cümlesi veya fiil cümlesi de olabilir. Hal cümlesi başına 'vav-ı haliye' alarak gelir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2025/q13.png", Explanation = "Temyiz, sayıların veya ölçü/ağırlık birimlerinin kapalılığını gidermek için kullanılır. 20, 30 gibi 'ukûd' (onluk) sayılardan sonra temyiz daima müfred ve mansub gelir." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "E", ImagePath = "/images/arapca-2/yaz_okulu/2025/q14.png", Explanation = "İstisna cümlesinde 'Gayr' veya 'Siva' kelimeleri kullanıldığında, müstesna görevini bu edatlar üstlenir ve kendilerinden sonra gelen isim her zaman muzafun ileyh olarak mecrur olur." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "D", ImagePath = "/images/arapca-2/yaz_okulu/2025/q15.png", Explanation = "Fiil-i muzariyi cezm eden edatlardan 'Lem' (لم), fiilin zamanını geçmişe çevirirken kesin bir olumsuzluk ifade eder ve fiilin son harekesini cezimler." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2025/q16.png", Explanation = "Mef'ulun mutlak fiili pekiştirmek (tekit) için getirildiğinde, fiille aynı kökten masdar olarak cümlede yer alır ve harekesi daima mansubdur." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "A", ImagePath = "/images/arapca-2/yaz_okulu/2025/q17.png", Explanation = "Nakıs fiilin ism-i faili, başında 'el' takısı olmadığında merfu ve mecrur durumunda sonundaki 'ya' (ي) harfini düşürür ve tenvin-i ivaz alır (örneğin: kâdın - قاضٍ)." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "B", ImagePath = "/images/arapca-2/yaz_okulu/2025/q18.png", Explanation = "Sıra sayıları müzekker ve müennes formlarıyla mevsufa uymak zorundadır. Örneğin, üçüncü dişil kelimesi için 'es-sâlise' (الثالثة) kullanılmalıdır." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2025/q19.png", Explanation = "Harf-i cerler (min, ilâ, an, alâ vb.) kendisinden sonra gelen ismin son harekesini mecrur (esre) yaparlar. Kelime tesniye veya cemi ise irab harfle olur." },
+                    new() { CourseName = "Arapça-2", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "C", ImagePath = "/images/arapca-2/yaz_okulu/2025/q20.png", Explanation = "İsm-i tafdil, 'min' edatı olmadan kullanıldığında ve kendisinden sonraki isme muzaf (tamlayan) olduğunda, 'en ...' (en güzel, en büyük) anlamına gelir." },
                 });
             }
 
             // ─────────────────────────────────────────────────────────────────
             // Arapça-2 | Dönem Sonu | 2022 — Cevap anahtarından okunan veriler
             // ─────────────────────────────────────────────────────────────────
-            if (!await context.Questions.AnyAsync(q => q.CourseName == "Arapça-2" && q.ExamType == "Dönem Sonu" && q.Year == "2022"))
+            var existingDS2022 = await context.Questions.Where(q => q.CourseName == "Arapça-2" && q.ExamType == "Dönem Sonu" && q.Year == "2022").ToListAsync();
+            if (existingDS2022.Any()) { context.Questions.RemoveRange(existingDS2022); await context.SaveChangesAsync(); }
+
+            // Answers for 2022 Dönem Sonu: 1-B, 2-D, 3-E, 4-A, 5-C, 6-B, 7-A, 8-D, 9-C, 10-C, 11-B, 12-D, 13-C, 14-A, 15-D, 16-E, 17-A, 18-E, 19-B, 20-E.
+            questions.AddRange(new List<Question>
             {
-                // Answers for 2022 Dönem Sonu: 1-B, 2-D, 3-E, 4-A, 5-C, 6-B, 7-A, 8-D, 9-C, 10-C, 11-B, 12-D, 13-C, 14-A, 15-D, 16-E, 17-A, 18-E, 19-B, 20-E.
-                questions.AddRange(new List<Question>
-                {
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2022/q1.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2022/q2.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2022/q3.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2022/q4.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2022/q5.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2022/q6.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2022/q7.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2022/q8.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2022/q9.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2022/q10.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2022/q11.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2022/q12.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2022/q13.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2022/q14.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2022/q15.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2022/q16.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2022/q17.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2022/q18.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2022/q19.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2022/q20.png" },
-                });
-            }
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2022/q1.png", Explanation = "İsim cümlesinde mübteda ve haber arasında sayı ve cinsiyet uyumu zorunludur. Mübteda müfred müzekker (tekil eril) olduğu için haberin de müfred müzekker olması gerekir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2022/q2.png", Explanation = "İzafet (isim tamlaması) kuralına göre muzaf (tamlanan) tenvin veya 'el' takısı alamaz. Muzafun ileyh (tamlayan) ise daima mecrur (esre veya mecrur alameti) olur." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2022/q3.png", Explanation = "Ecvef fiil (orta harfi illetli), muzari formda meczum olduğunda (önüne cezm edici edat geldiğinde) illet harfi düşer (örneğin: yekûlu -> lem yekul)." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2022/q4.png", Explanation = "Zaman ve mekan zarfları (Mef'ulun Fih) cümlenin fiilinin nerede veya ne zaman gerçekleştiğini bildirir ve daima mansub (fetha) olurlar." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2022/q5.png", Explanation = "İnne ve kardeşleri cümleye dahil olduklarında ismini mansub (üstünlü), haberini merfu (ötreli) yaparlar. Bu gramer kuralı irabı doğrudan belirler." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2022/q6.png", Explanation = "Arapça'da gayr-ı munsarif isimler (esre ve tenvin kabul etmeyen kelimeler) mecrur olmaları gerektiğinde kesra yerine fetha (üstün) ile mecrur olurlar." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2022/q7.png", Explanation = "Sayıların temyizi kuralına göre, 11 ile 99 arasındaki sayıların temyizi (sayılan şey) daima müfred (tekil) ve mansub (üstün tenvinli) olmalıdır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2022/q8.png", Explanation = "Hal, sahibinin eylem esnasındaki durumunu bildiren nekra ve mansub bir ögedir. Sayı ve cinsiyet bakımından hal sahibine uymak zorundadır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2022/q9.png", Explanation = "İsm-i Mevsul (bağlaç olan isimler), kendisinden önceki kelimenin cinsiyetine ve sayısına göre şekillenir. Tesniye (ikil) isimler için uygun ism-i mevsul seçilmelidir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2022/q10.png", Explanation = "Mezid fiiller, anlamı zenginleştirmek için kök harflere ziyade yapılan kalıplardır. İlgili babın (kalıbın) masdarı, cümlenin anlamına tam uymaktadır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2022/q11.png", Explanation = "Mef'ulun mutlak, cümlede geçen fiilin kendi kökünden türeyen ve eylemi pekiştirmek veya sayısını/tarzını bildirmek için kullanılan mansub masdardır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2022/q12.png", Explanation = "Kâne ve kardeşleri (nakıs fiiller), mübtedayı kendi isimleri yapıp merfu, haberi ise mansub bırakırlar. Bu soruda haber konumundaki kelime üstünlüdür." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2022/q13.png", Explanation = "Fiil cümlesinde fail (özne) çoğul bile olsa, fiil başta geldiğinde her zaman müfred (tekil) kipinde olmak zorundadır. Ancak cinsiyet uyumu şarttır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2022/q14.png", Explanation = "İstisna cümlesinde 'illa' (إلا) edatından sonra gelen isim (müstesna), cümlenin olumlu veya olumsuz/tam olmasına göre irablanır. Tam ve olumlu cümlede daima mansubdur." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2022/q15.png", Explanation = "Akılsız varlıkların çoğulları kural gereği 'müfred müennes' (tekil dişil) sayılır. Dolayısıyla kendilerine gelen sıfat da tekil-dişil olmalıdır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2022/q16.png", Explanation = "Cem-i müennes salim (düzenli dişil çoğullar) harf değil hareke ile irablanır, ancak nasb durumunda (mef'ul vb.) fetha yerine kesra (esre) alarak istisnai bir irab gösterirler." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2022/q17.png", Explanation = "Emir kipi türetilirken muzari fiilin başındaki muzaraat harfi atılır ve sonu cezimlenir. Şıklar arasındaki doğru emir kipi formülü budur." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2022/q18.png", Explanation = "İsm-i Tafdil (kıyaslama ismi), daha çok/daha büyük gibi anlamlar verir. 'Min' edatı ile birlikte kullanıldığında karşılaştırma (komparatif) anlamı taşır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2022/q19.png", Explanation = "Nakıs fiiller (son harfi illetli olanlar) muzari kiplerinde cezm edici edat (lem gibi) aldıklarında, illet harfi düşürülerek meczum olurlar." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2022/q20.png", Explanation = "Harf-i cerler (fî, alâ, min vb.) isimlerin başına gelir ve ismin sonunu mecrur (esre veya mecrur alameti olan 'ya') yapar. İkili (tesniye) kelimeler için alamet 'ya' dır." },
+            });
 
             // ─────────────────────────────────────────────────────────────────
             // Arapça-2 | Dönem Sonu | 2023-2024 — Cevap anahtarından okunan veriler
             // ─────────────────────────────────────────────────────────────────
-            if (!await context.Questions.AnyAsync(q => q.CourseName == "Arapça-2" && q.ExamType == "Dönem Sonu" && q.Year == "2023-2024"))
+            var existingDS2023 = await context.Questions.Where(q => q.CourseName == "Arapça-2" && q.ExamType == "Dönem Sonu" && q.Year == "2023-2024").ToListAsync();
+            if (existingDS2023.Any()) { context.Questions.RemoveRange(existingDS2023); await context.SaveChangesAsync(); }
+
+            // Answers for 2023-2024 Dönem Sonu: 1-E, 2-B, 3-A, 4-C, 5-A, 6-E, 7-D, 8-C, 9-E, 10-E, 11-B, 12-A, 13-D, 14-B, 15-C, 16-A, 17-D, 18-C, 19-B, 20-D.
+            questions.AddRange(new List<Question>
             {
-                // Answers for 2023-2024 Dönem Sonu: 1-E, 2-B, 3-A, 4-C, 5-A, 6-E, 7-D, 8-C, 9-E, 10-E, 11-B, 12-A, 13-D, 14-B, 15-C, 16-A, 17-D, 18-C, 19-B, 20-D.
-                questions.AddRange(new List<Question>
-                {
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q1.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q2.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q3.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q4.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q5.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q6.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q7.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q8.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q9.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q10.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q11.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q12.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q13.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q14.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q15.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q16.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q17.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q18.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q19.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q20.png" },
-                });
-            }
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q1.png", Explanation = "Fiil cümlesinde fiilin başa geldiği durumlarda failin (öznenin) sayısına bakılmaksızın fiil tekil formda kalır. Sadece eril/dişil uyumu aranır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q2.png", Explanation = "Mezid fiillerden rubaî (dört harfli) olan if'al (إفْعال) babı, geçişsiz (lazım) fiilleri geçişli (müteaddi) yapmak için kullanılır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q3.png", Explanation = "İsim tamlamasında (izafet), tamlanan ismin son harekesi cümledeki konumuna göre değişir ancak tamlayan isim daima esre (mecrur) alır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q4.png", Explanation = "Sayılarda temyiz (sayılan), 3-10 sayıları arasında cemi (çoğul) ve mecrur olarak gelirken, cinsiyet bakımından sayının tam zıttı olmalıdır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q5.png", Explanation = "Gayr-ı munsarif kelimeler, harfi cer aldıklarında veya izafet tamlamasında tamlayan olduklarında esre yerine fetha (üstün) ile irablanırlar." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q6.png", Explanation = "Hal, sahibinin durumunu bildiren mansub bir kelimedir. Soru kökündeki sahibul hal müfred müennes olduğu için hal de müfred müennes ve mansub gelmiştir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q7.png", Explanation = "İnne'nin ismi mansub, haberi merfudur. Tesniye (ikil) isimlerin nasb alameti 'ya' (ين), ref alameti ise 'elif' (ان) harfidir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q8.png", Explanation = "Mef'ulun lieclih (sebep mef'ulu), eylemin niçin yapıldığını gösteren masdar yapısındaki mansub bir kelimedir (örneğin: aşktan, korkudan)." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q9.png", Explanation = "Muttasıl zamirler (bitişik zamirler) edatlara (İnne vb.) bitiştiklerinde ismin yerini tutarlar ve cümlenin yapısına göre mahallen mansub olurlar." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q10.png", Explanation = "Soru edatları arasında sebep soran 'Lime/Limâzâ' edatına karşılık genellikle sebep bildiren mef'ulun lieclih veya 'li' edatı ile cevap verilir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q11.png", Explanation = "Ecvef fiilin (orta harfi illetli) ism-i fail formunda ortasındaki illet harfi kural gereği hemzeye (ء) dönüşür (Örn: Sâme -> Sâim)." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q12.png", Explanation = "Zaman bildiren zarflar (Mef'ulun fih), cümlenin sonlarında veya fiilden sonra gelerek eylemin zamanını fetha (üstün) ile mansub şekilde belirtir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q13.png", Explanation = "Mübteda akılsız varlıkların cemi teksiri (kırık çoğulu) ise haber daima müfred müennes (tekil dişil) olmak zorundadır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q14.png", Explanation = "Sıra sayıları (üçüncü, beşinci vb.) mevsufuna her bakımdan (cinsiyet, irab, marifelik) uyan sıfat konumundadırlar." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q15.png", Explanation = "İstisna cümlesi 'GAYR' veya 'SİVA' kelimesiyle kurulmuşsa, bu kelimelerden sonra gelen müstesna daima muzafun ileyh olarak esre (mecrur) olur." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q16.png", Explanation = "Kâne ve kardeşleri mübtedayı merfu, haberi ise mansub yapar. İkili isimlerin mansub hali 'ya' iledir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q17.png", Explanation = "Arapçada bağlaç olan İsm-i Mevsul, öncesindeki kelimeyle (marife isimle) sayı ve cinsiyet bakımından tam uyumlu olmalıdır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q18.png", Explanation = "Nakıs (son harfi illetli) fiilin emir formunda, sondaki illet harfi düşürülür. Bu düşme emir fiilin meczum alametidir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q19.png", Explanation = "İsm-i Tafdil 'ef'alu' (أفعل) kalıbında gelir. İki nesneyi kıyaslarken harfi cer olan 'min' (من) edatını alır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2023-2024/q20.png", Explanation = "Muzari fiili nasb eden edatlar (en, len, key, izen), eylemi gelecek zamana veya masdar anlamına çevirerek sonunu üstünlü yapar." },
+            });
 
             // ─────────────────────────────────────────────────────────────────
             // Arapça-2 | Dönem Sonu | 2024-2025 — Cevap anahtarından okunan veriler
             // ─────────────────────────────────────────────────────────────────
-            if (!await context.Questions.AnyAsync(q => q.CourseName == "Arapça-2" && q.ExamType == "Dönem Sonu" && q.Year == "2024-2025"))
+            var existingDS2024 = await context.Questions.Where(q => q.CourseName == "Arapça-2" && q.ExamType == "Dönem Sonu" && q.Year == "2024-2025").ToListAsync();
+            if (existingDS2024.Any()) { context.Questions.RemoveRange(existingDS2024); await context.SaveChangesAsync(); }
+
+            // Answers for 2024-2025 Dönem Sonu: 1-B, 2-E, 3-C, 4-A, 5-B, 6-E, 7-D, 8-D, 9-C, 10-A, 11-E, 12-A, 13-B, 14-D, 15-C, 16-E, 17-C, 18-A, 19-B, 20-D.
+            questions.AddRange(new List<Question>
             {
-                // Answers for 2024-2025 Dönem Sonu: 1-B, 2-E, 3-C, 4-A, 5-B, 6-E, 7-D, 8-D, 9-C, 10-A, 11-E, 12-A, 13-B, 14-D, 15-C, 16-E, 17-C, 18-A, 19-B, 20-D.
-                questions.AddRange(new List<Question>
-                {
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q1.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q2.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q3.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q4.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q5.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q6.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q7.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q8.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q9.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q10.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q11.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q12.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q13.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q14.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q15.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q16.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q17.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q18.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q19.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q20.png" },
-                });
-            }
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q1.png", Explanation = "İsim cümlesinde haberin mübteda ile cinsiyet ve sayı yönünden uyumlu olması gerekir. Akılsız çoğul olan mübtedaya müfred müennes haber gelir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q2.png", Explanation = "Muzaf (isim tamlamasında tamlanan), hiçbir zaman tenvin almaz ve 'el' takısı kabul etmez. İrabını cümledeki yerine göre alır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q3.png", Explanation = "Arapçada zaman bildiren mef'ul (Mef'ulun fih), nasb durumundadır. Cümlenin fiilinin ne zaman yapıldığını 'leyleti' (geceleyin) fetha ile belirtir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q4.png", Explanation = "Mezid bablardan tef'il (تفعيل) babı genellikle geçişli yapmak ve fiilde aşırılık/çokluk bildirmek amacıyla kullanılır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q5.png", Explanation = "Harf-i cerler ismin sonunu mecrur yapar. Cemi müzekker salim bir ismin mecrur alameti sonundaki 'ya' ve fethalı 'nun'dur (ينَ)." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q6.png", Explanation = "Mef'ulun mutlak, cümlenin ana fiili ile aynı kökten türeyen masdardır ve fiili pekiştirmek için üstün (mansub) olarak gelir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q7.png", Explanation = "Sayılar ve temyiz kuralları: 11-99 arası sayıların temyizi (sayılan), tekil (müfred) ve üstün tenvinli (mansub) olmak zorundadır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q8.png", Explanation = "İstisna cümlesi olumsuz (menfi) ve eksik (naşı) olduğunda 'illa' (إلا) edatı yokmuş gibi irab yapılır. Fail eksik olduğu için müstesna merfu (ötre) olmalıdır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q9.png", Explanation = "Hâl, eylemin yapıldığı andaki durumu anlatan kelimedir ve daima mansubdur. Sahibul hal (durumu açıklanan) ile uyumlu gelir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q10.png", Explanation = "Nakıs (illetli) fiiller muzari meczum durumuna girdiklerinde son harf (illet harfi) tamamen düşürülür." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q11.png", Explanation = "İnne'nin ismi mansub, haberi merfudur. Doğru cevapta haber, ötre ile (merfu) harekelenmiş kelimedir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q12.png", Explanation = "Sıra sayıları kendilerinden önceki isme (mevsufa) sıfat olurlar. İrabı, müzekker/müennes durumu tam olarak uymalıdır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q13.png", Explanation = "Kâne'nin ismi merfu (ötre), haberi mansub (üstün) olur. Şıklarda Kâne'nin bu irab etkisini yansıtan doğru kalıp aranmaktadır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q14.png", Explanation = "Gayr-ı munsarif kelimeler izafet tamlamasında esre yerine üstün (fetha) alırlar. 'Mescid' kelimesinin çoğulu (Mesâcid) gayr-ı munsariftir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q15.png", Explanation = "İsm-i Tafdil (kıyaslama) 'من' (min) harfi cerri ile kullanıldığında karşılaştırma yapar ve diğerlerinden üstünlüğü belirtir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q16.png", Explanation = "Fiil cümlesinin başında fiil kullanılıyorsa, fail (özne) tesniye veya cemi de olsa fiil mutlaka müfred (tekil) kalır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q17.png", Explanation = "Muttasıl (bitişik) zamirler isme eklenirse muzafun ileyh olur ve mecrur kabul edilirler. Cümledeki konumları iyelik (sahiplik) bildirir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q18.png", Explanation = "Mef'ulun lieclih (niçin mef'ulu) daima mansub bir masdardır. Korku, saygı, arzu bildiren masdarlar bu şekilde gelir (Örn: ihterâmen)." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q19.png", Explanation = "Arapçada ism-i fail kalıbı, sülasi fiillerden (فَاعِل) kalıbıyla üretilir ve eylemi yapan kişiyi (faili) gösterir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2024-2025/q20.png", Explanation = "Muzari fiiller sonlarında nasb edatı (en, len vb.) bulunduğunda nasb (üstün) olurlar. İlletli harfler de hareke alabilir." },
+            });
 
             // ─────────────────────────────────────────────────────────────────
             // Arapça-2 | Dönem Sonu | 2026 — Cevap anahtarından okunan veriler
             // ─────────────────────────────────────────────────────────────────
-            var existing2026 = await context.Questions.Where(q => q.CourseName == "Arapça-2" && q.ExamType == "Dönem Sonu" && q.Year == "2026").ToListAsync();
-            if (existing2026.Any())
-            {
-                context.Questions.RemoveRange(existing2026);
-                await context.SaveChangesAsync();
-            }
+            var existingDS2026 = await context.Questions.Where(q => q.CourseName == "Arapça-2" && q.ExamType == "Dönem Sonu" && q.Year == "2026").ToListAsync();
+            if (existingDS2026.Any()) { context.Questions.RemoveRange(existingDS2026); await context.SaveChangesAsync(); }
 
-            if (!await context.Questions.AnyAsync(q => q.CourseName == "Arapça-2" && q.ExamType == "Dönem Sonu" && q.Year == "2026"))
+            // Answers for 2026 Dönem Sonu: 1-C, 2-B, 3-D, 4-C, 5-A, 6-C, 7-D, 8-A, 9-A, 10-A, 11-D, 12-E, 13-C, 14-D, 15-B, 16-E, 17-B, 18-E, 19-B, 20-E.
+            questions.AddRange(new List<Question>
             {
-                // Answers for 2026 Dönem Sonu: 1-C, 2-B, 3-D, 4-C, 5-A, 6-C, 7-D, 8-A, 9-A, 10-A, 11-D, 12-E, 13-C, 14-D, 15-B, 16-E, 17-B, 18-E, 19-B, 20-E.
-                questions.AddRange(new List<Question>
-                {
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2026/q1.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2026/q2.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2026/q3.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2026/q4.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2026/q5.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2026/q6.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2026/q7.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2026/q8.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2026/q9.png"  },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2026/q10.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2026/q11.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2026/q12.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2026/q13.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2026/q14.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2026/q15.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2026/q16.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2026/q17.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2026/q18.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2026/q19.png" },
-                    new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2026/q20.png" },
-                });
-            }
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2026/q1.png", Explanation = "İsim tamlamasında (izafet) muzaf (tamlanan) tenvin almaz. Mübteda konumundaki muzaf merfu (ötreli) olmalıdır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2026/q2.png", Explanation = "İsim cümlesinde haber, mübtedaya uyum sağlamalıdır. Mübteda müfred müennes olduğu için haber de müfred müennes gelir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2026/q3.png", Explanation = "Harf-i cer ismin başına geldiğinde ismin sonunu mecrur yapar. Cemi müennes salim (dişil çoğul) ismin mecrur alameti esredir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2026/q4.png", Explanation = "Zaman zarfları (Mef'ulun fih) eylemin ne zaman yapıldığını bildirir ve daima mansub (fethalı) olurlar." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2026/q5.png", Explanation = "İnne'nin ismi mansub, haberi merfudur. Cemi müzekker salim isimlerin nasb alameti 'ya' ve fethalı nun'dur (ينَ)." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2026/q6.png", Explanation = "Fiil cümlesinde fiil daima başta müfred gelir, ancak fail (özne) müennes ise fiil de müenneslik alameti olan 'te' (ت) harfi ile çekimlenir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2026/q7.png", Explanation = "Mef'ulun mutlak fiili pekiştirmek için fiille aynı kökten masdar olarak getirilir ve daima mansub (fethalı) irab alır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2026/q8.png", Explanation = "Sayılar 3 ile 10 arasında olduğunda temyizi cemi ve mecrur gelirken, sayının kendisi temyizin tekilinin zıt cinsiyetinde olmalıdır." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2026/q9.png", Explanation = "İstisna cümlesi olumluysa müstesna daima mansubdur. Cümlede fail ve fiil tam olduğu için 'illa'dan sonraki isim mansub olmuştur." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "A", ImagePath = "/images/arapca-2/donem_sonu/2026/q10.png", Explanation = "Hâl, cümlenin sahibul halinin durumunu bildiren nekra ve mansub kelimedir. Fail müfred müzekker olduğu için hal de ona uygun formda gelmiştir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2026/q11.png", Explanation = "Nakıs fiil, son harfi illetli olan fiildir. Meczum formda bu illet harfi tamamen düşürülerek çekimlenir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2026/q12.png", Explanation = "Kâne ve kardeşleri mübtedayı merfu, haberi mansub yapar. İsim cümlesindeki haber bu sebeple nasb alameti ile gelmiştir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "C", ImagePath = "/images/arapca-2/donem_sonu/2026/q13.png", Explanation = "Sıra sayıları kendilerinden önceki marife isme (mevsufa) sıfat olurlar ve cinsiyet bakımından tam bir uyum sağlarlar." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "D", ImagePath = "/images/arapca-2/donem_sonu/2026/q14.png", Explanation = "Gayr-ı munsarif isimler tenvin almazlar ve mecrur durumdayken kesra (esre) yerine fetha (üstün) ile irab alırlar." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2026/q15.png", Explanation = "İsm-i Tafdil (ef'alu) kalıbı karşılaştırma yapar. Sonrasındaki 'min' edatı ile birlikte kullanıldığında irab özellikleri değişebilir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2026/q16.png", Explanation = "Akılsız çoğullar daima müfred müennes hükmündedir. Bu kelimelere verilecek sıfat veya işaret isminin de müfred müennes olması zorunludur." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2026/q17.png", Explanation = "Bitişik zamirler isme bitiştiğinde muzafun ileyh olur (mecrurdur). Fiile bitiştiklerinde ise nesne konumunda (mansub) olurlar." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2026/q18.png", Explanation = "Mef'ulun lieclih (sebep mef'ulu), eylemin niçin yapıldığını gösteren masdar yapısında, fetha ile mansub olan bir ögedir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "B", ImagePath = "/images/arapca-2/donem_sonu/2026/q19.png", Explanation = "İsm-i mef'ul kalıbı (مَفْعُول), sülasi fiillerde işten etkileneni belirtir. Ortadaki vav ve baştaki mim bu kalıbı gösterir." },
+                new() { CourseName = "Arapça-2", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "E", ImagePath = "/images/arapca-2/donem_sonu/2026/q20.png", Explanation = "Nasb edatları (en, len, key) muzari fiilin son harfinin harekesini üstüne çevirir. İllet harfi olsa bile fetha açıkça görülebilir." },
+            });
 
             // ─────────────────────────────────────────────────────────────────
             // Arapça-4 | Yaz Okulu | 2021 — Cevap anahtarından okunan veriler
             // ─────────────────────────────────────────────────────────────────
-            if (!await context.Questions.AnyAsync(q => q.CourseName == "Arapça-4" && q.ExamType == "Yaz Okulu" && q.Year == "2021"))
+            var existingYaz4_2021 = await context.Questions.Where(q => q.CourseName == "Arapça-4" && q.ExamType == "Yaz Okulu" && q.Year == "2021").ToListAsync();
+            if (existingYaz4_2021.Any()) { context.Questions.RemoveRange(existingYaz4_2021); await context.SaveChangesAsync(); }
+
+            // Answers for 2021 Arapça-4 Yaz Okulu: 1-E, 2-C, 3-A, 4-D, 5-A, 6-E, 7-E, 8-B, 9-C, 10-B, 11-E, 12-C, 13-D, 14-A, 15-D, 16-B, 17-D, 18-C, 19-A, 20-B.
+            questions.AddRange(new List<Question>
             {
-                // Answers for 2021 Arapça-4 Yaz Okulu: 1-E, 2-C, 3-A, 4-D, 5-A, 6-E, 7-E, 8-B, 9-C, 10-B, 11-E, 12-C, 13-D, 14-A, 15-D, 16-B, 17-D, 18-C, 19-A, 20-B.
-                questions.AddRange(new List<Question>
-                {
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2021/q1.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2021/q2.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2021/q3.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2021/q4.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2021/q5.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2021/q6.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2021/q7.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2021/q8.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2021/q9.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2021/q10.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2021/q11.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2021/q12.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2021/q13.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2021/q14.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2021/q15.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2021/q16.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2021/q17.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2021/q18.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2021/q19.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2021/q20.png" },
-                });
-            }
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2021/q1.png", Explanation = "Sıfat tamlamasında sıfat, mevsufuna cinsiyet, sayı, irab ve marifelik/nekralık bakımından tam uyum sağlamak zorundadır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2021/q2.png", Explanation = "İsim cümlesinde haber, mübtedanın cinsiyetine ve sayısına uymalıdır. Mübteda müfred müennes olduğu için haber de müfred müennes gelir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2021/q3.png", Explanation = "Arapçada fiillerin faili açıksa, fiil daima müfred (tekil) gelir. Sadece failin eril veya dişil olmasına göre cinsiyet uyumu aranır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2021/q4.png", Explanation = "Soru edatlarından 'Men' (Kim) akıllılar için, 'Mâ/Mâzâ' (Ne) ise akılsız varlıklar için kullanılır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2021/q5.png", Explanation = "Harf-i cerler (min, ila, an, ala vb.) ismin başına gelir ve ismin sonunu mecrur (esre) yapar." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2021/q6.png", Explanation = "İzafet (isim tamlaması) tamlamasında muzaf (tamlanan) asla tenvin veya 'El' takısı almaz, muzafun ileyh (tamlayan) ise daima mecrurdur." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2021/q7.png", Explanation = "Cemi müzekker salim (düzenli eril çoğul) isimler merfu durumda 'vav' (ون), mansub ve mecrur durumda ise 'ya' (ين) harfi alırlar." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2021/q8.png", Explanation = "İnne ve benzerleri (İnne, Enne, Keenne, Lakinne, Leyte, Lealle) ismini mansub, haberini merfu yaparlar." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2021/q9.png", Explanation = "Kâne ve kardeşleri mübtedayı merfu (isim olarak), haberi ise mansub (üstünlü) yaparak cümlenin anlamını geçmiş zamana veya belirli bir duruma taşır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2021/q10.png", Explanation = "Mef'ulun fih, eylemin yapıldığı zamanı veya mekânı belirten zarflardır ve cümlenin ögesi olarak mansub (üstün) olurlar." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2021/q11.png", Explanation = "Ecvef fiiller (orta harfi illetli), emir kipine çevrildiklerinde ortalarındaki illet harfi düşer (Örn: Kàle -> Kul)." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2021/q12.png", Explanation = "Muzari fiili nasb eden edatlar (En, Len, Key, İzen) fiilin son harekesini fetha yapar ve anlamını genellikle masdara veya gelecek zamana dönüştürür." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2021/q13.png", Explanation = "Sıra sayıları (birinci, üçüncü vb.) kendisinden önceki kelimeye (mevsufa) sıfat olurlar ve her açıdan ona tam uyum sağlarlar." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2021/q14.png", Explanation = "İsm-i Tafdil (ef'alu kalıbı) karşılaştırma yaparken 'min' harf-i cerri ile kullanılır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2021/q15.png", Explanation = "Mef'ulun lieclih, bir eylemin niçin yapıldığını açıklayan masdar yapısında kelimelerdir ve daima mansub (fetha) olurlar." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2021/q16.png", Explanation = "Hâl, fiilin nasıl yapıldığını bildiren, genellikle nekra ve mansub (fethalı) olan isimdir. Sahibul hâl ile uyumludur." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2021/q17.png", Explanation = "Akılsız varlıkların çoğulu, Arapçada dilbilgisi kuralı olarak daima 'müfred müennes' (tekil dişil) kabul edilir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2021/q18.png", Explanation = "Nakıs fiillerin (sonu illetli fiiller) meczum hallerinde veya emir kiplerinde sondaki illet harfi tamamen düşürülür." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2021/q19.png", Explanation = "Mef'ulun mutlak, cümlede asıl fiil ile aynı kökten (masdar) olarak gelen ve eylemi pekiştiren mansub ögedir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2021", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2021/q20.png", Explanation = "Sayıların temyizi kuralında 11-99 arası sayılardan sonra gelen kelime daima müfred (tekil) ve mansub (fethalı) olmalıdır." },
+            });
 
             // ─────────────────────────────────────────────────────────────────
             // Arapça-4 | Yaz Okulu | 2022 — Cevap anahtarından okunan veriler
             // ─────────────────────────────────────────────────────────────────
-            if (!await context.Questions.AnyAsync(q => q.CourseName == "Arapça-4" && q.ExamType == "Yaz Okulu" && q.Year == "2022"))
+            var existingYaz4_2022 = await context.Questions.Where(q => q.CourseName == "Arapça-4" && q.ExamType == "Yaz Okulu" && q.Year == "2022").ToListAsync();
+            if (existingYaz4_2022.Any()) { context.Questions.RemoveRange(existingYaz4_2022); await context.SaveChangesAsync(); }
+
+            // Answers for 2022 Arapça-4 Yaz Okulu: 1-B, 2-B, 3-C, 4-D, 5-C, 6-E, 7-E, 8-A, 9-A, 10-C, 11-D, 12-E, 13-D, 14-B, 15-C, 16-E, 17-D, 18-A, 19-A, 20-B.
+            questions.AddRange(new List<Question>
             {
-                // Answers for 2022 Arapça-4 Yaz Okulu: 1-B, 2-B, 3-C, 4-D, 5-C, 6-E, 7-E, 8-A, 9-A, 10-C, 11-D, 12-E, 13-D, 14-B, 15-C, 16-E, 17-D, 18-A, 19-A, 20-B.
-                questions.AddRange(new List<Question>
-                {
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2022/q1.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2022/q2.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2022/q3.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2022/q4.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2022/q5.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2022/q6.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2022/q7.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2022/q8.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2022/q9.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2022/q10.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2022/q11.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2022/q12.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2022/q13.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2022/q14.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2022/q15.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2022/q16.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2022/q17.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2022/q18.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2022/q19.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2022/q20.png" },
-                });
-            }
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2022/q1.png", Explanation = "İsim tamlamasında (izafet), muzaf (tamlanan) tenvin veya el takısı almaz, cümlenin ögesine göre harekelenir. Muzafun ileyh (tamlayan) ise daima mecrurdur." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2022/q2.png", Explanation = "İsim cümlesinde haber, mübtedanın cinsiyetine ve sayısına uymak zorundadır. Mübteda müfred müennes olduğu için haber de müfred müennes olmalıdır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2022/q3.png", Explanation = "Fiil cümlesinde fiil daima cümlenin başında müfred (tekil) gelir. Failin (öznenin) cemi veya tesniye olması fiili etkilemez, sadece cinsiyet uyumu aranır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2022/q4.png", Explanation = "Sıra sayıları kendisinden önceki kelimeye (mevsufa) sıfat olurlar ve marifelik/nekralık, müzekkerlik/müenneslik ve irab bakımından tam uymak zorundadırlar." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2022/q5.png", Explanation = "Muzari fiili nasb eden edatlardan biri olan 'En', fiilin sonunu üstünlü (fethalı) yapar ve cümleye masdar anlamı katar." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2022/q6.png", Explanation = "Mef'ulun fih (zaman veya mekân zarfları) cümlede eylemin gerçekleştiği zamanı veya yeri belirtir ve daima mansub (fethalı) olarak gelir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2022/q7.png", Explanation = "Hâl, fail veya mef'ulun durumunu açıklayan, nekra ve mansub (fethalı) olan bir ögedir. Sahibul halin cinsiyet ve sayısına uymalıdır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2022/q8.png", Explanation = "Kâne ve kardeşleri mübtedayı ismî yaparak merfu (ötreli) bırakır, haberi ise mansub (üstünlü) yapar. İsim cümlesindeki haberi nasb etmesiyle ayrılır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2022/q9.png", Explanation = "İnne ve kardeşleri, ismini mansub (fethalı veya ya harfi ile) ve haberini merfu (ötreli) yapan isim cümlesi edatlarıdır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2022/q10.png", Explanation = "Harf-i cerlerden (min, ila, an, ala vb.) sonra gelen kelime (mecrur) daima esre (kesra) veya onun yerine geçen irab alameti (örneğin ya harfi) alır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2022/q11.png", Explanation = "Sayılar 3 ile 10 arasında olduğunda, sayılan şey (temyiz) cemi (çoğul) ve mecrur gelir. Ayrıca sayının cinsiyeti temyizin tekiline zıt olmalıdır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2022/q12.png", Explanation = "İstisna edatı olan 'İlla'dan önce cümle olumlu ve tam ise, müstesna (istisna edilen kelime) daima mansub (fethalı) olmalıdır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2022/q13.png", Explanation = "Muttasıl (bitişik) zamirler isme bitişirse muzafun ileyh (mecrur) olur ve sahiplik bildirir. İrab mahallen kabul edilir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2022/q14.png", Explanation = "Mef'ulun lieclih (sebep mef'ulu), eylemin niçin yapıldığını açıklayan, masdar kalıbında ve daima mansub olan bir ögedir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2022/q15.png", Explanation = "İsm-i Tafdil (ef'alu kalıbı) 'min' harf-i cerri ile kullanıldığında karşılaştırma bildirir. Sıfatlar bu kalıba girerek üstünlük sağlar." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2022/q16.png", Explanation = "Mef'ulun mutlak, cümlede asıl fiil ile aynı kökten masdar olarak getirilir ve eylemin türünü, sayısını veya vurgusunu belirtmek için mansub olarak kullanılır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2022/q17.png", Explanation = "Akılsız varlıkların çoğulu, Arapça kuralına göre 'müfred müennes' (tekil dişil) kabul edilir. Buna gelen sıfat, işaret ismi veya haber de tekil dişil olmalıdır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2022/q18.png", Explanation = "Ecvef (orta harfi illetli) fiiller muzari meczum durumunda veya emir kipinde, ortalarındaki illet harfini kural gereği düşürürler." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2022/q19.png", Explanation = "Gayr-ı munsarif kelimeler esre (kesra) ve tenvin almazlar. Mecrur olmaları gereken durumlarda fetha (üstün) ile harekelenirler." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2022/q20.png", Explanation = "Cemi müzekker salim (düzenli eril çoğul) isimler merfu (ötreli) durumda iken vav harfi, mansub (üstün) ve mecrur (esre) durumlarda ya harfi ile irab alırlar." },
+            });
 
             // ─────────────────────────────────────────────────────────────────
             // Arapça-4 | Yaz Okulu | 2023 — Cevap anahtarından okunan veriler
             // ─────────────────────────────────────────────────────────────────
-            if (!await context.Questions.AnyAsync(q => q.CourseName == "Arapça-4" && q.ExamType == "Yaz Okulu" && q.Year == "2023"))
+            var existingYaz4_2023 = await context.Questions.Where(q => q.CourseName == "Arapça-4" && q.ExamType == "Yaz Okulu" && q.Year == "2023").ToListAsync();
+            if (existingYaz4_2023.Any()) { context.Questions.RemoveRange(existingYaz4_2023); await context.SaveChangesAsync(); }
+
+            // Answers for 2023 Arapça-4 Yaz Okulu: 1-A, 2-A, 3-D, 4-C, 5-D, 6-B, 7-E, 8-E, 9-D, 10-D, 11-A, 12-A, 13-B, 14-C, 15-C, 16-B, 17-B, 18-C, 19-E, 20-E.
+            questions.AddRange(new List<Question>
             {
-                // Answers for 2023 Arapça-4 Yaz Okulu: 1-A, 2-A, 3-D, 4-C, 5-D, 6-B, 7-E, 8-E, 9-D, 10-D, 11-A, 12-A, 13-B, 14-C, 15-C, 16-B, 17-B, 18-C, 19-E, 20-E.
-                questions.AddRange(new List<Question>
-                {
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2023/q1.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2023/q2.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2023/q3.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2023/q4.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2023/q5.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2023/q6.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2023/q7.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2023/q8.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2023/q9.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2023/q10.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2023/q11.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2023/q12.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2023/q13.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2023/q14.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2023/q15.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2023/q16.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2023/q17.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2023/q18.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2023/q19.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2023/q20.png" },
-                });
-            }
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2023/q1.png", Explanation = "İsim cümlesinde mübteda ve haber cinsiyet/sayı bakımından uyumlu olmalıdır. Akılsız varlıkların çoğulu olan mübtedalar, müfred müennes (tekil dişil) haber alırlar." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2023/q2.png", Explanation = "İsim tamlamasında (izafet) muzafun ileyh (tamlayan) daima mecrurdur. İkil (tesniye) isimlerin mecrur hali 'ya' (ين) harfi iledir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2023/q3.png", Explanation = "Cemi müennes salim (kurallı dişil çoğul) isimler nasb durumunda (mef'ul vb.) fetha yerine kesra (esre) ile irablanırlar." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2023/q4.png", Explanation = "Muzari fiili nasb eden 'Len' edatı eylemi gelecekte olumsuz yapar ve fiilin son harfini mansub (fethalı) hale getirir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2023/q5.png", Explanation = "Harf-i cerler ismin başına gelir ve sonunu esre yapar. Sayılara veya cinsiyete göre harf-i cer kullanım kuralı değişmez." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2023/q6.png", Explanation = "Fiil cümlesinin başında yer alan fiil daima müfred (tekil) gelir. Fail cemi veya tesniye olsa da fiil müfredliğini korur." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2023/q7.png", Explanation = "Mef'ulun mutlak, cümlede asıl eylemi vurgulamak için fiille aynı kökten masdar olarak gelir ve daima mansubdur." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2023/q8.png", Explanation = "Sayıların temyizi kuralına göre 11 ile 99 arası sayılardan sonra gelen isim (sayılan) müfred (tekil) ve mansub (fetha tenvinli) olmalıdır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2023/q9.png", Explanation = "Olumsuz ve eksik istisna cümlelerinde 'illa' edatı dikkate alınmadan irab yapılır. Fail eksikse, illa'dan sonraki kelime fail (merfu) olur." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2023/q10.png", Explanation = "Hâl, failin veya mef'ulun durumunu anlatan mansub isimdir. Cinsiyet ve sayı bakımından sahibul hale uyar." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2023/q11.png", Explanation = "Nakıs (son harfi illetli) fiiller muzari meczum durumunda veya emir kipine girdiklerinde sonlarındaki illet harfi düşer." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2023/q12.png", Explanation = "İnne edatı ismini mansub, haberini merfu yapar. Haber müfred bir isimse ötre alır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2023/q13.png", Explanation = "Kâne edatı ismini merfu, haberini ise mansub bırakır. İsim cümlesine zaman (geçmiş vb.) anlamı katar." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2023/q14.png", Explanation = "Sıra sayıları kendilerinden önceki isme (mevsufa) tam anlamıyla uyan bir sıfat durumundadırlar." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2023/q15.png", Explanation = "İsm-i Tafdil kalıbı, nesneler arası karşılaştırma yapmak için 'min' harf-i cerri ile kullanılır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2023/q16.png", Explanation = "Gayr-ı munsarif kelimeler izafet tamlamasında tamlayan (muzaf) iseler veya başlarında 'el' takısı varsa esre (kesra) alabilirler, aksi halde fetha alırlar." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2023/q17.png", Explanation = "Muttasıl zamirler, isme eklendiğinde o isme aitlik bildirir ve dilbilgisi açısından muzafun ileyh (mecrur) konumundadır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2023/q18.png", Explanation = "Mef'ulun lieclih, bir eylemin yapılma nedenini bildiren masdar kalıbındadır. 'Niçin' sorusuna cevap verir ve mansubdur." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2023/q19.png", Explanation = "İsm-i Fail (Örn: فَاعِل kalıbı), sülasi fiillerden eylemi yapan kişiyi veya nesneyi bildirmek için türetilir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2023", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2023/q20.png", Explanation = "Cemi müzekker salim isimlerin merfu durumu vav (ون) iledir. Fail konumunda olduklarında vav harfini korurlar." },
+            });
 
             // ─────────────────────────────────────────────────────────────────
             // Arapça-4 | Yaz Okulu | 2024 — Cevap anahtarından okunan veriler
             // ─────────────────────────────────────────────────────────────────
-            if (!await context.Questions.AnyAsync(q => q.CourseName == "Arapça-4" && q.ExamType == "Yaz Okulu" && q.Year == "2024"))
+            var existingYaz4_2024 = await context.Questions.Where(q => q.CourseName == "Arapça-4" && q.ExamType == "Yaz Okulu" && q.Year == "2024").ToListAsync();
+            if (existingYaz4_2024.Any()) { context.Questions.RemoveRange(existingYaz4_2024); await context.SaveChangesAsync(); }
+
+            // Answers for 2024 Arapça-4 Yaz Okulu: 1-C, 2-C, 3-E, 4-E, 5-C, 6-B, 7-E, 8-D, 9-A, 10-A, 11-D, 12-B, 13-D, 14-A, 15-B, 16-A, 17-B, 18-D, 19-E, 20-C.
+            questions.AddRange(new List<Question>
             {
-                // Answers for 2024 Arapça-4 Yaz Okulu: 1-C, 2-C, 3-E, 4-E, 5-C, 6-B, 7-E, 8-D, 9-A, 10-A, 11-D, 12-B, 13-D, 14-A, 15-B, 16-A, 17-B, 18-D, 19-E, 20-C.
-                questions.AddRange(new List<Question>
-                {
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2024/q1.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2024/q2.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2024/q3.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2024/q4.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2024/q5.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2024/q6.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2024/q7.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2024/q8.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2024/q9.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2024/q10.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2024/q11.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2024/q12.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2024/q13.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2024/q14.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2024/q15.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2024/q16.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2024/q17.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2024/q18.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2024/q19.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2024/q20.png" },
-                });
-            }
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2024/q1.png", Explanation = "İsim cümlesinde haberin mübteda ile cinsiyet ve sayı yönünden uyumlu olması gerekir. Akılsız çoğul olan mübtedaya müfred müennes haber gelir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2024/q2.png", Explanation = "Muzaf (isim tamlamasında tamlanan), hiçbir zaman tenvin almaz ve 'el' takısı kabul etmez. İrabını cümledeki yerine göre alır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2024/q3.png", Explanation = "Arapçada zaman bildiren mef'ul (Mef'ulun fih), nasb durumundadır. Cümlenin fiilinin ne zaman yapıldığını 'leyleti' (geceleyin) fetha ile belirtir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2024/q4.png", Explanation = "Mezid bablardan tef'il (تفعيل) babı genellikle geçişli yapmak ve fiilde aşırılık/çokluk bildirmek amacıyla kullanılır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2024/q5.png", Explanation = "Harf-i cerler ismin sonunu mecrur yapar. Cemi müzekker salim bir ismin mecrur alameti sonundaki 'ya' ve fethalı 'nun'dur (ينَ)." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2024/q6.png", Explanation = "Mef'ulun mutlak, cümlenin ana fiili ile aynı kökten türeyen masdardır ve fiili pekiştirmek için üstün (mansub) olarak gelir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2024/q7.png", Explanation = "Sayılar ve temyiz kuralları: 11-99 arası sayıların temyizi (sayılan), tekil (müfred) ve üstün tenvinli (mansub) olmak zorundadır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2024/q8.png", Explanation = "İstisna cümlesi olumsuz (menfi) ve eksik (naşı) olduğunda 'illa' (إلا) edatı yokmuş gibi irab yapılır. Fail eksik olduğu için müstesna merfu (ötre) olmalıdır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2024/q9.png", Explanation = "Hâl, eylemin yapıldığı andaki durumu anlatan kelimedir ve daima mansubdur. Sahibul hal (durumu açıklanan) ile uyumlu gelir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2024/q10.png", Explanation = "Nakıs (illetli) fiiller muzari meczum durumuna girdiklerinde son harf (illet harfi) tamamen düşürülür." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2024/q11.png", Explanation = "İnne'nin ismi mansub, haberi merfudur. Doğru cevapta haber, ötre ile (merfu) harekelenmiş kelimedir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2024/q12.png", Explanation = "Sıra sayıları kendilerinden önceki isme (mevsufa) sıfat olurlar. İrabı, müzekker/müennes durumu tam olarak uymalıdır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2024/q13.png", Explanation = "Kâne'nin ismi merfu (ötre), haberi mansub (üstün) olur. Şıklarda Kâne'nin bu irab etkisini yansıtan doğru kalıp aranmaktadır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2024/q14.png", Explanation = "Gayr-ı munsarif kelimeler izafet tamlamasında esre yerine üstün (fetha) alırlar. 'Mescid' kelimesinin çoğulu (Mesâcid) gayr-ı munsariftir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2024/q15.png", Explanation = "İsm-i Tafdil (kıyaslama) 'من' (min) harfi cerri ile kullanıldığında karşılaştırma yapar ve diğerlerinden üstünlüğü belirtir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2024/q16.png", Explanation = "Fiil cümlesinin başında fiil kullanılıyorsa, fail (özne) tesniye veya cemi de olsa fiil mutlaka müfred (tekil) kalır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2024/q17.png", Explanation = "Muttasıl (bitişik) zamirler isme eklenirse muzafun ileyh olur ve mecrur kabul edilirler. Cümledeki konumları iyelik (sahiplik) bildirir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2024/q18.png", Explanation = "Mef'ulun lieclih (niçin mef'ulu) daima mansub bir masdardır. Korku, saygı, arzu bildiren masdarlar bu şekilde gelir (Örn: ihterâmen)." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2024/q19.png", Explanation = "Arapçada ism-i fail kalıbı, sülasi fiillerden (فَاعِل) kalıbıyla üretilir ve eylemi yapan kişiyi (faili) gösterir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2024", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2024/q20.png", Explanation = "Muzari fiiller sonlarında nasb edatı (en, len vb.) bulunduğunda nasb (üstün) olurlar. İlletli harfler de hareke alabilir." },
+            });
 
             // ─────────────────────────────────────────────────────────────────
             // Arapça-4 | Yaz Okulu | 2025 — Cevap anahtarından okunan veriler
             // ─────────────────────────────────────────────────────────────────
-            if (!await context.Questions.AnyAsync(q => q.CourseName == "Arapça-4" && q.ExamType == "Yaz Okulu" && q.Year == "2025"))
+            var existingYaz4_2025 = await context.Questions.Where(q => q.CourseName == "Arapça-4" && q.ExamType == "Yaz Okulu" && q.Year == "2025").ToListAsync();
+            if (existingYaz4_2025.Any()) { context.Questions.RemoveRange(existingYaz4_2025); await context.SaveChangesAsync(); }
+
+            // Answers for 2025 Arapça-4 Yaz Okulu: 1-A, 2-E, 3-C, 4-D, 5-E, 6-B, 7-A, 8-A, 9-E, 10-C, 11-C, 12-B, 13-B, 14-D, 15-A, 16-D, 17-D, 18-E, 19-C, 20-B.
+            questions.AddRange(new List<Question>
             {
-                // Answers for 2025 Arapça-4 Yaz Okulu: 1-A, 2-E, 3-C, 4-D, 5-E, 6-B, 7-A, 8-A, 9-E, 10-C, 11-C, 12-B, 13-B, 14-D, 15-A, 16-D, 17-D, 18-E, 19-C, 20-B.
-                questions.AddRange(new List<Question>
-                {
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2025/q1.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2025/q2.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2025/q3.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2025/q4.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2025/q5.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2025/q6.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2025/q7.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2025/q8.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2025/q9.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2025/q10.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2025/q11.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2025/q12.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2025/q13.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2025/q14.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2025/q15.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2025/q16.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2025/q17.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2025/q18.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2025/q19.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2025/q20.png" },
-                });
-            }
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2025/q1.png", Explanation = "Fiil cümlesinin başında yer alan fiil daima müfred (tekil) gelir. Fail cemi (çoğul) veya tesniye (ikil) olsa bile fiil müfredliğini korur." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2025/q2.png", Explanation = "Mezid fiillerden 'Tef'il' babı genellikle geçişli yapmak ve eylemde çokluk/aşırılık bildirmek amacıyla kullanılır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2025/q3.png", Explanation = "İsim tamlamasında (izafet), tamlanan ismin (muzaf) son harekesi cümledeki konumuna göre değişirken tamlayan (muzafun ileyh) daima mecrur (esreli) olur." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2025/q4.png", Explanation = "Sayıların temyizi (sayılan kelime) 3-10 sayıları arasında cemi (çoğul) ve mecrur gelir. Ayrıca sayının cinsiyeti sayılanın tekiline zıt olmalıdır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2025/q5.png", Explanation = "Gayr-ı munsarif isimler (bazı özel veya yabancı isimler vb.) kesra (esre) alamadıkları durumlarda harfi cer aldıklarında fetha (üstün) ile irablanırlar." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2025/q6.png", Explanation = "Hâl, eylemin nasıl yapıldığını bildiren ve daima mansub (fetha) olan kelimedir. Fail müfred müzekker ise hal de müfred müzekker olmalıdır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2025/q7.png", Explanation = "İnne edatının ismi mansub, haberi ise merfu olmalıdır. Tesniye (ikil) isimlerin nasb alameti 'ya' (ين), ref alameti ise 'elif' (ان) ile gösterilir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2025/q8.png", Explanation = "Mef'ulun lieclih (sebep mef'ulu), eylemin niçin yapıldığını açıklayan masdar yapısında mansub bir kelimedir (örneğin aşktan, saygıdan, korkudan)." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2025/q9.png", Explanation = "Muttasıl (bitişik) zamirler isim veya edatlara bitiştiklerinde ismin yerini tutarak cümlenin yapısına göre mahallen mansub veya mecrur olurlar." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2025/q10.png", Explanation = "Soru edatlarından sebep bildiren 'Lime/Limâzâ' (Niçin) sorusuna genellikle sebep açıklayan mef'ulun lieclih kalıbıyla cevap verilir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2025/q11.png", Explanation = "Ecvef (orta harfi illetli) fiilin ism-i fail kalıbında, ortadaki illet harfi kural gereği hemzeye (ء) dönüşür (Örn: Sâme -> Sâim)." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2025/q12.png", Explanation = "Zaman zarfları (Mef'ulun fih), eylemin zamanını bildirmek üzere cümlenin son kısımlarında fetha (üstün) ile mansub olarak kullanılır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2025/q13.png", Explanation = "Mübteda akılsız varlıkların cemi teksiri (kırık çoğulu) ise, onu niteleyen haber veya sıfat daima müfred müennes (tekil dişil) olmak zorundadır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2025/q14.png", Explanation = "Sıra sayıları (birinci, ikinci, vb.) sıfat tamlaması şeklinde mevsufuna her bakımdan (cinsiyet, irab, marifelik) uymak zorundadır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "A", ImagePath = "/images/arapca-4/yaz_okulu/2025/q15.png", Explanation = "İstisna cümlesi 'GAYR' veya 'SİVA' kelimesiyle kurulduğunda, bu kelimelerden sonra gelen müstesna kelime muzafun ileyh olduğu için mecrur (esreli) olur." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2025/q16.png", Explanation = "Kâne edatı ve kardeşleri isim cümlesinin başına geldiğinde mübtedayı merfu, haberi ise nasb durumunda yapar. Tesniye (ikil) isimlerin nasb durumu 'ya' iledir." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "D", ImagePath = "/images/arapca-4/yaz_okulu/2025/q17.png", Explanation = "İsm-i Mevsul (bağlaç) öncesindeki marife isme (mevsufuna) cinsiyet ve sayı yönünden tam bir uyum sağlamalıdır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "E", ImagePath = "/images/arapca-4/yaz_okulu/2025/q18.png", Explanation = "Nakıs (son harfi illetli) fiilin emir kipinde sondaki illet harfi (vav, ya, elif) meczum alameti olarak düşürülür." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "C", ImagePath = "/images/arapca-4/yaz_okulu/2025/q19.png", Explanation = "İsm-i Tafdil (أفعل - ef'alu kalıbı) karşılaştırma anlamı taşır ve iki nesneyi kıyaslamak için 'min' (من) harfi ceri ile birlikte kullanılır." },
+                new() { CourseName = "Arapça-4", ExamType = "Yaz Okulu", Year = "2025", CorrectOption = "B", ImagePath = "/images/arapca-4/yaz_okulu/2025/q20.png", Explanation = "Muzari fiili nasb eden edatlar (en, len, vb.) eylemin anlamını masdara veya geleceğe çevirerek fiilin son harekesini üstünlü (nasb) yapar." },
+            });
 
             // ─────────────────────────────────────────────────────────────────
             // Arapça-4 | Dönem Sonu | 2022 — Cevap anahtarından okunan veriler
             // ─────────────────────────────────────────────────────────────────
-            if (!await context.Questions.AnyAsync(q => q.CourseName == "Arapça-4" && q.ExamType == "Dönem Sonu" && q.Year == "2022"))
+            var existingDonem4_2022 = await context.Questions.Where(q => q.CourseName == "Arapça-4" && q.ExamType == "Dönem Sonu" && q.Year == "2022").ToListAsync();
+            if (existingDonem4_2022.Any()) { context.Questions.RemoveRange(existingDonem4_2022); await context.SaveChangesAsync(); }
+
+            // Answers for 2022 Arapça-4 Dönem Sonu: 1-C, 2-A, 3-B, 4-B, 5-D, 6-E, 7-C, 8-C, 9-C, 10-B, 11-E, 12-B, 13-D, 14-A, 15-E, 16-E, 17-D, 18-A, 19-A, 20-D.
+            questions.AddRange(new List<Question>
             {
-                // Answers for 2022 Arapça-4 Dönem Sonu: 1-C, 2-A, 3-B, 4-B, 5-D, 6-E, 7-C, 8-C, 9-C, 10-B, 11-E, 12-B, 13-D, 14-A, 15-E, 16-E, 17-D, 18-A, 19-A, 20-D.
-                questions.AddRange(new List<Question>
-                {
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2022/q1.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2022/q2.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2022/q3.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2022/q4.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2022/q5.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2022/q6.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2022/q7.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2022/q8.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2022/q9.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2022/q10.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2022/q11.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2022/q12.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2022/q13.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2022/q14.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2022/q15.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2022/q16.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2022/q17.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2022/q18.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2022/q19.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2022/q20.png" },
-                });
-            }
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2022/q1.png", Explanation = "İsim tamlamasında muzaf olan kelime elif-lâm (el) takısı ve tenvin almaz. Ayrıca irabını cümledeki konumuna göre alır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2022/q2.png", Explanation = "İsim cümlesinde haber mübtedaya uyumlu olmalıdır. Akılsız çoğullar müfred müennes (tekil dişil) hükmünde olduğu için haber de müfred müennes gelir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2022/q3.png", Explanation = "Sıra sayıları kendisinden önce gelen mevsufun (nitelenen kelime) cinsiyetine, irabına ve marife/nekra durumuna tam uyum sağlar." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2022/q4.png", Explanation = "Muzari fiilin başına nasb edatlarından biri (en, len vb.) gelirse, fiilin son harfi fetha (üstün) ile harekelenir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2022/q5.png", Explanation = "Harf-i cer ismin başına geldiğinde ismin sonunu mecrur yapar. Cemi müzekker salim isimlerin cer alameti 'ya' (ين) harfidir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2022/q6.png", Explanation = "Cümlenin asıl fiili ile aynı kökten (masdar) türetilip mansub olarak kullanılan pekiştirme veya sayı bildiren öğeye Mef'ulun mutlak denir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2022/q7.png", Explanation = "Sayıların kuralına göre 11 ile 99 arasındaki sayıların temyizi müfred (tekil) ve mansub (fethalı) olmak zorundadır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2022/q8.png", Explanation = "Olumsuz ve müstesna minh'i (kendisinden istisna edilen bütün) zikredilmeyen cümlelerde (eksik istisna) müstesna cümledeki ögesine göre (örneğin fail) merfu olur." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2022/q9.png", Explanation = "Hâl, eylem anında durumu bildiren ve daima mansub (fetha/üstün alan) nekra bir isimdir. Durumu açıklanan isimle cinsiyet uyumu aranır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2022/q10.png", Explanation = "Ecvef (orta harfi illetli) fiiller emir kipindeyken ortadaki illet harfi kural gereği düşürülür (Örn: kàle -> kul)." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2022/q11.png", Explanation = "İnne ve kardeşleri, cümlenin ismini mansub (fetha), haberini ise merfu (ötre) yapan edatlardır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2022/q12.png", Explanation = "İsm-i Tafdil yapısı (أفعل - ef'alu), karşılaştırma için 'min' (من) edatıyla kullanılır. Kıyaslama veya üstünlük bildirir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2022/q13.png", Explanation = "Kâne edatı, isim cümlesinin başına geldiğinde mübtedayı merfu, haberi ise mansub duruma dönüştürür." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2022/q14.png", Explanation = "Mef'ulun fih (zaman veya mekân zarfları) cümlenin eyleminin ne zaman veya nerede gerçekleştiğini bildiren ve fetha ile harekelenen mansub ögedir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2022/q15.png", Explanation = "Gayr-ı munsarif kelimeler tenvin ve esre almazlar. Ancak 'el' takısı aldıklarında veya muzaf olduklarında mecrur durumunda kesra alabilirler." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2022/q16.png", Explanation = "Muttasıl zamirler, bir isme bitiştiğinde mülkiyet/iyelik anlamı katar ve dilbilgisi yönünden muzafun ileyh konumunda mahallen mecrur olurlar." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2022/q17.png", Explanation = "Fiil cümlesinde fiil daima cümlenin başında müfred (tekil) formda gelir. Fail (özne) çoğul bile olsa fiilin tekilliği değişmez." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2022/q18.png", Explanation = "Mef'ulun lieclih (sebep mef'ulu), eylemin yapılma nedenini açıklayan masdar yapısında kelimedir (saygıdan, aşktan vb.) ve her zaman mansubdur." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2022/q19.png", Explanation = "İsm-i Fail kalıbı (فَاعِل), sülasi (üç harfli) fiillerden eylemi gerçekleştiren kimseyi belirtmek için üretilir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2022", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2022/q20.png", Explanation = "Muzari fiili meczum eden edatlar (Lem, Lemmâ, Lâ, Li vb.) fiilin sonundaki harekeyi sakin kılar veya illetli ise illet harfini düşürür." },
+            });
 
             // ─────────────────────────────────────────────────────────────────
             // Arapça-4 | Dönem Sonu | 2023-2024 — Cevap anahtarından okunan veriler
             // ─────────────────────────────────────────────────────────────────
-            if (!await context.Questions.AnyAsync(q => q.CourseName == "Arapça-4" && q.ExamType == "Dönem Sonu" && q.Year == "2023-2024"))
+            var existingDonem4_2023 = await context.Questions.Where(q => q.CourseName == "Arapça-4" && q.ExamType == "Dönem Sonu" && q.Year == "2023-2024").ToListAsync();
+            if (existingDonem4_2023.Any()) { context.Questions.RemoveRange(existingDonem4_2023); await context.SaveChangesAsync(); }
+
+            // Answers for 2023-2024 Arapça-4 Dönem Sonu: 1-C, 2-D, 3-B, 4-B, 5-D, 6-C, 7-A, 8-C, 9-D, 10-E, 11-E, 12-C, 13-D, 14-E, 15-A, 16-B, 17-B, 18-E, 19-A, 20-B.
+            questions.AddRange(new List<Question>
             {
-                // Answers for 2023-2024 Arapça-4 Dönem Sonu: 1-C, 2-D, 3-B, 4-B, 5-D, 6-C, 7-A, 8-C, 9-D, 10-E, 11-E, 12-C, 13-D, 14-E, 15-A, 16-B, 17-B, 18-E, 19-A, 20-B.
-                questions.AddRange(new List<Question>
-                {
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q1.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q2.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q3.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q4.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q5.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q6.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q7.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q8.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q9.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q10.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q11.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q12.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q13.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q14.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q15.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q16.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q17.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q18.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q19.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q20.png" },
-                });
-            }
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q1.png", Explanation = "Gayr-ı munsarif isimler (yabancı özel isimler vb.) esre yerine fetha (üstün) alırlar. Sadece başlarında 'el' takısı varsa veya muzaf iseler esre alabilirler." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q2.png", Explanation = "Sıra sayıları, sıfat tamlaması kurallarına tam olarak uyar. Mevsufu marife ise sayı da marife olmalı, mevsufu müzekker ise sayı da müzekker olmalıdır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q3.png", Explanation = "İnne edatı ismini mansub, haberini merfu yapar. Haber müfred bir isimse ötre (damme) alarak cümlenin anlamını pekiştirir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q4.png", Explanation = "Kâne edatı isim cümlesini geçmiş zamana taşırken mübtedayı merfu (ötreli) bırakır, haberi ise nasb durumuna (üstün) getirir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q5.png", Explanation = "İsm-i Tafdil (ef'alu) yapısı, iki veya daha fazla şey arasında kıyaslama bildirir ve genellikle 'min' (den/dan) edatı ile kullanılır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q6.png", Explanation = "Mef'ulun fih, eylemin yapıldığı zamanı (zaman zarfı) bildiren ve fetha ile harekelenerek (mansub) cümlede yer alan bir ögedir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q7.png", Explanation = "Mef'ulun mutlak, anlamı pekiştirmek veya eylemin sayısını/türünü bildirmek için fiilin kendi kökünden türetilen mansub masdardır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q8.png", Explanation = "Sayı temyizi: 11 ile 99 arası sayılardan sonra gelen kelime daima müfred (tekil) ve mansub (fethalı) olarak gelir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q9.png", Explanation = "Hâl, eylemin ne durumda veya nasıl yapıldığını bildiren nekra, mansub bir isimdir. Sahib-i hâl ile sayı/cinsiyet uyumu taşır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q10.png", Explanation = "Mef'ulun lieclih, eylemin 'niçin' veya 'hangi amaçla' yapıldığını bildiren, daima mansub durumda kullanılan masdardır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q11.png", Explanation = "Cemi müzekker salim (kurallı eril çoğul) isimler raf durumunda 'vav', nasb ve cer durumunda 'ya' ile irab edilirler." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q12.png", Explanation = "Muttasıl zamirler (hu, huma, hum vb.) isme bitiştiklerinde sahiplik (mülkiyet) anlamı verirler ve muzafun ileyh konumundadırlar." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q13.png", Explanation = "İsim cümlesinde haber, mübtedaya uyum sağlamalıdır. Mübteda ikil (tesniye) ise haber de ikil olur ve ref alameti olarak elif (ان) alır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q14.png", Explanation = "Muzari fiili nasb eden edatlar (en, len, vb.) fiilin sonunu fethalı yapar. 'Len' edatı gelecekte kesin olumsuzluk bildirir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q15.png", Explanation = "Muzari fiili meczum eden edatlardan 'Lem' (لم), fiilin anlamını geçmiş zaman olumsuzuna çevirirken son harekesini sakin kılar." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q16.png", Explanation = "İzafet (isim tamlaması) yapısında muzaf (tamlanan) ismin son harekesi cümlenin irabına göre değişebilirken muzafun ileyh mecrurdur." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q17.png", Explanation = "Ecvef fiiller, ortası illetli fiillerdir ve emir kiplerinde illetli harf, iki sakin harfin yan yana gelmemesi kuralıyla düşürülür." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q18.png", Explanation = "Sülasi fiilden türetilen İsm-i Fail (فَاعِل kalıbı), eylemi gerçekleştiren özneyi tanımlamak için kullanılır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q19.png", Explanation = "Eksik (müferrağ) istisna cümlelerinde (olumsuzluk + illa + tek öge), müstesna kelimesi cümlenin eksik olan ögesinin (örn: failin) irabını alır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2023-2024", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2023-2024/q20.png", Explanation = "Harf-i cer ismin başına gelir ve ismin sonunu esre (mecrur) yapar. Cer edilen isme mecrur isim adı verilir." },
+            });
 
             // ─────────────────────────────────────────────────────────────────
             // Arapça-4 | Dönem Sonu | 2024-2025 — Cevap anahtarından okunan veriler
             // ─────────────────────────────────────────────────────────────────
-            if (!await context.Questions.AnyAsync(q => q.CourseName == "Arapça-4" && q.ExamType == "Dönem Sonu" && q.Year == "2024-2025"))
+            var existingDonem4_2024 = await context.Questions.Where(q => q.CourseName == "Arapça-4" && q.ExamType == "Dönem Sonu" && q.Year == "2024-2025").ToListAsync();
+            if (existingDonem4_2024.Any()) { context.Questions.RemoveRange(existingDonem4_2024); await context.SaveChangesAsync(); }
+
+            // Answers for 2024-2025 Arapça-4 Dönem Sonu: 1-A, 2-C, 3-E, 4-D, 5-E, 6-D, 7-A, 8-C, 9-E, 10-D, 11-A, 12-D, 13-C, 14-B, 15-C, 16-E, 17-A, 18-B, 19-B, 20-B.
+            questions.AddRange(new List<Question>
             {
-                // Answers for 2024-2025 Arapça-4 Dönem Sonu: 1-A, 2-C, 3-E, 4-D, 5-E, 6-D, 7-A, 8-C, 9-E, 10-D, 11-A, 12-D, 13-C, 14-B, 15-C, 16-E, 17-A, 18-B, 19-B, 20-B.
-                questions.AddRange(new List<Question>
-                {
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q1.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q2.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q3.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q4.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q5.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q6.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q7.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q8.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q9.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q10.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q11.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q12.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q13.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q14.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q15.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q16.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q17.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q18.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q19.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q20.png" },
-                });
-            }
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q1.png", Explanation = "İsim cümlesinde haberin mübteda ile cinsiyet ve sayı yönünden uyumlu olması gerekir. Akılsız çoğul olan mübtedaya müfred müennes (tekil dişil) haber gelir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q2.png", Explanation = "Muzaf (isim tamlamasında tamlanan), hiçbir zaman tenvin almaz ve 'el' takısı kabul etmez. İrabını cümledeki yerine göre alır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q3.png", Explanation = "Zaman bildiren mef'ul (Mef'ulun fih), eylemin ne zaman gerçekleştiğini bildirir ve nasb durumundadır (örneğin fetha ile 'leyleti' geceleyin)." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q4.png", Explanation = "Mezid bablardan tef'il (تفعيل) babı genellikle geçişli yapmak ve fiilde aşırılık/çokluk (mübalağa) bildirmek amacıyla kullanılır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q5.png", Explanation = "Harf-i cerler ismin sonunu mecrur yapar. Cemi müzekker salim bir ismin mecrur alameti sonundaki 'ya' (ين) harfidir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q6.png", Explanation = "Mef'ulun mutlak, cümlenin ana fiili ile aynı kökten türeyen masdardır ve fiili pekiştirmek veya sayısını/türünü belirtmek için üstün (mansub) olarak gelir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q7.png", Explanation = "Sayılar ve temyiz kuralları: 11-99 arası sayıların temyizi (sayılan), tekil (müfred) ve üstün tenvinli (mansub) olmak zorundadır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q8.png", Explanation = "İstisna cümlesi olumsuz ve eksik olduğunda 'illa' (إلا) edatı yokmuş gibi irab yapılır. Fail eksik olduğu için müstesna fail (merfu/ötreli) konumundadır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q9.png", Explanation = "Hâl, eylemin yapıldığı andaki durumu anlatan kelimedir ve daima mansubdur. Sahibul hal (durumu açıklanan) ile sayı ve cinsiyet uyumu taşır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q10.png", Explanation = "Nakıs (illetli) fiiller muzari meczum durumuna girdiklerinde son harf (illet harfi) kural gereği tamamen düşürülür." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q11.png", Explanation = "İnne'nin ismi mansub (fethalı), haberi merfudur (ötreli). Haber cümlesi isme anlamca tam bir yüklem oluşturur." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q12.png", Explanation = "Sıra sayıları kendilerinden önceki isme (mevsufa) sıfat olurlar. İrabı, müzekker/müennes durumu tam olarak uymalıdır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q13.png", Explanation = "Kâne'nin ismi merfu (ötre), haberi mansub (üstün) olur. Şıklarda Kâne'nin bu irab etkisini yansıtan doğru kelime aranmaktadır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q14.png", Explanation = "Gayr-ı munsarif kelimeler izafet tamlamasında esre yerine üstün (fetha) alırlar (Mescid kelimesinin çoğulu Mesâcid gibi)." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q15.png", Explanation = "İsm-i Tafdil (kıyaslama) kalıbı 'من' (min) harfi cerri ile kullanıldığında karşılaştırma yapar ve diğerlerinden üstünlüğü (daha ... şeklinde) belirtir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q16.png", Explanation = "Fiil cümlesinin başında fiil kullanılıyorsa, fail (özne) tesniye (ikil) veya cemi (çoğul) da olsa fiil mutlaka müfred (tekil) kalır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q17.png", Explanation = "Muttasıl (bitişik) zamirler isme eklenirse muzafun ileyh olur ve mecrur kabul edilirler. Cümledeki konumları ismin sahibini (iyelik) bildirir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q18.png", Explanation = "Mef'ulun lieclih (niçin mef'ulu) eylemin yapılma nedenini açıklayan, daima mansub (fethalı) bir masdardır (korku, saygı vb.)." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q19.png", Explanation = "Arapçada ism-i fail kalıbı, sülasi fiillerden (فَاعِل - fâil) kalıbıyla üretilir ve eylemi yapan kişiyi/nesneyi (faili) gösterir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2024-2025", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2024-2025/q20.png", Explanation = "Muzari fiiller sonlarında nasb edatı (en, len vb.) bulunduğunda nasb (üstün/fetha) olurlar. İlletli harfler de durumlarına göre bu harekeyi alabilir." },
+            });
 
             // ─────────────────────────────────────────────────────────────────
             // Arapça-4 | Dönem Sonu | 2026 — Cevap anahtarından okunan veriler
             // ─────────────────────────────────────────────────────────────────
-            if (!await context.Questions.AnyAsync(q => q.CourseName == "Arapça-4" && q.ExamType == "Dönem Sonu" && q.Year == "2026"))
+            var existingDonem4_2026 = await context.Questions.Where(q => q.CourseName == "Arapça-4" && q.ExamType == "Dönem Sonu" && q.Year == "2026").ToListAsync();
+            if (existingDonem4_2026.Any()) { context.Questions.RemoveRange(existingDonem4_2026); await context.SaveChangesAsync(); }
+
+            // Answers for 2026 Arapça-4 Dönem Sonu: 1-C, 2-B, 3-E, 4-D, 5-E, 6-A, 7-D, 8-C, 9-E, 10-C, 11-A, 12-A, 13-A, 14-D, 15-B, 16-B, 17-E, 18-C, 19-D, 20-B.
+            questions.AddRange(new List<Question>
             {
-                // Answers for 2026 Arapça-4 Dönem Sonu: 1-C, 2-B, 3-E, 4-D, 5-E, 6-A, 7-D, 8-C, 9-E, 10-C, 11-A, 12-A, 13-A, 14-D, 15-B, 16-B, 17-E, 18-C, 19-D, 20-B.
-                questions.AddRange(new List<Question>
-                {
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2026/q1.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2026/q2.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2026/q3.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2026/q4.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2026/q5.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2026/q6.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2026/q7.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2026/q8.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2026/q9.png"  },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2026/q10.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2026/q11.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2026/q12.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2026/q13.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2026/q14.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2026/q15.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2026/q16.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2026/q17.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2026/q18.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2026/q19.png" },
-                    new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2026/q20.png" },
-                });
-            }
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2026/q1.png", Explanation = "İsim tamlamasında muzaf (tamlanan) daima tenvinsiz ve el takısız gelir. Muzafun ileyh (tamlayan) ise her zaman mecrur durumdadır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2026/q2.png", Explanation = "Akılsız çoğullar tekil dişi (müfred müennes) kabul edilirler. Mübteda akılsız çoğul olduğundan, haberi de müfred müennes olarak gelir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2026/q3.png", Explanation = "Zaman mef'ulü (Mef'ulun fih), cümlenin zamanını belirtirken nasb (fetha) ile harekelenir. (Örn: yevmen - bir gün)." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2026/q4.png", Explanation = "Sıra sayıları sıfat tamlaması yapısında mevsufuna her yönden (cinsiyet, irab, marifelik/nekralık, sayı) tamamen uyarlar." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2026/q5.png", Explanation = "Mezid fiillerde (harf ilaveli fiiller) if'al, tef'il ve mufa'ale babları fiilin köküne göre genellikle geçişlilik veya işteşlik anlamı katar." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2026/q6.png", Explanation = "Mef'ulun mutlak fiilin anlamını kuvvetlendirmek veya yapılış tarzını/sayısını ifade etmek için aynı kökten mansub masdar olarak gelir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2026/q7.png", Explanation = "11-99 arası sayıların temyizi her zaman müfred (tekil) ve mansub (fethalı) olarak gelir. 100 ve katlarınınki ise müfred ve mecrurdur." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2026/q8.png", Explanation = "İstisna cümlesi eksik (müferrağ) olduğunda 'illa' kelimesi cümlenin irabına etki etmez, kelime cümlenin eksik öğesine göre harekelenir." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2026/q9.png", Explanation = "Hâl, fâil veya mef'ulün eylem esnasındaki durumunu bildiren nekra ve mansub isimdir. Cinsiyet ve sayıca sahibine uymalıdır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2026/q10.png", Explanation = "Nakıs (sonu illetli) fiiller muzari meczum olduklarında illet harfleri (vav, ya, elif) kural gereği sondan düşer." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2026/q11.png", Explanation = "İnne edatı, isim cümlesinin mübtedasını nasb (fetha) edip kendisine isim yapar; haberini ise ref (ötre) edip kendisine haber yapar." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2026/q12.png", Explanation = "İsm-i Tafdil yapısı (أفعل - ef'alu), bir şeyin diğerlerinden daha üstün olduğunu belirtir ve 'min' edatıyla karşılaştırma yapar." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "A", ImagePath = "/images/arapca-4/donem_sonu/2026/q13.png", Explanation = "Kâne ve benzerleri (Nakıs Fiiller) ismini merfu (ötre), haberini ise mansub (fetha) yapar." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2026/q14.png", Explanation = "Gayr-ı munsarif isimler (yabancı özel isimler, mesâcid gibi kalıplar) kesra (esre) almaz, cer durumunda esre yerine fetha ile harekelenirler." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2026/q15.png", Explanation = "Fiil cümlesinde fiil daima başta gelir ve tekil (müfred) olur. Fail (özne) çoğul bile olsa fiil çekimi tekil üzerinden yapılır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2026/q16.png", Explanation = "Muttasıl zamirler (ör. hu, huma, hum) isme birleştiklerinde mülkiyet bildirirler (onun evi, onların okulu vb.) ve muzafun ileyh sayılırlar." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "E", ImagePath = "/images/arapca-4/donem_sonu/2026/q17.png", Explanation = "İsm-i Fail kalıbı (فَاعِل), üç harfli sülasi fiillerin failini belirtmek için kullanılır (örneğin kâtib - yazan)." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "C", ImagePath = "/images/arapca-4/donem_sonu/2026/q18.png", Explanation = "Ecvef fiiller (ortası illetli) emir kipi yapılırken kural gereği ortadaki illet harfini kaybederler." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "D", ImagePath = "/images/arapca-4/donem_sonu/2026/q19.png", Explanation = "Mef'ulun lieclih (sebep mef'ulu), 'niçin' sorusunun cevabıdır. Eylemin yapılma amacını anlatan mansub masdardır." },
+                new() { CourseName = "Arapça-4", ExamType = "Dönem Sonu", Year = "2026", CorrectOption = "B", ImagePath = "/images/arapca-4/donem_sonu/2026/q20.png", Explanation = "Nasb edatları (en, len, key vb.) muzari fiilin başına geldiğinde fiilin son harfinin harekesini nasb (fetha) haline getirir." },
+            });
 
             if (questions.Any())
             {
