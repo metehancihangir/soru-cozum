@@ -4,26 +4,51 @@ import { getQuestions } from './services/questionService'
 import QuestionCard from './components/QuestionCard'
 import HomeScreen from './components/HomeScreen'
 
+// Ders kataloğu — ilerde genişletilebilir
+const COURSES = {
+  'Arapça-2': {
+    examTypes: ['Dönem Sonu', 'Yaz Okulu'],
+    // Her exam type için mevcut yıllar (gerçek veri API'den gelecek; şimdi sabit)
+    years: {
+      'Dönem Sonu': [],      // Henüz veri yok
+      'Yaz Okulu': [2021],
+    },
+  },
+}
+
 function App() {
-  // ── Ekran yönetimi ────────────────────────────────────────
-  // "home"     → Karşılama / kategori seçimi
-  // "quiz"     → Soru çözüm ekranı
-  // "complete" → Tamamlandı ekranı
+  // ── Navigasyon akışı: home → examType → year → quiz → complete
   const [screen, setScreen] = useState('home')
 
-  // ── Quiz state'leri ───────────────────────────────────────
-  const [questions, setQuestions]       = useState([])
-  const [loading, setLoading]           = useState(false)
-  const [error, setError]               = useState(null)
-  const [currentIndex, setCurrentIndex] = useState(0)
+  // ── Seçim state'leri
+  const [selectedCourse,   setSelectedCourse]   = useState(null)   // "Arapça-2"
+  const [selectedExamType, setSelectedExamType] = useState(null)   // "Yaz Okulu"
+  const [selectedYear,     setSelectedYear]     = useState(null)   // 2021
+
+  // ── Quiz state'leri
+  const [questions,      setQuestions]      = useState([])
+  const [loading,        setLoading]        = useState(false)
+  const [error,          setError]          = useState(null)
+  const [currentIndex,   setCurrentIndex]   = useState(0)
   const [selectedOption, setSelectedOption] = useState(null)
-  const [isAnswered, setIsAnswered]     = useState(false)
-  const [score, setScore]               = useState(0)
+  const [isAnswered,     setIsAnswered]     = useState(false)
+  const [score,          setScore]          = useState(0)
 
-  // ── Kategori seçilince quiz'e geç ────────────────────────
-  const handleSelectCategory = async (category) => {
-    if (category !== 'arabic2') return
+  // ── Ders seçildi → ExamType ekranına geç
+  const handleSelectCourse = (courseName) => {
+    setSelectedCourse(courseName)
+    setScreen('examType')
+  }
 
+  // ── Sınav türü seçildi → Year ekranına geç
+  const handleSelectExamType = (examType) => {
+    setSelectedExamType(examType)
+    setScreen('year')
+  }
+
+  // ── Yıl seçildi → soruları yükle ve quiz'e geç
+  const handleSelectYear = async (year) => {
+    setSelectedYear(year)
     setLoading(true)
     setError(null)
     setScreen('quiz')
@@ -34,7 +59,7 @@ function App() {
     setScore(0)
 
     try {
-      const data = await getQuestions()
+      const data = await getQuestions(selectedCourse, selectedExamType, year)
       setQuestions(data)
     } catch (err) {
       setError(err.message)
@@ -43,9 +68,12 @@ function App() {
     }
   }
 
-  // ── Ana menüye dön ────────────────────────────────────────
+  // ── Ana menüye tamamen dön
   const handleBackToHome = () => {
     setScreen('home')
+    setSelectedCourse(null)
+    setSelectedExamType(null)
+    setSelectedYear(null)
     setQuestions([])
     setCurrentIndex(0)
     setSelectedOption(null)
@@ -54,7 +82,26 @@ function App() {
     setError(null)
   }
 
-  // ── Şık seçildi ───────────────────────────────────────────
+  // ── ExamType seçimine geri dön
+  const handleBackToExamType = () => {
+    setScreen('examType')
+    setSelectedExamType(null)
+    setSelectedYear(null)
+  }
+
+  // ── Year seçimine geri dön
+  const handleBackToYear = () => {
+    setScreen('year')
+    setSelectedYear(null)
+    setQuestions([])
+    setCurrentIndex(0)
+    setSelectedOption(null)
+    setIsAnswered(false)
+    setScore(0)
+    setError(null)
+  }
+
+  // ── Şık seçildi
   const handleOptionClick = (option) => {
     const correct = questions[currentIndex].correctOption
     setSelectedOption(option)
@@ -62,7 +109,7 @@ function App() {
     if (option === correct) setScore(prev => prev + 1)
   }
 
-  // ── Sonraki soru ──────────────────────────────────────────
+  // ── Sonraki soru
   const handleNextQuestion = () => {
     if (currentIndex >= questions.length - 1) {
       setScreen('complete')
@@ -73,11 +120,95 @@ function App() {
     setIsAnswered(false)
   }
 
-  // ── Render ────────────────────────────────────────────────
+  // ─────────────────────────────────────────────────────────
+  // RENDER
+  // ─────────────────────────────────────────────────────────
 
-  // Karşılama ekranı
+  // Ana menü
   if (screen === 'home') {
-    return <HomeScreen onSelectCategory={handleSelectCategory} />
+    return <HomeScreen onSelectCourse={handleSelectCourse} />
+  }
+
+  // Sınav türü seçimi
+  if (screen === 'examType') {
+    const examTypes = COURSES[selectedCourse]?.examTypes ?? []
+    return (
+      <div className="app-container">
+        <div className="nav-screen">
+          <div className="nav-screen__header">
+            <button className="quiz__back" onClick={handleBackToHome}>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+              Geri
+            </button>
+            <div className="nav-screen__breadcrumb">
+              <span className="nav-screen__course">{selectedCourse}</span>
+            </div>
+          </div>
+          <h2 className="nav-screen__title">Sınav Türü Seç</h2>
+          <div className="nav-screen__grid">
+            {examTypes.map((et) => {
+              const years = COURSES[selectedCourse]?.years?.[et] ?? []
+              const locked = years.length === 0
+              return (
+                <button
+                  key={et}
+                  type="button"
+                  className={`nav-card ${locked ? 'nav-card--locked' : ''}`}
+                  onClick={() => !locked && handleSelectExamType(et)}
+                  aria-disabled={locked}
+                >
+                  <span className="nav-card__icon" aria-hidden="true">
+                    {et === 'Yaz Okulu' ? '☀️' : '📚'}
+                  </span>
+                  <span className="nav-card__label">{et}</span>
+                  {locked
+                    ? <span className="badge">Yakında</span>
+                    : <span className="nav-card__meta">{years.length} dönem</span>
+                  }
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Yıl seçimi
+  if (screen === 'year') {
+    const years = COURSES[selectedCourse]?.years?.[selectedExamType] ?? []
+    return (
+      <div className="app-container">
+        <div className="nav-screen">
+          <div className="nav-screen__header">
+            <button className="quiz__back" onClick={handleBackToExamType}>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+              Geri
+            </button>
+            <div className="nav-screen__breadcrumb">
+              <span className="nav-screen__course">{selectedCourse}</span>
+              <span className="nav-screen__sep">›</span>
+              <span>{selectedExamType}</span>
+            </div>
+          </div>
+          <h2 className="nav-screen__title">Yıl Seç</h2>
+          <div className="nav-screen__grid">
+            {years.map((year) => (
+              <button
+                key={year}
+                type="button"
+                className="nav-card"
+                onClick={() => handleSelectYear(year)}
+              >
+                <span className="nav-card__icon" aria-hidden="true">📅</span>
+                <span className="nav-card__label">{year}</span>
+                <span className="nav-card__meta">Sınav soruları</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
   }
 
   // Quiz — yükleniyor
@@ -116,6 +247,9 @@ function App() {
           <h1 className="complete__title">Tamamladın!</h1>
           <p className="complete__score">
             {score} / {questions.length} doğru
+          </p>
+          <p className="complete__detail">
+            {selectedCourse} · {selectedExamType} · {selectedYear}
           </p>
           <div className="complete__actions">
             <button
@@ -157,7 +291,7 @@ function App() {
         isAnswered={isAnswered}
         onOptionClick={handleOptionClick}
         onNext={handleNextQuestion}
-        onBack={handleBackToHome}
+        onBack={handleBackToYear}
       />
     </div>
   )

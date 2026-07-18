@@ -1,4 +1,4 @@
-import { getVisibleOptions } from './questionCard.logic'
+import { OPTION_LETTERS, getOptionButtonClass } from './questionCard.logic'
 
 function QuestionCard({
   question,
@@ -6,17 +6,14 @@ function QuestionCard({
   questionsTotal,
   selectedOption,
   isAnswered,
-  isCorrect,
   onOptionClick,
   onNext,
   onBack,
 }) {
-  const KEYS = ['A', 'B', 'C', 'D', 'E']
-  const options = getVisibleOptions(question)
-  const isLast  = currentIndex >= questionsTotal - 1
+  const isLast = currentIndex >= questionsTotal - 1
 
   // Progress bar yüzdesi
-  const progressPct = (currentIndex / questionsTotal) * 100
+  const progressPct = ((currentIndex + 1) / questionsTotal) * 100
 
   return (
     <section className="quiz" aria-label="Soru çözümü">
@@ -47,45 +44,58 @@ function QuestionCard({
         />
       </div>
 
-      {/* ── Soru + Şıklar ── */}
+      {/* ── Soru Resmi ── */}
       <div className="quiz__question">
-        <h1
-          className="quiz__prompt"
-          lang="ar"
-          dir="rtl"
-        >
-          {question.questionText}
-        </h1>
+        <div className="quiz__image-wrapper">
+          <img
+            src={question.imagePath}
+            alt={`Soru ${currentIndex + 1}`}
+            className="quiz__image"
+            draggable={false}
+          />
+        </div>
 
+        {/* ── Sabit A-E Şık Butonları ── */}
         <div
           className="quiz__options"
           role="group"
           aria-label="Cevap şıkları"
         >
-          {options.map(({ option, text }, i) => {
-            let stateClass = ''
-            if (isAnswered) {
-              if (option === question.correctOption) stateClass = ' is-correct'
-              else if (option === selectedOption)    stateClass = ' is-wrong'
-            }
+          {OPTION_LETTERS.map((letter) => {
+            const stateClass = isAnswered
+              ? letter === question.correctOption
+                ? ' is-correct'
+                : letter === selectedOption
+                  ? ' is-wrong'
+                  : ''
+              : ''
 
             return (
               <button
-                key={option}
+                key={letter}
                 type="button"
-                className={`option${stateClass}`}
+                className={`option option--compact${stateClass}`}
                 disabled={isAnswered}
-                onClick={() => onOptionClick(option)}
-                aria-pressed={selectedOption === option}
+                onClick={() => onOptionClick(letter)}
+                aria-pressed={selectedOption === letter}
+                aria-label={`Şık ${letter}`}
               >
                 <span className="option__key" aria-hidden="true">
-                  {KEYS[i]}
+                  {letter}
                 </span>
-                <span className="option__label">{text}</span>
               </button>
             )
           })}
         </div>
+
+        {/* ── Cevap sonucu mesajı ── */}
+        {isAnswered && (
+          <p className={`quiz__feedback ${selectedOption === question.correctOption ? 'quiz__feedback--correct' : 'quiz__feedback--wrong'}`}>
+            {selectedOption === question.correctOption
+              ? '✓ Doğru!'
+              : `✗ Yanlış — Doğru cevap: ${question.correctOption}`}
+          </p>
+        )}
       </div>
 
       {/* ── Sonraki buton ── */}

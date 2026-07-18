@@ -160,6 +160,74 @@ a { color: inherit; text-decoration: none; }
   min-height:  2.7em;
 }
 
+/* ── Soru resmi ──────────────────────────────────────────── */
+.quiz__image-wrapper {
+  width:         100%;
+  border-radius: var(--radius-card);
+  overflow:      hidden;
+  border:        var(--border-light);
+  background:    var(--color-surface);
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+  min-height:    200px;
+}
+
+.quiz__image {
+  width:      100%;
+  height:     auto;
+  display:    block;
+  max-height: 60vh;
+  object-fit: contain;
+  user-select: none;
+}
+
+/* ── Kompakt A-E şık butonları ────────────────────────────── */
+.option--compact {
+  flex-direction:  row;
+  justify-content: center;
+  min-height:      48px;
+  width:           auto;
+  padding:         10px 20px;
+  font-size:       var(--font-size-body);
+  font-weight:     600;
+  letter-spacing:  0.03em;
+}
+
+.quiz__options:has(.option--compact) {
+  flex-direction: row;
+  flex-wrap:      wrap;
+  gap:            var(--spacing-2);
+  justify-content: center;
+}
+
+.option--compact .option__key {
+  width:   26px;
+  height:  26px;
+  font-size: 13px;
+  opacity: 1;
+  border:  1.5px solid currentColor;
+}
+
+/* ── Cevap feedback ───────────────────────────────────────── */
+.quiz__feedback {
+  text-align:  center;
+  font-size:   var(--font-size-body);
+  font-weight: 500;
+  padding:     10px 16px;
+  border-radius: var(--radius-card);
+}
+
+.quiz__feedback--correct {
+  background: var(--color-accent-bg);
+  color:      var(--color-accent);
+}
+
+.quiz__feedback--wrong {
+  background: var(--color-error-bg);
+  color:      var(--color-error);
+}
+
 .quiz__options {
   display:        flex;
   flex-direction: column;
@@ -312,6 +380,113 @@ a { color: inherit; text-decoration: none; }
 .toast.is-visible {
   opacity:   1;
   transform: translateX(-50%) translateY(0);
+}
+
+/* ── Nav screen (ExamType / Year seçimi) ─────────────────── */
+.nav-screen {
+  flex:           1;
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--spacing-5);
+  padding-block:  var(--spacing-3);
+}
+
+.nav-screen__header {
+  display:     flex;
+  align-items: center;
+  gap:         var(--spacing-3);
+}
+
+.nav-screen__breadcrumb {
+  display:     flex;
+  align-items: center;
+  gap:         6px;
+  font-size:   var(--font-size-small);
+  color:       var(--color-neutral-mid);
+  flex:        1;
+}
+
+.nav-screen__course {
+  font-family: var(--font-display);
+  color:       var(--color-neutral-dark);
+}
+
+.nav-screen__sep {
+  opacity: 0.4;
+}
+
+.nav-screen__title {
+  font-family: var(--font-display);
+  font-size:   var(--font-size-subtitle);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-title);
+  color:       var(--color-neutral-dark);
+}
+
+.nav-screen__grid {
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--spacing-3);
+}
+
+/* Nav card — ExamType ve Year seçim kartları */
+.nav-card {
+  display:       flex;
+  align-items:   center;
+  gap:           var(--spacing-3);
+  width:         100%;
+  padding:       var(--spacing-4) var(--spacing-3);
+  background:    var(--color-surface);
+  border-radius: var(--radius-card);
+  border:        1px solid transparent;
+  text-align:    left;
+  min-height:    68px;
+  font-family:   inherit;
+  font-size:     inherit;
+  color:         inherit;
+  cursor:        pointer;
+  transition:    background-color var(--transition-fast),
+                 border-color     var(--transition-fast);
+}
+
+.nav-card:hover:not(.nav-card--locked) {
+  background:   var(--color-surface-hover);
+  border-color: rgba(0,0,0,0.1);
+}
+
+.nav-card:focus-visible {
+  outline:        2px solid var(--color-neutral-dark);
+  outline-offset: 2px;
+}
+
+.nav-card--locked {
+  opacity: 0.5;
+  cursor:  not-allowed;
+}
+
+.nav-card__icon {
+  font-size:   22px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.nav-card__label {
+  flex:        1;
+  font-family: var(--font-display);
+  font-size:   var(--font-size-subtitle);
+  color:       var(--color-neutral-dark);
+  line-height: var(--line-height-title);
+}
+
+.nav-card__meta {
+  font-size: var(--font-size-small);
+  color:     var(--color-neutral-mid);
+}
+
+/* complete__detail */
+.complete__detail {
+  font-size: var(--font-size-small);
+  color:     var(--color-neutral-mid);
 }
 
 /* ── Yardımcı ────────────────────────────────────────────── */

@@ -1,3 +1,7 @@
+/**
+ * Yeni model: resim tabanlı sorular için şık mantığı.
+ * Sorular artık metin içermiyor; şıklar daima A-E sabit.
+ */
 export const OPTION_LETTERS = ['A', 'B', 'C', 'D', 'E']
 
 export const getOptionButtonClass = ({
@@ -6,19 +10,11 @@ export const getOptionButtonClass = ({
   selectedOption,
   correctOption,
 }) => {
-  if (!isAnswered) return 'option-btn'
-  if (option === correctOption) return 'option-btn correct'
-  if (option === selectedOption) return 'option-btn wrong'
-  return 'option-btn'
+  if (!isAnswered) return 'option'
+  if (option === correctOption) return 'option is-correct'
+  if (option === selectedOption) return 'option is-wrong'
+  return 'option'
 }
 
-export const getVisibleOptions = (question) =>
-  OPTION_LETTERS
-    .map((letter) => ({
-      option: letter,
-      text: question?.[`option${letter}`],
-    }))
-    .filter(({ text }) => Boolean(text))
-
 export const getNextButtonText = (currentIndex, questionsTotal) =>
-  currentIndex < questionsTotal - 1 ? 'Sonraki Soru →' : 'Testi Bitir 🎉'
+  currentIndex < questionsTotal - 1 ? 'Sonraki Soru' : 'Testi Bitir'

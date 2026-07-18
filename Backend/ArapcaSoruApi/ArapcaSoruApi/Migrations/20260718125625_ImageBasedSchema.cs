@@ -1,4 +1,3 @@
-﻿using System;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
@@ -7,11 +6,15 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ArapcaSoruApi.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class ImageBasedSchema : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            // Eski şemadan temiz geçiş: mevcut tabloyu ve eski migration geçmişini sil
+            migrationBuilder.Sql("DROP TABLE IF EXISTS `Questions`;");
+            migrationBuilder.Sql("DELETE FROM `__EFMigrationsHistory` WHERE `MigrationId` != '20260718125625_ImageBasedSchema';");
+
             migrationBuilder.AlterDatabase()
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -21,23 +24,15 @@ namespace ArapcaSoruApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    QuestionText = table.Column<string>(type: "longtext", nullable: false, collation: "utf8mb4_unicode_ci")
+                    CourseName = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false, collation: "utf8mb4_unicode_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    OptionA = table.Column<string>(type: "longtext", nullable: false, collation: "utf8mb4_unicode_ci")
+                    ExamType = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false, collation: "utf8mb4_unicode_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    OptionB = table.Column<string>(type: "longtext", nullable: false, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OptionC = table.Column<string>(type: "longtext", nullable: true, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OptionD = table.Column<string>(type: "longtext", nullable: true, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OptionE = table.Column<string>(type: "longtext", nullable: true, collation: "utf8mb4_unicode_ci")
+                    Year = table.Column<int>(type: "int", nullable: false),
+                    ImagePath = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false, collation: "utf8mb4_unicode_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CorrectOption = table.Column<string>(type: "varchar(1)", maxLength: 1, nullable: false, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Explanation = table.Column<string>(type: "longtext", nullable: true, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -45,6 +40,11 @@ namespace ArapcaSoruApi.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Questions_Course_ExamType_Year",
+                table: "Questions",
+                columns: new[] { "CourseName", "ExamType", "Year" });
         }
 
         /// <inheritdoc />
