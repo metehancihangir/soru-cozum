@@ -24,7 +24,7 @@ namespace ArapcaSoruApi.Controllers
         public async Task<ActionResult<IEnumerable<Question>>> GetQuestions(
             [FromQuery] string? courseName,
             [FromQuery] string? examType,
-            [FromQuery] int? year)
+            [FromQuery] string? year)
         {
             var query = _context.Questions.AsQueryable();
 
@@ -34,8 +34,8 @@ namespace ArapcaSoruApi.Controllers
             if (!string.IsNullOrWhiteSpace(examType))
                 query = query.Where(q => q.ExamType == examType);
 
-            if (year.HasValue)
-                query = query.Where(q => q.Year == year.Value);
+            if (!string.IsNullOrWhiteSpace(year))
+                query = query.Where(q => q.Year == year);
 
             var questions = await query.OrderBy(q => q.Id).ToListAsync();
             return Ok(questions);

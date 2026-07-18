@@ -20,9 +20,10 @@ namespace ArapcaSoruApi.Models
         [MaxLength(100)]
         public string ExamType { get; set; } = string.Empty;
 
-        // Sınav yılı — Örn: 2021
+        // Sınav yılı — Örn: "2021" veya "2023-2024"
         [Required]
-        public int Year { get; set; }
+        [MaxLength(20)]
+        public string Year { get; set; } = string.Empty;
 
         // React tarafında okunacak görsel yolu — Örn: "/images/arapca-2/yaz_okulu/2021/q1.png"
         [Required]

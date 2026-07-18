@@ -3,12 +3,12 @@ import './HomeScreen.css'
 
 // Ders kataloğu — App.jsx ile senkronize
 const COURSE_META = {
-  'Arapça-2': { questionCount: 20, active: true },
-  'Arapça-4': { questionCount: 0,  active: false },
+  'Arapça-2': { questionCount: 180, active: true },
+  'Arapça-4': { questionCount: 180, active: true },
 }
 
 function HomeScreen({ onSelectCourse }) {
-  const [toastMsg,     setToastMsg]     = useState('')
+  const [toastMsg, setToastMsg] = useState('')
   const [toastVisible, setToastVisible] = useState(false)
   let toastTimer = null
 
@@ -60,15 +60,14 @@ function HomeScreen({ onSelectCourse }) {
             </span>
           </button>
 
-          {/* Arapça-4 — kilitli */}
+          {/* Arapça-4 */}
           <button
             type="button"
-            className="cat-card cat-card--locked"
+            className="cat-card cat-card--active"
             role="listitem"
             id="btn-arabic-4"
-            aria-disabled="true"
-            aria-label="Arapça-4, yakında"
-            onClick={() => showToast('Arapça-4 yakında geliyor 🔒')}
+            aria-label={`Arapça-4, ${COURSE_META['Arapça-4'].questionCount} soru`}
+            onClick={() => onSelectCourse('Arapça-4')}
           >
             <span className="cat-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -78,14 +77,13 @@ function HomeScreen({ onSelectCourse }) {
             <span className="cat-card__body">
               <span className="cat-card__name">Arapça-4</span>
               <span className="cat-card__meta">
-                <span className="badge">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <rect x="5" y="11" width="14" height="10" rx="1.5" />
-                    <path d="M8 11V8a4 4 0 0 1 8 0v3" />
-                  </svg>
-                  Yakında
-                </span>
+                {COURSE_META['Arapça-4'].questionCount} Soru
               </span>
+            </span>
+            <span className="cat-card__arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
             </span>
           </button>
 
