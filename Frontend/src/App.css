@@ -18,6 +18,21 @@ body {
   color:            var(--color-text);
   background-color: var(--color-background);
   min-height:       100dvh;
+  position:         relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('/images/islamic_bg.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.15;
+  z-index: -1;
+  pointer-events: none;
 }
 
 button {
