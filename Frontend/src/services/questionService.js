@@ -1,4 +1,4 @@
-const API_BASE = '/api/questions'
+const API_BASE = 'https://soru-cozum-production.up.railway.app/api/questions'
 
 /**
  * Soruları filtreli veya filtresiz getirir.

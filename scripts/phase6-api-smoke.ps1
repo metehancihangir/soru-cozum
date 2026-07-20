@@ -1,5 +1,5 @@
 param(
-    [string]$ApiBase = "http://localhost:5248/api/questions",
+    [string]$ApiBase = "http://soru-cozum-production.up.railway.app:8080/api/questions",
     [int]$PerformanceTarget = 100,
     [int]$MaxLocalResponseMs = 500,
     [switch]$SkipPerformanceSeed

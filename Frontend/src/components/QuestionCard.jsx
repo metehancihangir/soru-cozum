@@ -60,7 +60,7 @@ function QuestionCard({
         <div className="quiz__question">
           <div className="quiz__image-wrapper">
             <img
-              src={question.imagePath}
+              src={`https://soru-cozum-production.up.railway.app${question.imagePath}`}
               alt={`Soru ${currentIndex + 1}`}
               className="quiz__image"
               draggable={false}

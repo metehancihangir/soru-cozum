@@ -1,4 +1,4 @@
-const AI_API_BASE = '/api/ai'
+const AI_API_BASE = 'https://soru-cozum-production.up.railway.app/api/ai'
 
 /**
  * Sorunun görsel yolunu backend'e gönderir ve yapay zeka açıklamasını alır.
