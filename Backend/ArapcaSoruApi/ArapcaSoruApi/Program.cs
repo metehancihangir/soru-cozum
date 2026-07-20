@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ArapcaSoruApi.Data;
+using ArapcaSoruApi.Services;
 
 namespace ArapcaSoruApi
 {
@@ -30,6 +31,10 @@ namespace ArapcaSoruApi
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
+
+            // Yapay Zeka servisi ve HTTP istemcisi kaydı
+            builder.Services.AddHttpClient();
+            builder.Services.AddScoped<AiService>();
 
             builder.Services.AddSwaggerGen(options =>
             {
@@ -68,9 +73,10 @@ namespace ArapcaSoruApi
             // HTTPS kapalı (dev ortamı — CORS çakışmasını önler)
             // app.UseHttpsRedirection();
 
-            // Middleware sırası: UseRouting → UseCors → UseAuthorization → MapControllers
+            // Middleware sırası: UseRouting → UseCors → UseStaticFiles → UseAuthorization → MapControllers
             app.UseRouting();
             app.UseCors("AllowReactApp");
+            app.UseStaticFiles();  // wwwroot/images → Frontend/public/images (junction)
             app.UseAuthorization();
             app.MapControllers();
 

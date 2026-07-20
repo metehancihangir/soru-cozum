@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { getQuestions } from './services/questionService'
+import { askAi } from './services/aiService'
 import QuestionCard from './components/QuestionCard'
 import HomeScreen from './components/HomeScreen'
 
@@ -40,6 +41,10 @@ function App() {
   const [selectedOption, setSelectedOption] = useState(null)
   const [isAnswered, setIsAnswered] = useState(false)
   const [score, setScore] = useState(0)
+
+  // ── Yapay Zeka state'leri
+  const [aiLoading, setAiLoading] = useState(false)
+  const [aiResponse, setAiResponse] = useState(null)
 
   // ── Ders seçildi → ExamType ekranına geç
   const handleSelectCourse = (courseName) => {
@@ -125,6 +130,23 @@ function App() {
     setCurrentIndex(prev => prev + 1)
     setSelectedOption(null)
     setIsAnswered(false)
+    // Yeni soruya geçilince AI yanıtını sıfırla
+    setAiLoading(false)
+    setAiResponse(null)
+  }
+
+  // ── Yapay Zekaya Sor
+  const handleAskAi = async (imagePath) => {
+    setAiLoading(true)
+    setAiResponse(null)
+    try {
+      const result = await askAi(imagePath)
+      setAiResponse(result)
+    } catch (err) {
+      setAiResponse('Yapay zeka yanıtı alınamadı: ' + err.message)
+    } finally {
+      setAiLoading(false)
+    }
   }
 
   // ─────────────────────────────────────────────────────────
@@ -299,6 +321,9 @@ function App() {
         onOptionClick={handleOptionClick}
         onNext={handleNextQuestion}
         onBack={handleBackToYear}
+        onAskAi={handleAskAi}
+        aiLoading={aiLoading}
+        aiResponse={aiResponse}
       />
     </div>
   )
