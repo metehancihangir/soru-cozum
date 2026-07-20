@@ -316,6 +316,22 @@ a { color: inherit; text-decoration: none; }
   color: var(--color-text);
 }
 
+.quiz__ai-disclaimer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--spacing-3);
+  padding-top: var(--spacing-2);
+  border-top: 1px dashed #e5e5e5;
+  font-size: 11px;
+  color: var(--color-neutral-mid);
+  opacity: 0.85;
+}
+.quiz__ai-disclaimer svg {
+  flex-shrink: 0;
+  stroke: var(--color-neutral-mid);
+}
+
 @keyframes slideInRight {
   from {
     opacity: 0;
