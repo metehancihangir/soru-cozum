@@ -92,6 +92,8 @@ function App() {
     setIsAnswered(false)
     setScore(0)
     setError(null)
+    setAiLoading(false)
+    setAiResponse(null)
   }
 
   // ── ExamType seçimine geri dön
@@ -99,6 +101,8 @@ function App() {
     setScreen('examType')
     setSelectedExamType(null)
     setSelectedYear(null)
+    setAiLoading(false)
+    setAiResponse(null)
   }
 
   // ── Year seçimine geri dön
@@ -111,6 +115,8 @@ function App() {
     setIsAnswered(false)
     setScore(0)
     setError(null)
+    setAiLoading(false)
+    setAiResponse(null)
   }
 
   // ── Şık seçildi
@@ -119,6 +125,10 @@ function App() {
     setSelectedOption(option)
     setIsAnswered(true)
     if (option === correct) setScore(prev => prev + 1)
+    
+    // Her ihtimale karşı yeni şık seçildiğinde eski AI yanıtını sıfırla
+    setAiLoading(false)
+    setAiResponse(null)
   }
 
   // ── Sonraki soru

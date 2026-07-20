@@ -11,6 +11,11 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:5248',
         changeOrigin: true,
+      },
+      // Resim dosyalarını da backend sunucusundan (wwwroot) çekeriz
+      '/images': {
+        target: 'http://localhost:5248',
+        changeOrigin: true,
       }
     }
   }
