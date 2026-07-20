@@ -47,7 +47,7 @@ namespace ArapcaSoruApi.Services
             // ── 2. Görseli backend'in kendi URL'sinden çek ve Base64'e çevir ───────────────
             // Görseller /images/... yolu ile backend tarafından static file olarak sunulmaktadır.
             // IWebHostEnvironment.WebRootPath yerine HTTP ile çekiyoruz — bu daha güvenilirdir.
-            var backendBaseUrl = _configuration["AiSettings:BackendBaseUrl"] ?? "http://soru-cozum-production.up.railway.app:8080";
+            var backendBaseUrl = _configuration["AiSettings:BackendBaseUrl"] ?? "https://soru-cozum-production.up.railway.app";
             var imageUrl       = $"{backendBaseUrl.TrimEnd('/')}/{imagePath.TrimStart('/')}";
 
             byte[] imageBytes;
