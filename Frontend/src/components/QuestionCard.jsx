@@ -1,4 +1,4 @@
-import { OPTION_LETTERS, getOptionButtonClass } from './questionCard.logic'
+import { OPTION_LETTERS } from './questionCard.logic'
 
 function QuestionCard({
   question,
@@ -9,16 +9,23 @@ function QuestionCard({
   onOptionClick,
   onNext,
   onBack,
+  onAskAi,
+  aiLoading,
+  aiResponse,
 }) {
   const isLast = currentIndex >= questionsTotal - 1
 
   // Progress bar yüzdesi
   const progressPct = ((currentIndex + 1) / questionsTotal) * 100
 
-  const hasFeedback = isAnswered && selectedOption !== question.correctOption && question.explanation
+  // Yanlış cevap verildi mi?
+  const isWrong = isAnswered && selectedOption !== question.correctOption
 
   return (
-    <section className={`quiz ${hasFeedback ? 'quiz--has-feedback' : ''}`} aria-label="Soru çözümü">
+    <section
+      className={`quiz ${isWrong ? 'quiz--has-ai-panel' : ''}`}
+      aria-label="Soru çözümü"
+    >
 
       {/* ── Üst bar: geri + sayaç ── */}
       <div className="quiz__top">
@@ -46,8 +53,10 @@ function QuestionCard({
         />
       </div>
 
+      {/* ── Quiz gövdesi: sol (soru) + sağ (AI paneli) ── */}
       <div className="quiz__body">
-        {/* ── Soru Resmi ── */}
+
+        {/* ── Sol taraf: Soru resmi + şıklar + feedback ── */}
         <div className="quiz__question">
           <div className="quiz__image-wrapper">
             <img
@@ -101,20 +110,58 @@ function QuestionCard({
           )}
         </div>
 
-        {/* ── Yanlış cevap için eğitici açıklama paneli ── */}
-        {isAnswered && selectedOption !== question.correctOption && question.explanation && (
-          <aside className="quiz__explanation-panel">
-            <div className="quiz__explanation-header">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="16" x2="12" y2="12"></line>
-                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-              </svg>
-              <h4>Neden Yanlış?</h4>
-            </div>
-            <div className="quiz__explanation-content">
-              <p>{question.explanation}</p>
-            </div>
+        {/* ── Sağ taraf: AI paneli (sadece yanlış cevapta göster) ── */}
+        {isWrong && (
+          <aside className="quiz__ai-panel" aria-live="polite">
+            {!aiLoading && !aiResponse && (
+              /* Henüz butona basılmadı — "Yapay Zekaya Sor" butonunu göster */
+              <div className="quiz__ai-prompt">
+                <p className="quiz__ai-prompt-text">Bu soruyu açıklamasını mı istiyorsun?</p>
+                <button
+                  type="button"
+                  id="ask-ai-btn"
+                  className="btn btn--ask-ai"
+                  onClick={() => onAskAi(question.imagePath)}
+                  aria-label="Bu soruyu yapay zekaya sor"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
+                  Yapay Zekaya Sor
+                </button>
+              </div>
+            )}
+
+            {aiLoading && (
+              /* Yükleniyor animasyonu */
+              <div className="quiz__ai-loading" aria-label="Yapay zeka yanıtı bekleniyor">
+                <div className="ai-spinner">
+                  <div className="ai-spinner__dot" />
+                  <div className="ai-spinner__dot" />
+                  <div className="ai-spinner__dot" />
+                </div>
+                <p className="quiz__ai-loading-text">Yapay zeka analiz ediyor…</p>
+              </div>
+            )}
+
+            {!aiLoading && aiResponse && (
+              /* Yanıt geldi — göster */
+              <div className="quiz__ai-response">
+                <div className="quiz__ai-response-header">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
+                  <span>Yapay Zeka Açıklaması</span>
+                </div>
+                <div className="quiz__ai-response-content">
+                  <p>{aiResponse}</p>
+                </div>
+              </div>
+            )}
           </aside>
         )}
       </div>
