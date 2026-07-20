@@ -18,12 +18,12 @@ namespace ArapcaSoruApi
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
             );
 
-            // CORS politikası — Vite dev server için
+            // CORS politikası — Tüm istemcilere izin ver (Firebase vs.)
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowReactApp", policy =>
+                options.AddPolicy("AllowAll", policy =>
                 {
-                    policy.WithOrigins("http://localhost:5173")
+                    policy.AllowAnyOrigin()
                           .AllowAnyMethod()
                           .AllowAnyHeader();
                 });
@@ -75,7 +75,7 @@ namespace ArapcaSoruApi
 
             // Middleware sırası: UseRouting → UseCors → UseStaticFiles → UseAuthorization → MapControllers
             app.UseRouting();
-            app.UseCors("AllowReactApp");
+            app.UseCors("AllowAll");
             app.UseStaticFiles();  // wwwroot/images → Frontend/public/images (junction)
             app.UseAuthorization();
             app.MapControllers();

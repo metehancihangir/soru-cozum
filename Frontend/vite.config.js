@@ -9,12 +9,12 @@ export default defineConfig({
       // G-10, G-11: /api ile başlayan tüm istekler backend'e yönlendirilir
       // changeOrigin: host header'ı hedef sunucuya göre ayarlanır
       '/api': {
-        target: 'http://localhost:5248',
+        target: 'http://soru-cozum-production.up.railway.app:8080',
         changeOrigin: true,
       },
       // Resim dosyalarını da backend sunucusundan (wwwroot) çekeriz
       '/images': {
-        target: 'http://localhost:5248',
+        target: 'http://soru-cozum-production.up.railway.app:8080',
         changeOrigin: true,
       }
     }

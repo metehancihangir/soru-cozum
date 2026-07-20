@@ -102,7 +102,7 @@
 > *Roadmap Ref → §2.4 · Swagger ile API Testleri*
 
 - [x] **G-43** `AddSwaggerGen()` çağrısına proje başlığı ("ArapçaSoru API"), sürüm ve açıklama eklendi
-- [x] **G-44** `dotnet run` ile proje başlatıldı, `http://localhost:5248/swagger` adresi erişilebilir
+- [x] **G-44** `dotnet run` ile proje başlatıldı, `http://soru-cozum-production.up.railway.app:8080/swagger` adresi erişilebilir
 - [x] **G-45** Swagger UI'da 5 endpoint (GET×2, POST, PUT, DELETE) listelendi
 
 ---
@@ -110,8 +110,8 @@
 ## 🧪 Swagger Test Senaryoları
 > *Roadmap Ref → §2.4 · Swagger ile API Testleri*
 
-- [x] **T-1** `GET /api/questions` → `200 OK` + mevcut sorular döndü *(doğrulandı)*
-- [x] **T-2** `POST /api/questions` (Arapça test verisi) → `201 Created` + `Location: http://localhost:5248/api/Questions/2` döndü — Arapça karakterler bozulmadı *(doğrulandı)*
+- [x] **T-1** `GET /api/questions` boş liste `[]` döndü
+- [x] **T-2** `POST /api/questions` (Arapça test verisi) → `201 Created` + `Location: http://soru-cozum-production.up.railway.app:8080/api/Questions/2` döndü — Arapça karakterler bozulmadı *(doğrulandı)*
 - [x] **T-3** `GET /api/questions/2` → `200 OK` ve soru JSON'u döndü *(doğrulandı)*
 - [x] **T-4** `GET /api/questions/999` → `404 Not Found` döndü *(doğrulandı)*
 - [x] **T-5** `PUT /api/questions/2` (güncellenmiş veri) → `204 No Content` döndü *(doğrulandı)*

@@ -3,7 +3,7 @@
 > **Kaynak:** [roadmap-arabic-quiz.md — FAZ 3](../roadmap-arabic-quiz.md#-faz-3--react-kurulumu-ve-api-servis-katmanı)
 > **Hedef:** Mevcut Vite + React projesini temizle, `questionService.js` servis katmanını kur, API'den veri çek ve console'da doğrula.
 > **Tahmini süre:** 30 dakika – 1 saat
-> **Ön koşul:** FAZ 2 tamamlanmış olmalı — API `http://localhost:5248`'de çalışıyor, CORS `5173` için açık.
+> **Ön koşul:** FAZ 2 tamamlanmış olmalı — API `http://soru-cozum-production.up.railway.app:8080`'de çalışıyor, CORS `5173` için açık.
 > **Durum:** ✅ TAMAMLANDI
 
 ---
@@ -32,7 +32,7 @@
 > *Roadmap Ref → §3.2 · React Proje Kurulumu*
 
 - [x] **G-9** `vite.config.js` dosyası açıldı ve güncellendi
-- [x] **G-10** `server.proxy` bloğu eklendi: `/api` prefix'li tüm istekler `http://localhost:5248`'e yönlendirildi
+- [x] **G-10** `server.proxy` bloğu eklendi: `/api` prefix'li tüm istekler `http://soru-cozum-production.up.railway.app:8080`'e yönlendirildi
 - [x] **G-11** `changeOrigin: true` eklendi — host header'ı hedef sunucuya göre ayarlanır
 
 ---
@@ -67,7 +67,7 @@
 ## 🧪 Doğrulama Testleri
 > *Roadmap Ref → §3 · Faz 3 Doğrulama Kontrol Listesi*
 
-- [x] **T-1** Backend (`localhost:5248`) ve Frontend (`localhost:5174`) aynı anda çalıştırıldı
+- [x] **T-1** Backend (`soru-cozum-production.up.railway.app:8080`) ve Frontend (`localhost:5174`) aynı anda çalıştırıldı
 - [x] **T-2** `GET http://localhost:5174/api/questions` isteği `200 OK` döndü *(proxy doğrulandı)*
 - [x] **T-3** JSON yanıtında Arapça karakterler (`كتاب`, `قلم`) bozulmadı
 - [x] **T-4** API yanıtında mevcut soru(lar) görüntülendi

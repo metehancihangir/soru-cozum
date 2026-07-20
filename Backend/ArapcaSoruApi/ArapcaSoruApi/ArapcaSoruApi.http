@@ -1,4 +1,4 @@
-@ArapcaSoruApi_HostAddress = http://localhost:5248
+@ArapcaSoruApi_HostAddress = http://soru-cozum-production.up.railway.app:8080
 
 GET {{ArapcaSoruApi_HostAddress}}/weatherforecast/
 Accept: application/json
