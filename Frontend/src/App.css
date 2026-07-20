@@ -28,7 +28,7 @@ body::before {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: url('/images/islamic_bg.png') no-repeat center center;
+  background: url('https://soru-cozum-production.up.railway.app/images/islamic_bg.png') no-repeat center center;
   background-size: cover;
   opacity: 0.15;
   z-index: -1;
