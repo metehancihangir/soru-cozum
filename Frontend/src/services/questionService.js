@@ -1,4 +1,8 @@
-const API_BASE = 'https://soru-cozum-production.up.railway.app/api/questions'
+// Dev: relative path → Vite proxy → localhost backend
+// Production build: tam Railway URL → Firebase'den doğrudan erişim
+const API_BASE = import.meta.env.DEV
+  ? '/api/questions'
+  : 'https://soru-cozum-production.up.railway.app/api/questions'
 
 /**
  * Soruları filtreli veya filtresiz getirir.
@@ -6,6 +10,8 @@ const API_BASE = 'https://soru-cozum-production.up.railway.app/api/questions'
  * @param {string} [examType]   - Örn: "Yaz Okulu"
  * @param {number} [year]       - Örn: 2021
  */
+import topicMapping from '../data/topicMapping.json'
+
 export const getQuestions = async (courseName, examType, year) => {
   const params = new URLSearchParams()
   if (courseName) params.append('courseName', courseName)
@@ -15,7 +21,18 @@ export const getQuestions = async (courseName, examType, year) => {
   const url = params.toString() ? `${API_BASE}?${params}` : API_BASE
   const response = await fetch(url)
   if (!response.ok) throw new Error(`API hatası: ${response.status}`)
-  return await response.json()
+  
+  const data = await response.json()
+  
+  // Frontend'de konuları mocklamak (Backend'de Topic alanı olmadığı için)
+  return data.map(q => {
+    if (!q.topic) {
+      // Haritadan resim yoluna göre (örn: "/images/arapca-2/yaz_okulu/2021/q1.png") konuyu bul
+      const mappedTopic = topicMapping[q.imagePath];
+      q.topic = mappedTopic || "Genel Tekrar";
+    }
+    return q;
+  })
 }
 
 export const getQuestionById = async (id) => {

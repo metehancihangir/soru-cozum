@@ -1,15 +1,20 @@
-const AI_API_BASE = 'https://soru-cozum-production.up.railway.app/api/ai'
+// Dev: relative path → Vite proxy → localhost backend
+// Production build: tam Railway URL → Firebase'den doğrudan erişim
+const AI_API_BASE = import.meta.env.DEV
+  ? '/api/ai'
+  : 'https://soru-cozum-production.up.railway.app/api/ai'
 
 /**
- * Sorunun görsel yolunu backend'e gönderir ve yapay zeka açıklamasını alır.
+ * Sorunun görsel yolunu ve doğru cevabını backend'e gönderir ve yapay zeka açıklamasını alır.
  * @param {string} imagePath - Soruya ait görselin yolu (örn: "/images/sorular/q1.jpg")
+ * @param {string} correctOption - Sorunun doğru şıkkı (örn: "C")
  * @returns {Promise<string>} - Yapay zekanın ürettiği açıklama metni
  */
-export const askAi = async (imagePath) => {
+export const askAi = async (imagePath, correctOption) => {
   const response = await fetch(`${AI_API_BASE}/explain`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ imagePath }),
+    body: JSON.stringify({ imagePath, correctOption }),
   })
 
   if (!response.ok) {

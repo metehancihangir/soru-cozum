@@ -60,7 +60,7 @@ function QuestionCard({
         <div className="quiz__question">
           <div className="quiz__image-wrapper">
             <img
-              src={`https://soru-cozum-production.up.railway.app${question.imagePath}`}
+              src={import.meta.env.DEV ? question.imagePath : `https://soru-cozum-production.up.railway.app${question.imagePath}`}
               alt={`Soru ${currentIndex + 1}`}
               className="quiz__image"
               draggable={false}
@@ -121,7 +121,7 @@ function QuestionCard({
                   type="button"
                   id="ask-ai-btn"
                   className="btn btn--ask-ai"
-                  onClick={() => onAskAi(question.imagePath)}
+                  onClick={() => onAskAi(question.imagePath, question.correctOption)}
                   aria-label="Bu soruyu yapay zekaya sor"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

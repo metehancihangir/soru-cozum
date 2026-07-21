@@ -13,6 +13,48 @@
   padding-block:  var(--spacing-6);
 }
 
+.home-screen-fade {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── Alt Aksiyon Alanı ────────────────────────────────────── */
+.home__footer-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-4);
+}
+
+.home__analyze-btn {
+  font-family: var(--font-ui);
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--gradient-primary, linear-gradient(135deg, #3b82f6 0%, #2563eb 100%));
+  border: none;
+  border-radius: 9999px;
+  padding: 16px 40px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
+}
+
+.home__analyze-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(59, 130, 246, 0.35);
+  filter: brightness(1.1);
+}
+
+.home__analyze-btn:active {
+  transform: translateY(1px);
+}
+
 /* ── Brand / Logo ────────────────────────────────────────── */
 .home__brand {
   text-align:     center;
@@ -23,30 +65,34 @@
 }
 
 .home__logo {
-  width:         56px;
-  height:        56px;
+  width:         88px;
+  height:        88px;
   border-radius: 50%;
   background:    var(--color-neutral-dark);
   color:         var(--color-on-primary);
   display:       grid;
   place-items:   center;
   font-family:   var(--font-display);
-  font-size:     22px;
+  font-size:     36px;
   line-height:   1;
+  box-shadow:    0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .home__title {
   font-family: var(--font-display);
-  font-size:   var(--font-size-title);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-title);
+  font-size:   clamp(36px, 6vw, 56px);
+  font-weight: 800;
+  line-height: 1.1;
   color:       var(--color-neutral-dark);
+  letter-spacing: -0.02em;
+  margin-top:  8px;
 }
 
 .home__tagline {
-  font-size:  var(--font-size-body);
+  font-size:  clamp(16px, 2.5vw, 20px);
   color:      var(--color-neutral-mid);
-  max-width:  28ch;
+  max-width:  32ch;
+  letter-spacing: 0.02em;
 }
 
 /* ── Categories ──────────────────────────────────────────── */
@@ -65,36 +111,54 @@
 .cat-card {
   display:          flex;
   align-items:      center;
-  gap:              var(--spacing-3);
+  gap:              20px;
   width:            100%;
   text-align:       left;
-  padding:          var(--spacing-4) var(--spacing-3);
-  background:       var(--color-surface);
-  border-radius:    var(--radius-card);
-  border:           1px solid transparent;
-  transition:       background-color var(--transition-fast);
-  min-height:       72px;
-  /* button sıfırlama */
+  padding:          20px 24px;
+  background:       rgba(255, 255, 255, 0.6);
+  backdrop-filter:  blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius:    24px;
+  border:           1px solid rgba(255, 255, 255, 0.8);
+  transition:       all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  min-height:       80px;
   font-family:      inherit;
   font-size:        inherit;
   color:            inherit;
   cursor:           pointer;
+  box-shadow:       0 4px 15px rgba(0, 0, 0, 0.03);
+  
+  /* Giriş Animasyonu */
+  animation: cardFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+  transform: translateY(15px);
 }
 
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cat-card:nth-child(1) { animation-delay: 0.05s; }
+.cat-card:nth-child(2) { animation-delay: 0.15s; }
+.cat-card:nth-child(3) { animation-delay: 0.25s; }
+.cat-card:nth-child(4) { animation-delay: 0.35s; }
+
 .cat-card__icon {
-  width:         40px;
-  height:        40px;
+  width:         48px;
+  height:        48px;
   flex-shrink:   0;
   display:       grid;
   place-items:   center;
-  border-radius: var(--radius-card);
+  border-radius: 16px;
   background:    var(--color-background);
   color:         var(--color-neutral-dark);
+  box-shadow:    0 2px 10px rgba(0, 0, 0, 0.04);
 }
 
 .cat-card__icon svg {
-  width:          20px;
-  height:         20px;
+  width:          24px;
+  height:         24px;
   stroke:         currentColor;
   fill:           none;
   stroke-width:   1.6;
@@ -144,14 +208,17 @@
 
 /* Aktif kart hover */
 .cat-card--active:hover {
-  background: var(--color-surface-hover);
+  background:   rgba(255, 255, 255, 0.95);
+  border-color: #3b82f6;
+  transform:    translateY(-3px);
+  box-shadow:   0 12px 30px rgba(59, 130, 246, 0.15);
 }
 .cat-card--active:hover .cat-card__arrow {
-  color:     var(--color-neutral-dark);
+  color:     #3b82f6;
   transform: translateX(4px);
 }
 .cat-card--active:focus-visible {
-  outline:        2px solid var(--color-neutral-dark);
+  outline:        2px solid #3b82f6;
   outline-offset: 2px;
 }
 

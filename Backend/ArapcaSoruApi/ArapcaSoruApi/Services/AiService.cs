@@ -14,9 +14,23 @@ namespace ArapcaSoruApi.Services
 
         // Sistem istemi: Yapay zekanın nasıl davranacağını tanımlar
         private const string SystemPrompt =
-            "Sen uzman bir Arapça öğretmenisin. Sana gönderilen soruyu analiz et ve doğru cevabı açıkla. " +
-            "Açıklamaların kısa, öz ve doğrudan sadede gelen şekilde olsun. Kullanıcıyı yormamak için gereksiz detaylardan kaçın. " +
-            "En fazla 3-4 cümleyle, öğrencinin anlayabileceği düzeyde net bir açıklama yap.";
+            "Rol ve Amaç:\n" +
+            "Sen, pedagojik becerileri yüksek, uzman ve kullanıcı dostu bir eğitim asistanısın. " +
+            "Temel görevin, sana iletilen soruları öğrencinin bilişsel yükünü en aza indirecek şekilde çözmektir. " +
+            "Gereksiz detaylara girmeden, maksimum anlaşılırlıkla ve aşağıda belirtilen katı şablona kesinlikle sadık kalarak yanıt vermelisin.\n\n" +
+            "Temel Kurallar:\n" +
+            "- Odaklı İletişim: Açıklamaları asla gereksiz yere uzatma. Laf kalabalığından, didaktik tekrarlardan ve uzun paragraflardan kaçın. Sadece cevaba giden en net yolu göster.\n" +
+            "- Okunabilirlik: Metinleri akıcı ve kullanıcı dostu bir dille yaz. Çözüm adımlarını, okumayı kolaylaştırmak için mutlaka kısa maddeler veya tek cümlelik satırlar halinde yapılandır.\n" +
+            "- Format Bağlılığı: Çıktın SADECE aşağıdaki şablondan oluşmalıdır. Şablonun dışına çıkma, öncesine veya sonrasına ekstra bir selamlama/yorum ekleme.\n\n" +
+            "Çıktı Şablonu:\n" +
+            "🎯 SORU TAKTİĞİ:\n" +
+            "[Soru tipine nasıl yaklaşılması gerektiğini anlatan, öğrenciye zaman kazandıracak veya vizyon katacak, 1-2 cümlelik pratik bir strateji/ipucu yaz.]\n\n" +
+            "📝 ADIM ADIM ÇÖZÜM:\n" +
+            "[Adım 1: Çözüme giden ilk aşamanın net ve akıcı ifadesi.]\n" +
+            "[Adım 2: Uygulanan mantık, işlem veya kuralın kısa açıklaması.]\n" +
+            "[Gerekiyorsa diğer kısa adımlar...]\n\n" +
+            "✅ DOĞRU CEVAP:\n" +
+            "[Sadece doğru seçeneği veya sonucu yaz. Örn: C / 45 / Yalnız I]";
 
         public AiService(IConfiguration configuration, IHttpClientFactory httpClientFactory)
         {
@@ -32,7 +46,7 @@ namespace ArapcaSoruApi.Services
         /// Backend'in kendi URL'sinden HTTP ile çekilir; wwwroot bağımlılığı yoktur.
         /// </param>
         /// <returns>Yapay zekanın ürettiği açıklama metni.</returns>
-        public async Task<string> ExplainQuestionAsync(string imagePath)
+        public async Task<string> ExplainQuestionAsync(string imagePath, string correctOption)
         {
             // ── 1. API anahtarını yapılandırmadan al ────────────────────────────────────────
             // API anahtarını appsettings.json içindeki "AiSettings:GeminiApiKey" alanından okur.
@@ -104,7 +118,9 @@ namespace ArapcaSoruApi.Services
                             },
                             new
                             {
-                                text = "Bu soruyu analiz et ve doğru cevabı açıkla."
+                                text = $"Bu sorunun doğru cevabı {correctOption} şıkkıdır. " +
+                                       "Önce doğru cevabın neden doğru olduğunu teyit et, " +
+                                       "sonra çözüm adımlarını bu doğrultuda oluştur."
                             }
                         }
                     }

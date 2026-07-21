@@ -6,15 +6,14 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      // G-10, G-11: /api ile başlayan tüm istekler backend'e yönlendirilir
-      // changeOrigin: host header'ı hedef sunucuya göre ayarlanır
+      // Local dev: /api istekleri localhost backend'e yönlendirilir
       '/api': {
-        target: 'https://soru-cozum-production.up.railway.app',
+        target: 'http://localhost:5062',
         changeOrigin: true,
       },
-      // Resim dosyalarını da backend sunucusundan (wwwroot) çekeriz
+      // Resim dosyaları da localhost backend'den çekilir
       '/images': {
-        target: 'https://soru-cozum-production.up.railway.app',
+        target: 'http://localhost:5062',
         changeOrigin: true,
       }
     }

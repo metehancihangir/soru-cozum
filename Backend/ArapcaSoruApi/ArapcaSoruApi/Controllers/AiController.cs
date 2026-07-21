@@ -25,9 +25,12 @@ namespace ArapcaSoruApi.Controllers
             if (string.IsNullOrWhiteSpace(request.ImagePath))
                 return BadRequest(new { error = "imagePath boş olamaz." });
 
+            if (string.IsNullOrWhiteSpace(request.CorrectOption))
+                return BadRequest(new { error = "correctOption boş olamaz." });
+
             try
             {
-                var explanation = await _aiService.ExplainQuestionAsync(request.ImagePath);
+                var explanation = await _aiService.ExplainQuestionAsync(request.ImagePath, request.CorrectOption);
                 return Ok(new { explanation });
             }
             catch (FileNotFoundException ex)
@@ -47,5 +50,5 @@ namespace ArapcaSoruApi.Controllers
     }
 
     /// <summary>POST /api/ai/explain istek gövdesi.</summary>
-    public record ExplainRequest(string ImagePath);
+    public record ExplainRequest(string ImagePath, string CorrectOption);
 }

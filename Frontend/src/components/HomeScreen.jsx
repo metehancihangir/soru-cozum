@@ -7,7 +7,7 @@ const COURSE_META = {
   'Arapça-4': { questionCount: 180, active: true },
 }
 
-function HomeScreen({ onSelectCourse }) {
+function HomeScreen({ onSelectCourse, onOpenDashboard }) {
   const [toastMsg, setToastMsg] = useState('')
   const [toastVisible, setToastVisible] = useState(false)
   let toastTimer = null
@@ -20,7 +20,7 @@ function HomeScreen({ onSelectCourse }) {
   }
 
   return (
-    <div className="app-container">
+    <div className="app-container home-screen-fade">
       <main className="home" aria-label="Kategori seçimi">
 
         {/* ── Marka / Logo ── */}
@@ -88,9 +88,20 @@ function HomeScreen({ onSelectCourse }) {
           </button>
 
         </div>
+
+        {/* ── Kendini Analiz Et Butonu ── */}
+        <div className="home__footer-actions">
+          <button
+            type="button"
+            className="home__analyze-btn"
+            onClick={onOpenDashboard}
+          >
+            Kendini Analiz Et
+          </button>
+        </div>
       </main>
 
-      {/* Toast */}
+      {/* ── Bildirim (Toast) ── */}
       <div
         className={`toast${toastVisible ? ' is-visible' : ''}`}
         role="status"

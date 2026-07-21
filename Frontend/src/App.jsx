@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import './App.css'
 import { getQuestions } from './services/questionService'
 import { askAi } from './services/aiService'
+import { getDailySolvedCount, getWeeklySolvedCount, recordQuestionSolved, recordWrongAnswer, getDetailedErrors, getPerformanceStats, recordCorrectAnswer } from './services/statsService'
 import QuestionCard from './components/QuestionCard'
 import HomeScreen from './components/HomeScreen'
+import Dashboard from './components/Dashboard'
 
 // Ders kataloğu — ilerde genişletilebilir
 const COURSES = {
@@ -25,8 +27,8 @@ const COURSES = {
 }
 
 function App() {
-  // ── Navigasyon akışı: home → examType → year → quiz → complete
-  const [screen, setScreen] = useState('home')
+  // ── Navigasyon akışı: dashboard <-> home → examType → year → quiz → complete
+  const [screen, setScreen] = useState('dashboard')
 
   // ── Seçim state'leri
   const [selectedCourse, setSelectedCourse] = useState(null)   // "Arapça-2"
@@ -46,6 +48,24 @@ function App() {
   const [aiLoading, setAiLoading] = useState(false)
   const [aiResponse, setAiResponse] = useState(null)
 
+  // ── Dashboard istatistik state'leri
+  const [solvedToday, setSolvedToday] = useState(() => getDailySolvedCount())
+  const [solvedWeekly, setSolvedWeekly] = useState(() => getWeeklySolvedCount())
+  const [detailedErrors, setDetailedErrors] = useState(() => getDetailedErrors())
+  const [performanceStats, setPerformanceStats] = useState(() => getPerformanceStats())
+  const [hasSeenWelcome, setHasSeenWelcome] = useState(false)
+
+  // Quiz sırasında biriken yanlış cevapları takip et
+  const wrongAnswersRef = useRef([])
+
+  // İstatistikleri LocalStorage'dan yeniden oku
+  const refreshStats = useCallback(() => {
+    setSolvedToday(getDailySolvedCount())
+    setSolvedWeekly(getWeeklySolvedCount())
+    setDetailedErrors(getDetailedErrors())
+    setPerformanceStats(getPerformanceStats())
+  }, [])
+
   // ── Ders seçildi → ExamType ekranına geç
   const handleSelectCourse = (courseName) => {
     setSelectedCourse(courseName)
@@ -56,6 +76,38 @@ function App() {
   const handleSelectExamType = (examType) => {
     setSelectedExamType(examType)
     setScreen('year')
+  }
+
+  // ── Dashboard'dan Soruyu Tekrar Çözmek İçin ──
+  const handleJumpToQuestion = async (qInfo) => {
+    setSelectedCourse(qInfo.courseName)
+    setSelectedExamType(qInfo.examType)
+    setSelectedYear(qInfo.year)
+    
+    setLoading(true)
+    setError(null)
+    setScreen('quiz')
+    setQuestions([])
+    setCurrentIndex(0)
+    setSelectedOption(null)
+    setIsAnswered(false)
+    setScore(0)
+    wrongAnswersRef.current = []
+
+    try {
+      const data = await getQuestions(qInfo.courseName, qInfo.examType, qInfo.year)
+      setQuestions(data)
+      
+      // Soru id'si veya imagePath üzerinden eşleştir
+      const targetIndex = data.findIndex(q => (q.id && q.id === qInfo.id) || (q.imagePath && q.imagePath === qInfo.imagePath))
+      if (targetIndex !== -1) {
+        setCurrentIndex(targetIndex)
+      }
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
   }
 
   // ── Yıl seçildi → soruları yükle ve quiz'e geç
@@ -69,6 +121,7 @@ function App() {
     setSelectedOption(null)
     setIsAnswered(false)
     setScore(0)
+    wrongAnswersRef.current = []
 
     try {
       const data = await getQuestions(selectedCourse, selectedExamType, year)
@@ -94,6 +147,12 @@ function App() {
     setError(null)
     setAiLoading(false)
     setAiResponse(null)
+    refreshStats()
+  }
+
+  // ── Dashboard'a git
+  const handleOpenDashboard = () => {
+    setScreen('dashboard')
   }
 
   // ── ExamType seçimine geri dön
@@ -121,10 +180,29 @@ function App() {
 
   // ── Şık seçildi
   const handleOptionClick = (option) => {
-    const correct = questions[currentIndex].correctOption
+    const currentQ = questions[currentIndex]
+    const correct = currentQ.correctOption
+    
     setSelectedOption(option)
     setIsAnswered(true)
-    if (option === correct) setScore(prev => prev + 1)
+    
+    // Soruyu eşsiz olarak çözüldü olarak işaretle
+    recordQuestionSolved(currentQ.id)
+
+    if (option === correct) {
+      setScore(prev => prev + 1)
+      recordCorrectAnswer(currentQ.id)
+    } else {
+      // Yanlış cevabı kaydet — quiz bittiğinde toplu işlenecek
+      wrongAnswersRef.current.push({
+        courseName: selectedCourse,
+        topic: currentQ.topic,
+      })
+      // NOT: Anında da kaydedilebilir, ancak performans ve akış için quiz sonunda veya çıkışta işliyoruz.
+      // Eğer kullanıcı testi bitirmeden çıkarsa diye, aslında çıkış yaparken veya anında da yazılabilir.
+      // Kullanıcı talebine göre testten çıkıldığında da işlensin dediği için anında kaydediyoruz:
+      recordWrongAnswer(currentQ)
+    }
     
     // Her ihtimale karşı yeni şık seçildiğinde eski AI yanıtını sıfırla
     setAiLoading(false)
@@ -134,6 +212,10 @@ function App() {
   // ── Sonraki soru
   const handleNextQuestion = () => {
     if (currentIndex >= questions.length - 1) {
+      // Quiz bitti — istatistikleri yenile (yanlışlar zaten anında yazıldı)
+      wrongAnswersRef.current = []
+      refreshStats()
+
       setScreen('complete')
       return
     }
@@ -146,11 +228,11 @@ function App() {
   }
 
   // ── Yapay Zekaya Sor
-  const handleAskAi = async (imagePath) => {
+  const handleAskAi = async (imagePath, correctOption) => {
     setAiLoading(true)
     setAiResponse(null)
     try {
-      const result = await askAi(imagePath)
+      const result = await askAi(imagePath, correctOption)
       setAiResponse(result)
     } catch (err) {
       setAiResponse('Yapay zeka yanıtı alınamadı: ' + err.message)
@@ -163,9 +245,32 @@ function App() {
   // RENDER
   // ─────────────────────────────────────────────────────────
 
+  // Dashboard ekranı
+  if (screen === 'dashboard') {
+    return (
+      <Dashboard
+        solvedToday={solvedToday}
+        solvedWeekly={solvedWeekly}
+        detailedErrors={detailedErrors}
+        performanceStats={performanceStats}
+        isFirstVisit={!hasSeenWelcome}
+        onComplete={() => {
+          setHasSeenWelcome(true)
+          setScreen('home')
+        }}
+        onQuestionClick={handleJumpToQuestion}
+      />
+    )
+  }
+
   // Ana menü
   if (screen === 'home') {
-    return <HomeScreen onSelectCourse={handleSelectCourse} />
+    return (
+      <HomeScreen
+        onSelectCourse={handleSelectCourse}
+        onOpenDashboard={handleOpenDashboard}
+      />
+    )
   }
 
   // Sınav türü seçimi
