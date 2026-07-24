@@ -1,0 +1,383 @@
+/* ═══════════════════════════════════════════════════════════
+   Soru Çözüm — Admin Panel Styles
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Admin giriş ekranı ─────────────────────────────── */
+.admin-login {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-7) var(--spacing-3);
+  text-align: center;
+}
+
+.admin-login__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-neutral-dark);
+  display: grid;
+  place-items: center;
+}
+.admin-login__icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.admin-login__title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-subtitle);
+  font-weight: 600;
+  color: var(--color-neutral-dark);
+}
+
+.admin-login__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  width: 100%;
+  max-width: 320px;
+}
+
+.admin-login__input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: var(--radius-badge);
+  border: var(--border-light);
+  background: var(--color-background);
+  font-family: inherit;
+  font-size: var(--font-size-body);
+  color: var(--color-text);
+  transition: border-color var(--transition-fast);
+}
+.admin-login__input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.admin-login__error {
+  font-size: var(--font-size-small);
+  color: var(--color-error);
+}
+
+/* ── Admin panel ana düzen ───────────────────────────── */
+.admin {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+  padding-block: var(--spacing-3);
+}
+
+.admin__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+}
+
+.admin__title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-subtitle);
+  font-weight: 600;
+  color: var(--color-neutral-dark);
+}
+
+.admin__header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* ── Sekme navigasyonu ───────────────────────────────── */
+.admin__tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: var(--border-light);
+  padding-bottom: 0;
+  overflow-x: auto;
+}
+
+.admin__tab {
+  padding: 10px 20px;
+  font-size: var(--font-size-body);
+  font-weight: 500;
+  color: var(--color-neutral-mid);
+  border-bottom: 2px solid transparent;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  min-height: 44px;
+}
+.admin__tab:hover {
+  color: var(--color-neutral-dark);
+}
+.admin__tab.is-active {
+  color: var(--color-neutral-dark);
+  border-bottom-color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* ── İstatistik kartları ─────────────────────────────── */
+.admin__stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--spacing-3);
+}
+
+.admin__stat-card {
+  padding: var(--spacing-4);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--radius-card);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin__stat-val {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-neutral-dark);
+  font-variant-numeric: tabular-nums;
+}
+
+.admin__stat-label {
+  font-size: var(--font-size-small);
+  color: var(--color-neutral-mid);
+}
+
+.admin__stat-card--warning .admin__stat-val { color: #ea580c; }
+.admin__stat-card--danger  .admin__stat-val { color: var(--color-error); }
+.admin__stat-card--success .admin__stat-val { color: var(--color-accent); }
+
+/* ── Filtreler ───────────────────────────────────────── */
+.admin__filters {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.admin__filter-select {
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: var(--radius-badge);
+  border: var(--border-light);
+  background: var(--color-background);
+  font-family: inherit;
+  font-size: var(--font-size-small);
+  color: var(--color-text);
+  cursor: pointer;
+}
+.admin__filter-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* ── Soru tablosu ────────────────────────────────────── */
+.admin__table-container {
+  overflow-x: auto;
+  border-radius: var(--radius-card);
+  border: var(--border-light);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.admin__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-body);
+}
+
+.admin__table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: var(--font-size-small);
+  color: var(--color-neutral-mid);
+  border-bottom: var(--border-light);
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.admin__table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  color: var(--color-text);
+  vertical-align: middle;
+}
+
+.admin__table tr:last-child td { border-bottom: none; }
+
+.admin__table tr:hover td {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.admin__table-img {
+  width: 60px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 4px;
+  background: var(--color-surface);
+}
+
+/* ── Tablo aksiyon butonları ─────────────────────────── */
+.admin__table-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.admin__action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: var(--color-surface);
+  color: var(--color-neutral-mid);
+  transition: all var(--transition-fast);
+}
+.admin__action-btn:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-neutral-dark);
+}
+.admin__action-btn--danger:hover {
+  background: var(--color-error-bg);
+  color: var(--color-error);
+}
+.admin__action-btn svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── Kota durumu barı ────────────────────────────────── */
+.admin__quota-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--color-surface);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.admin__quota-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.admin__quota-bar-fill--ok      { background: var(--color-accent); }
+.admin__quota-bar-fill--warning { background: #f59e0b; }
+.admin__quota-bar-fill--danger  { background: var(--color-error); }
+
+/* ── Boş durum ───────────────────────────────────────── */
+.admin__empty {
+  text-align: center;
+  padding: var(--spacing-7) var(--spacing-3);
+  color: var(--color-neutral-mid);
+  font-size: var(--font-size-body);
+}
+
+/* ── Onay diyaloğu ───────────────────────────────────── */
+.admin__confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: modalFadeIn 0.2s ease-out forwards;
+}
+
+.admin__confirm-dialog {
+  background: var(--color-background);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-5);
+  max-width: 400px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  box-shadow: var(--shadow-overlay);
+  animation: modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.admin__confirm-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  color: var(--color-neutral-dark);
+}
+
+.admin__confirm-text {
+  font-size: var(--font-size-body);
+  color: var(--color-neutral-mid);
+  line-height: 1.6;
+}
+
+.admin__confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-2);
+}
+
+/* ── Edit formu ──────────────────────────────────────── */
+.admin__edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+}
+
+.admin__edit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin__edit-label {
+  font-size: var(--font-size-small);
+  font-weight: 500;
+  color: var(--color-neutral-mid);
+}
+
+.admin__edit-input {
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: var(--radius-badge);
+  border: var(--border-light);
+  background: var(--color-background);
+  font-family: inherit;
+  font-size: var(--font-size-body);
+  color: var(--color-text);
+}
+.admin__edit-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}

@@ -42,18 +42,6 @@ function Dashboard({ solvedToday = 0, solvedWeekly = 0, detailedErrors = { total
               Arapça dil becerilerini geliştirmek için doğru yerdesin. 
               Günlük ilerlemeni ve performansını takip et, eksiklerini tamamla.
             </p>
-            <div className="dashboard__action">
-              <button 
-                type="button" 
-                className="dashboard__nav-btn"
-                onClick={() => setScene(1)}
-                aria-label="İleri"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </button>
-            </div>
           </div>
         )}
 
@@ -63,23 +51,16 @@ function Dashboard({ solvedToday = 0, solvedWeekly = 0, detailedErrors = { total
             <h2 className="dashboard__hero-subtitle">Bugünün Özeti</h2>
             <p className="dashboard__hero-date">{todayDate}</p>
             
-            <div className="dashboard__stat-big">
-              <span className="dashboard__stat-big-val">{solvedToday}</span>
-              <span className="dashboard__stat-big-label">Soru Çözüldü</span>
-            </div>
-
-            <div className="dashboard__action">
-              <button 
-                type="button" 
-                className="dashboard__nav-btn"
-                onClick={() => setScene(2)}
-                aria-label="İleri"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </button>
-            </div>
+            {isFirstVisit && solvedToday === 0 ? (
+              <p className="dashboard__empty-info">
+                Bu alanda bugün çözdüğün soru sayısını ve performansını takip edebilirsin.
+              </p>
+            ) : (
+              <div className="dashboard__stat-big">
+                <span className="dashboard__stat-big-val">{solvedToday}</span>
+                <span className="dashboard__stat-big-label">Soru Çözüldü</span>
+              </div>
+            )}
           </div>
         )}
 
@@ -89,23 +70,16 @@ function Dashboard({ solvedToday = 0, solvedWeekly = 0, detailedErrors = { total
             <h2 className="dashboard__hero-subtitle">Haftanın Özeti</h2>
             <p className="dashboard__hero-date">Bu Hafta Toplam</p>
             
-            <div className="dashboard__stat-big">
-              <span className="dashboard__stat-big-val" style={{ color: 'var(--color-blue-accent)' }}>{solvedWeekly}</span>
-              <span className="dashboard__stat-big-label">Soru Çözüldü</span>
-            </div>
-
-            <div className="dashboard__action">
-              <button 
-                type="button" 
-                className="dashboard__nav-btn"
-                onClick={() => setScene(3)}
-                aria-label="İleri"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </button>
-            </div>
+            {isFirstVisit && solvedWeekly === 0 ? (
+              <p className="dashboard__empty-info">
+                Bu alanda bu hafta boyunca çözdüğün soruların genel bir dökümünü görebilirsin.
+              </p>
+            ) : (
+              <div className="dashboard__stat-big">
+                <span className="dashboard__stat-big-val" style={{ color: 'var(--color-blue-accent)' }}>{solvedWeekly}</span>
+                <span className="dashboard__stat-big-label">Soru Çözüldü</span>
+              </div>
+            )}
           </div>
         )}
 
@@ -126,8 +100,8 @@ function Dashboard({ solvedToday = 0, solvedWeekly = 0, detailedErrors = { total
                   
                   {/* Sol Taraf: Toplam Yanlış ve Soru Listesi */}
                   <div className="dashboard__errors-left">
-                    <div className="dashboard__errors-total" style={{ marginBottom: '24px', minHeight: '110px' }}>
-                      <span className="dashboard__errors-total-val" style={{ color: '#ef4444', background: 'none', WebkitTextFillColor: 'initial' }}>{detailedErrors.totalCount}</span>
+                    <div className="dashboard__errors-total">
+                      <span className="dashboard__errors-total-val">{detailedErrors.totalCount}</span>
                       <span className="dashboard__errors-total-label">Toplam Yanlış</span>
                     </div>
                     <ul className="dashboard__questions-list dashboard__accordion">
@@ -194,27 +168,41 @@ function Dashboard({ solvedToday = 0, solvedWeekly = 0, detailedErrors = { total
                 </div>
               ) : (
                 <div className="dashboard__empty">
-                  <span aria-hidden="true" style={{ fontSize: '42px', display: 'block', marginBottom: '16px' }}>🎯</span>
-                  Henüz yanlış cevap yok.<br/>Harika gidiyorsun!
+                  {isFirstVisit && performanceStats.total === 0 ? (
+                    <p className="dashboard__empty-info" style={{ marginTop: '32px' }}>
+                      Bu alanda yanlış yaptığın konuları ve genel başarı oranını inceleyerek eksiklerini belirleyebilirsin.
+                    </p>
+                  ) : (
+                    <>
+                      <span aria-hidden="true" style={{ fontSize: '42px', display: 'block', marginBottom: '16px' }}>🎯</span>
+                      Henüz yanlış cevap yok.<br/>Harika gidiyorsun!
+                    </>
+                  )}
                 </div>
               )}
-            </div>
-
-            <div className="dashboard__action">
-              <button 
-                type="button" 
-                className="dashboard__nav-btn"
-                onClick={onComplete}
-                aria-label="Ana Sayfaya Geç"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </button>
             </div>
           </div>
         )}
 
+      </div>
+      
+      {/* Sabit İleri Butonu */}
+      <div className="dashboard__fixed-action">
+        <button 
+          type="button" 
+          className="dashboard__nav-btn"
+          onClick={() => {
+            if (scene === 0) setScene(1)
+            else if (scene === 1) setScene(2)
+            else if (scene === 2) setScene(3)
+            else if (scene === 3) onComplete()
+          }}
+          aria-label={scene === 3 ? "Ana Sayfaya Geç" : "İleri"}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </button>
       </div>
     </div>
   )

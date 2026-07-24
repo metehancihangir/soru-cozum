@@ -34,6 +34,7 @@ namespace ArapcaSoruApi
 
             // Yapay Zeka servisi ve HTTP istemcisi kaydı
             builder.Services.AddHttpClient();
+            builder.Services.AddSingleton<QuotaTracker>();   // Kota izleme — singleton
             builder.Services.AddScoped<AiService>();
 
             builder.Services.AddSwaggerGen(options =>

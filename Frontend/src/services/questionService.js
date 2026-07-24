@@ -35,6 +35,12 @@ export const getQuestions = async (courseName, examType, year) => {
   })
 }
 
+export const getQuestionCatalog = async () => {
+  const response = await fetch(`${API_BASE}/catalog`)
+  if (!response.ok) throw new Error(`Katalog alınamadı: ${response.status}`)
+  return await response.json()
+}
+
 export const getQuestionById = async (id) => {
   const response = await fetch(`${API_BASE}/${id}`)
   if (!response.ok) throw new Error(`Soru bulunamadı: ${response.status}`)
@@ -60,7 +66,34 @@ export const updateQuestion = async (id, data) => {
   if (!response.ok) throw new Error(`Güncelleme hatası: ${response.status}`)
 }
 
-export const deleteQuestion = async (id) => {
-  const response = await fetch(`${API_BASE}/${id}`, { method: 'DELETE' })
+export const deleteQuestion = async (id, requesterUsername) => {
+  const url = requesterUsername
+    ? `${API_BASE}/${id}?requesterUsername=${encodeURIComponent(requesterUsername)}`
+    : `${API_BASE}/${id}`
+
+  const response = await fetch(url, { method: 'DELETE' })
   if (!response.ok) throw new Error(`Silme hatası: ${response.status}`)
+}
+
+export const uploadCroppedQuestion = async ({ imageBase64, courseName, examType, year, correctOption, explanation, adminUsername }) => {
+  const response = await fetch(`${API_BASE}/upload-cropped`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      imageBase64,
+      courseName,
+      examType,
+      year,
+      correctOption,
+      explanation,
+      adminUsername,
+    }),
+  })
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}))
+    throw new Error(errorData.error || `Soru yükleme hatası: ${response.status}`)
+  }
+
+  return await response.json()
 }

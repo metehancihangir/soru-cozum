@@ -20,6 +20,13 @@
   animation:      dashboardFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+.dashboard.dashboard--scrollable {
+  justify-content: flex-start;
+  overflow-y: auto;
+  padding-top: var(--spacing-6);
+  padding-bottom: 120px; /* Sabit butonun arkasında kalmaması için ekstra boşluk */
+}
+
 .dashboard::before {
   content: '';
   position: absolute;
@@ -47,18 +54,29 @@
 .dashboard__container {
   width: 100%;
   max-width: 800px;
+  height: clamp(450px, 75dvh, 650px);
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative; /* Buton buraya göre hizalanacak */
 }
 
 .dashboard__scene {
+  flex: 1;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 100%;
+  overflow-y: auto;
+  padding-bottom: 80px; /* Buton yüksekliği için güvenli alan */
+}
+
+/* Safe vertical centering: içerik kısa ise ortalar, uzunsa üstten başlar */
+.dashboard__scene::before,
+.dashboard__scene::after {
+  content: '';
+  margin: auto;
 }
 
 .dashboard__scene-fade {
@@ -180,10 +198,16 @@
   color: var(--color-neutral-mid);
 }
 
-/* ── Performans Analizi (Yanlışlar) ── */
-.dashboard__scene-wide {
-  max-width: 900px; /* Daha geniş alan */
-  width: 100%;
+/* ── Fixed Action Button (Consistent across all scenes) ── */
+.dashboard__fixed-action {
+  position: absolute; /* .dashboard__container'a göre hizalanır */
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .dashboard__header-row {
@@ -191,7 +215,8 @@
   align-items: center;
   justify-content: center;
   gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .dashboard__header-row .dashboard__hero-subtitle {
@@ -202,25 +227,24 @@
   display: flex;
   align-items: baseline;
   gap: 6px;
-  background: var(--glass-bg);
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  background: var(--color-blue-accent-bg, #e8f0fe);
+  border: 1px solid rgba(26, 115, 232, 0.3);
   padding: 6px 16px;
   border-radius: 9999px;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
 }
 
 .dashboard__performance-badge-val {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 800;
-  color: #3b82f6;
+  color: var(--color-blue-accent, #1a73e8);
 }
 
 .dashboard__performance-badge-label {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--color-neutral-mid);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.05em;
 }
 
 .dashboard__section-title-wrapper {
@@ -228,18 +252,18 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 24px;
-  min-height: 110px; /* Toplam Yanlış alanının yüksekliğine eşitlemek için */
   width: 100%;
 }
 
 .dashboard__section-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-family: var(--font-display, var(--font-ui));
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  font-weight: 800;
+  color: var(--color-neutral-dark);
   margin-bottom: 0;
   text-align: center;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.06em;
 }
 
 .dashboard__errors-container {
@@ -506,4 +530,17 @@
   color: var(--color-neutral-mid);
   text-align: center;
   padding: var(--spacing-4);
+}
+
+.dashboard__empty-info {
+  font-size: clamp(15px, 3.5vw, 18px);
+  line-height: 1.6;
+  color: var(--color-neutral-mid);
+  text-align: center;
+  max-width: 480px;
+  background: rgba(255, 255, 255, 0.4);
+  padding: var(--spacing-5);
+  border-radius: var(--radius-card);
+  border: 1px dashed rgba(0, 0, 0, 0.1);
+  margin-top: var(--spacing-3);
 }
