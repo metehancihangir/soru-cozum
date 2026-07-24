@@ -173,23 +173,36 @@ a { color: inherit; text-decoration: none; }
 }
 
 .quiz--has-ai-panel {
-  max-width: 900px;
+  width: 100%;
 }
 
-@media (min-width: 768px) {
+/* On wide screens (desktop), expand the container to fit both side-by-side without shrinking the image */
+@media (min-width: 1024px) {
+  /* Expand the main app container so we have room for the side panel */
+  .app-container:has(.quiz--has-ai-panel) {
+    max-width: 1060px; /* 640px (original) + 380px (panel + gap) */
+    transition: max-width 0.3s ease-out;
+  }
+
   .quiz--has-ai-panel .quiz__body {
     flex-direction: row;
     align-items: flex-start;
   }
+
   .quiz--has-ai-panel .quiz__question {
-    flex: 1.5;
+    /* Keep question at its original content width (640px - paddings = 592px) so it NEVER shrinks */
+    flex: 0 0 592px;
   }
+
   .quiz__ai-panel {
-    flex: 1;
+    flex: 1; /* Takes the remaining space */
+    min-width: 320px;
     position: sticky;
     top: var(--spacing-5);
   }
 }
+/* On smaller screens (< 1024px), the layout naturally falls back to flex-direction: column 
+   where the AI panel sits below the question. This ensures responsive behavior without shrinking the image. */
 
 /* ── Yapay Zeka Paneli ────────────────────────────── */
 .quiz__ai-panel {
@@ -309,6 +322,28 @@ a { color: inherit; text-decoration: none; }
   stroke: var(--color-primary);
 }
 
+/* ── Tam ekran butonu (AI header içinde) ─────────────── */
+.quiz__ai-fullscreen-btn {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-neutral-mid);
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+.quiz__ai-fullscreen-btn:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-neutral-dark);
+}
+.quiz__ai-fullscreen-btn svg {
+  stroke: currentColor;
+}
+
 .quiz__ai-response-content {
   font-family: var(--font-ui);
   font-size: var(--font-size-body);
@@ -343,6 +378,199 @@ a { color: inherit; text-decoration: none; }
   }
 }
 
+/* ── Kota uyarı bandı ─────────────────────────────── */
+.quiz__ai-quota-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: var(--radius-badge);
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #9a3412;
+  margin-bottom: var(--spacing-3);
+}
+.quiz__ai-quota-warning svg {
+  flex-shrink: 0;
+  stroke: #ea580c;
+  margin-top: 1px;
+}
+
+/* ── AI hata mesajı stili ─────────────────────────── */
+.quiz__ai-error {
+  color: var(--color-error);
+  background: var(--color-error-bg);
+  padding: 12px 16px;
+  border-radius: var(--radius-badge);
+}
+
+/* ── AI içerik renderer stilleri ──────────────────── */
+.ai-content__header {
+  font-family: var(--font-display);
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  color: var(--color-neutral-dark);
+  margin: var(--spacing-3) 0 var(--spacing-1) 0;
+  padding-bottom: var(--spacing-1);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.ai-content__header:first-child { margin-top: 0; }
+
+.ai-content__option {
+  font-size: var(--font-size-body);
+  line-height: 1.6;
+  color: var(--color-text);
+  padding: 6px 0;
+  border-bottom: 1px dashed rgba(0,0,0,0.04);
+}
+.ai-content__option:last-of-type { border-bottom: none; }
+
+.ai-content__line {
+  font-size: var(--font-size-body);
+  line-height: 1.6;
+  color: var(--color-text);
+  margin: 4px 0;
+}
+
+/* ── Tam Ekran Modal ──────────────────────────────── */
+.ai-fullscreen-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: modalFadeIn 0.25s ease-out forwards;
+}
+
+.ai-fullscreen-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.ai-fullscreen-modal__container {
+  position: relative;
+  width: min(95vw, 720px);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-background);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-overlay);
+  overflow: hidden;
+  animation: modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.ai-fullscreen-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: var(--border-light);
+  flex-shrink: 0;
+}
+
+.ai-fullscreen-modal__title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  color: var(--color-neutral-dark);
+}
+
+.ai-fullscreen-modal__controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ai-fullscreen-modal__zoom-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-neutral-mid);
+  transition: all var(--transition-fast);
+}
+.ai-fullscreen-modal__zoom-btn:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+  color: var(--color-neutral-dark);
+}
+.ai-fullscreen-modal__zoom-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.ai-fullscreen-modal__zoom-btn svg {
+  stroke: currentColor;
+}
+
+.ai-fullscreen-modal__zoom-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-neutral-mid);
+  min-width: 36px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.ai-fullscreen-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-neutral-mid);
+  margin-left: 4px;
+  transition: all var(--transition-fast);
+}
+.ai-fullscreen-modal__close:hover {
+  background: var(--color-surface);
+  color: var(--color-neutral-dark);
+}
+.ai-fullscreen-modal__close svg {
+  stroke: currentColor;
+}
+
+.ai-fullscreen-modal__content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-5);
+  touch-action: pinch-zoom;
+  -webkit-overflow-scrolling: touch;
+  line-height: 1.7;
+  font-family: var(--font-ui);
+  color: var(--color-text);
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes modalSlideUp {
+  from { opacity: 0; transform: scale(0.96) translateY(12px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+
+/* Mobil: Tam ekran modal tam genişlik */
+@media (max-width: 480px) {
+  .ai-fullscreen-modal__container {
+    width: 100vw;
+    max-height: 100vh;
+    height: 100vh;
+    border-radius: 0;
+  }
+}
+
 .quiz__prompt {
   font-family: var(--font-display);
   font-size:   var(--font-size-arabic);
@@ -374,6 +602,9 @@ a { color: inherit; text-decoration: none; }
   max-height: 60vh;
   object-fit: contain;
   user-select: none;
+  /* Görev 2.1: Görüntü kalitesi iyileştirmesi */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
 }
 
 /* ── Kompakt A-E şık butonları ────────────────────────────── */
@@ -381,20 +612,25 @@ a { color: inherit; text-decoration: none; }
   flex-direction:  row;
   justify-content: center;
   align-items:     center;
-  width:           64px;
-  height:          64px;
-  min-height:      64px;
+  width:           clamp(40px, 10vw, 64px);
+  height:          clamp(40px, 10vw, 64px);
+  min-height:      40px;             /* WCAG 2.2 — minimum 40×40 dokunma alanı */
+  min-width:       40px;
   padding:         0;
   border-radius:   50%;
-  font-size:       1.5rem;
+  font-size:       clamp(1rem, 3vw, 1.5rem);
   font-weight:     700;
+  flex:            0 1 auto;         /* Daralmaya izin ver, büyümeyi engelle */
+  overflow:        hidden;
 }
 
 .quiz__options:has(.option--compact) {
-  flex-direction: row;
-  flex-wrap:      wrap;
-  gap:            var(--spacing-3, 16px);
+  flex-direction:  row;
+  flex-wrap:       nowrap;           /* 5 şık DAIMA tek satırda */
+  gap:             clamp(8px, 2vw, 16px);
   justify-content: center;
+  max-width:       100%;
+  width:           100%;
 }
 
 .option.option--compact .option__key {

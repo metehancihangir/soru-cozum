@@ -42,6 +42,33 @@ namespace ArapcaSoruApi.Controllers
         }
 
         // ──────────────────────────────────────────────────────────────
+        // GET /api/questions/catalog
+        // Veritabanında gerçekten soru bulunan Ders -> Sınav Türü -> Yıllar kataloğunu döner.
+        // ──────────────────────────────────────────────────────────────
+        [HttpGet("catalog")]
+        public async Task<IActionResult> GetCatalog()
+        {
+            var raw = await _context.Questions
+                .Select(q => new { q.CourseName, q.ExamType, q.Year })
+                .Distinct()
+                .ToListAsync();
+
+            var result = raw
+                .GroupBy(q => q.CourseName)
+                .ToDictionary(
+                    gCourse => gCourse.Key,
+                    gCourse => gCourse
+                        .GroupBy(q => q.ExamType)
+                        .ToDictionary(
+                            gExam => gExam.Key,
+                            gExam => gExam.Select(q => q.Year).Distinct().OrderBy(y => y).ToList()
+                        )
+                );
+
+            return Ok(result);
+        }
+
+        // ──────────────────────────────────────────────────────────────
         // GET /api/questions/{id}
         // ──────────────────────────────────────────────────────────────
         [HttpGet("{id}")]
@@ -105,7 +132,7 @@ namespace ArapcaSoruApi.Controllers
         // DELETE /api/questions/{id} → Sil; 204 No Content
         // ──────────────────────────────────────────────────────────────
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteQuestion(int id)
+        public async Task<IActionResult> DeleteQuestion(int id, [FromQuery] string? requesterUsername)
         {
             var question = await _context.Questions.FindAsync(id);
 
@@ -113,9 +140,106 @@ namespace ArapcaSoruApi.Controllers
                 return NotFound();
 
             _context.Questions.Remove(question);
+
+            // Audit log
+            await _context.AuditLogs.AddAsync(new AuditLog
+            {
+                AdminUsername = requesterUsername ?? "system",
+                Action = "DELETE_QUESTION",
+                Details = $"Deleted question ID {id} ({question.CourseName} - {question.ExamType} - {question.Year})"
+            });
+
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
+
+        // ──────────────────────────────────────────────────────────────
+        // POST /api/questions/upload-cropped
+        // Form verisi veya Base64 olarak kırpılmış görsel ve metadata alır
+        // ──────────────────────────────────────────────────────────────
+        [HttpPost("upload-cropped")]
+        public async Task<IActionResult> UploadCropped([FromBody] UploadCroppedQuestionRequest request, [FromServices] IWebHostEnvironment env)
+        {
+            if (string.IsNullOrWhiteSpace(request.ImageBase64))
+                return BadRequest(new { error = "Görsel verisi boş olamaz." });
+
+            if (string.IsNullOrWhiteSpace(request.CourseName) || string.IsNullOrWhiteSpace(request.ExamType) || string.IsNullOrWhiteSpace(request.Year))
+                return BadRequest(new { error = "Ders, Sınav türü ve Yıl bilgileri zorunludur." });
+
+            if (string.IsNullOrWhiteSpace(request.CorrectOption))
+                return BadRequest(new { error = "Doğru seçenek zorunludur." });
+
+            // Folder path oluştur
+            string courseSlug = request.CourseName.ToLowerInvariant().Replace(" ", "_").Replace("ç", "c").Replace("ş", "s").Replace("ğ", "g").Replace("ü", "u").Replace("ö", "o").Replace("ı", "i");
+            string examSlug   = request.ExamType.ToLowerInvariant().Replace(" ", "_").Replace("ç", "c").Replace("ş", "s").Replace("ğ", "g").Replace("ü", "u").Replace("ö", "o").Replace("ı", "i");
+            string yearSlug   = request.Year.ToLowerInvariant().Replace(" ", "_");
+
+            string relFolder = Path.Combine("images", courseSlug, examSlug, yearSlug).Replace("\\", "/");
+            string webRoot = env.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            string targetDir = Path.Combine(webRoot, relFolder);
+
+            if (!Directory.Exists(targetDir))
+            {
+                Directory.CreateDirectory(targetDir);
+            }
+
+            // Soru numarasını veya benzersiz adı belirle
+            string filename = $"q_{DateTime.UtcNow.Ticks}_{Guid.NewGuid().ToString("N").Substring(0, 6)}.png";
+            string filePath = Path.Combine(targetDir, filename);
+
+            // Base64 verisini byte array'e çevir
+            string base64Data = request.ImageBase64;
+            if (base64Data.Contains(","))
+            {
+                base64Data = base64Data.Split(',')[1];
+            }
+
+            byte[] imageBytes = Convert.FromBase64String(base64Data);
+            await System.IO.File.WriteAllBytesAsync(filePath, imageBytes);
+
+            string imagePath = $"/{relFolder}/{filename}";
+
+            // Question entity oluştur
+            var question = new Question
+            {
+                CourseName = request.CourseName,
+                ExamType = request.ExamType,
+                Year = request.Year,
+                ImagePath = imagePath,
+                CorrectOption = request.CorrectOption.ToUpper(),
+                Explanation = request.Explanation
+            };
+
+            await _context.Questions.AddAsync(question);
+
+            // YearOption kaydını da güncelle
+            if (!await _context.YearOptions.AnyAsync(y => y.Year == request.Year))
+            {
+                await _context.YearOptions.AddAsync(new YearOption { Year = request.Year });
+            }
+
+            // Audit log
+            await _context.AuditLogs.AddAsync(new AuditLog
+            {
+                AdminUsername = request.AdminUsername ?? "system",
+                Action = "CREATE_QUESTION_CROPPED",
+                Details = $"Created cropped question {imagePath} for {request.CourseName} - {request.ExamType} - {request.Year}"
+            });
+
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetQuestion), new { id = question.Id }, question);
+        }
     }
+
+    public record UploadCroppedQuestionRequest(
+        string ImageBase64,
+        string CourseName,
+        string ExamType,
+        string Year,
+        string CorrectOption,
+        string? Explanation,
+        string? AdminUsername
+    );
 }

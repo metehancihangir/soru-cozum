@@ -1,4 +1,4 @@
-﻿using ArapcaSoruApi.Models;
+using ArapcaSoruApi.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ArapcaSoruApi.Data
@@ -601,6 +601,32 @@ namespace ArapcaSoruApi.Data
             if (questions.Any())
             {
                 await context.Questions.AddRangeAsync(questions);
+                await context.SaveChangesAsync();
+            }
+
+            // ── AdminUser Seeding ──
+            if (!await context.AdminUsers.AnyAsync(u => u.Username == "admin"))
+            {
+                var rootAdmin = new AdminUser
+                {
+                    Username = "admin",
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin2026"),
+                    Role = "super_admin",
+                    ForcePasswordChange = true,
+                    CreatedAt = DateTime.UtcNow
+                };
+                await context.AdminUsers.AddAsync(rootAdmin);
+                await context.SaveChangesAsync();
+            }
+
+            // ── YearOption Seeding ──
+            if (!await context.YearOptions.AnyAsync())
+            {
+                var defaultYears = new List<string> { "2021", "2022", "2023", "2023-2024", "2024-2025", "2025", "2026" };
+                foreach (var yr in defaultYears)
+                {
+                    await context.YearOptions.AddAsync(new YearOption { Year = yr });
+                }
                 await context.SaveChangesAsync();
             }
         }

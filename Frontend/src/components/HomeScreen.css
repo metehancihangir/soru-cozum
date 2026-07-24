@@ -25,8 +25,35 @@
 /* ── Alt Aksiyon Alanı ────────────────────────────────────── */
 .home__footer-actions {
   display: flex;
+  align-items: center;
   justify-content: center;
+  gap: var(--spacing-3);
   margin-top: var(--spacing-4);
+}
+
+/* Admin ayarlar butonu */
+.home__admin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  color: var(--color-neutral-mid);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.home__admin-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-neutral-dark);
+  transform: rotate(45deg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.home__admin-btn svg {
+  stroke: currentColor;
 }
 
 .home__analyze-btn {

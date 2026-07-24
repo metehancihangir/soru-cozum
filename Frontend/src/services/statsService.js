@@ -241,4 +241,66 @@ export const clearAllStats = () => {
   localStorage.removeItem(STORAGE_KEYS.weekly)
   localStorage.removeItem(STORAGE_KEYS.errors)
   localStorage.removeItem(STORAGE_KEYS.performance)
+  localStorage.removeItem('soru-cozum:has-visited')
+}
+
+/**
+ * Belirli bir soruya ait tüm istatistikleri siler (Cascade Delete).
+ */
+export const removeQuestionStats = (questionId) => {
+  if (!questionId) return
+
+  // Günlükten sil
+  const dailyStats = safeGet(STORAGE_KEYS.daily, { date: today(), solvedQuestions: [] })
+  if (dailyStats.solvedQuestions?.includes(questionId)) {
+    dailyStats.solvedQuestions = dailyStats.solvedQuestions.filter(id => id !== questionId)
+    localStorage.setItem(STORAGE_KEYS.daily, JSON.stringify(dailyStats))
+  }
+
+  // Haftalıktan sil
+  const weeklyStats = safeGet(STORAGE_KEYS.weekly, { weekStart: getWeekStart(), solvedQuestions: [] })
+  if (weeklyStats.solvedQuestions?.includes(questionId)) {
+    weeklyStats.solvedQuestions = weeklyStats.solvedQuestions.filter(id => id !== questionId)
+    localStorage.setItem(STORAGE_KEYS.weekly, JSON.stringify(weeklyStats))
+  }
+
+  // Yanlışlardan sil
+  const errors = safeGet(STORAGE_KEYS.errors, {})
+  const errorKey = `q_${questionId}`
+  let wasIncorrect = false
+  if (errors[errorKey]) {
+    delete errors[errorKey]
+    localStorage.setItem(STORAGE_KEYS.errors, JSON.stringify(errors))
+    wasIncorrect = true
+  }
+
+  // Doğrulardan ve All-Time Performanstan sil
+  const perf = safeGet(STORAGE_KEYS.performance, { correct: 0, incorrect: 0, correctQuestions: [] })
+  let perfChanged = false
+  if (perf.correctQuestions?.includes(questionId)) {
+    perf.correctQuestions = perf.correctQuestions.filter(id => id !== questionId)
+    perf.correct = perf.correctQuestions.length
+    perfChanged = true
+  }
+  if (wasIncorrect) {
+    perf.incorrect = Object.keys(errors).length
+    perfChanged = true
+  }
+  if (perfChanged) {
+    localStorage.setItem(STORAGE_KEYS.performance, JSON.stringify(perf))
+  }
+}
+
+/**
+ * Kullanıcının dashboard'u daha önce ziyaret edip etmediğini döner.
+ */
+export const hasVisitedDashboard = () => {
+  return safeGet('soru-cozum:has-visited', false)
+}
+
+/**
+ * Kullanıcının dashboard'u ziyaret ettiğini kaydeder.
+ */
+export const markDashboardVisited = () => {
+  localStorage.setItem('soru-cozum:has-visited', JSON.stringify(true))
 }

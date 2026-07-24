@@ -10,6 +10,9 @@ namespace ArapcaSoruApi.Data
         }
 
         public DbSet<Question> Questions { get; set; }
+        public DbSet<AdminUser> AdminUsers { get; set; }
+        public DbSet<YearOption> YearOptions { get; set; }
+        public DbSet<AuditLog> AuditLogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -48,6 +51,20 @@ namespace ArapcaSoruApi.Data
                 // Hiyerarşik sorgular için bileşik index: Ders + Sınav Türü + Yıl
                 entity.HasIndex(q => new { q.CourseName, q.ExamType, q.Year })
                       .HasDatabaseName("IX_Questions_Course_ExamType_Year");
+            });
+
+            modelBuilder.Entity<AdminUser>(entity =>
+            {
+                entity.HasIndex(u => u.Username)
+                      .IsUnique()
+                      .HasDatabaseName("IX_AdminUsers_Username");
+            });
+
+            modelBuilder.Entity<YearOption>(entity =>
+            {
+                entity.HasIndex(y => y.Year)
+                      .IsUnique()
+                      .HasDatabaseName("IX_YearOptions_Year");
             });
         }
     }

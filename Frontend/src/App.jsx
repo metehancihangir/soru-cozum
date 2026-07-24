@@ -2,33 +2,37 @@ import { useState, useRef, useCallback, useEffect } from 'react'
 import './App.css'
 import { getQuestions } from './services/questionService'
 import { askAi } from './services/aiService'
-import { getDailySolvedCount, getWeeklySolvedCount, recordQuestionSolved, recordWrongAnswer, getDetailedErrors, getPerformanceStats, recordCorrectAnswer } from './services/statsService'
+import { getDailySolvedCount, getWeeklySolvedCount, recordQuestionSolved, recordWrongAnswer, getDetailedErrors, getPerformanceStats, recordCorrectAnswer, hasVisitedDashboard, markDashboardVisited } from './services/statsService'
 import QuestionCard from './components/QuestionCard'
 import HomeScreen from './components/HomeScreen'
 import Dashboard from './components/Dashboard'
+import AdminPanel from './components/AdminPanel'
+
+import { getQuestionCatalog } from './services/questionService'
+import { getYears } from './services/yearsService'
 
 // Ders kataloğu — ilerde genişletilebilir
 const COURSES = {
   'Arapça-2': {
     examTypes: ['Dönem Sonu', 'Yaz Okulu'],
-    // Her exam type için mevcut yıllar (gerçek veri API'den gelecek; şimdi sabit)
-    years: {
-      'Dönem Sonu': ['2022', '2023-2024', '2024-2025', '2026'],
-      'Yaz Okulu': ['2021', '2022', '2023', '2024', '2025'],
-    },
   },
   'Arapça-4': {
     examTypes: ['Dönem Sonu', 'Yaz Okulu'],
-    years: {
-      'Dönem Sonu': ['2022', '2023-2024', '2024-2025', '2026'],
-      'Yaz Okulu': ['2021', '2022', '2023', '2024', '2025'],
-    },
   },
 }
 
 function App() {
   // ── Navigasyon akışı: dashboard <-> home → examType → year → quiz → complete
   const [screen, setScreen] = useState('dashboard')
+
+  // ── Dinamik Katalog (Veritabanında gerçekten soru olan ders/sınavTürü/yıl kombinasyonları) ──
+  const [catalog, setCatalog] = useState({})
+
+  useEffect(() => {
+    getQuestionCatalog()
+      .then(data => setCatalog(data))
+      .catch(err => console.error('Katalog çekilemedi:', err))
+  }, [screen])
 
   // ── Seçim state'leri
   const [selectedCourse, setSelectedCourse] = useState(null)   // "Arapça-2"
@@ -53,7 +57,7 @@ function App() {
   const [solvedWeekly, setSolvedWeekly] = useState(() => getWeeklySolvedCount())
   const [detailedErrors, setDetailedErrors] = useState(() => getDetailedErrors())
   const [performanceStats, setPerformanceStats] = useState(() => getPerformanceStats())
-  const [hasSeenWelcome, setHasSeenWelcome] = useState(false)
+  const [hasSeenWelcome, setHasSeenWelcome] = useState(() => hasVisitedDashboard())
 
   // Quiz sırasında biriken yanlış cevapları takip et
   const wrongAnswersRef = useRef([])
@@ -155,6 +159,11 @@ function App() {
     setScreen('dashboard')
   }
 
+  // ── Admin paneline git
+  const handleOpenAdmin = () => {
+    setScreen('admin')
+  }
+
   // ── ExamType seçimine geri dön
   const handleBackToExamType = () => {
     setScreen('examType')
@@ -233,9 +242,10 @@ function App() {
     setAiResponse(null)
     try {
       const result = await askAi(imagePath, correctOption)
+      // result = { explanation, quotaWarning, usedFallback }
       setAiResponse(result)
     } catch (err) {
-      setAiResponse('Yapay zeka yanıtı alınamadı: ' + err.message)
+      setAiResponse({ explanation: err.message, quotaWarning: null, usedFallback: false, isError: true })
     } finally {
       setAiLoading(false)
     }
@@ -244,6 +254,13 @@ function App() {
   // ─────────────────────────────────────────────────────────
   // RENDER
   // ─────────────────────────────────────────────────────────
+
+  // Admin paneli
+  if (screen === 'admin') {
+    return (
+      <AdminPanel onBack={handleBackToHome} />
+    )
+  }
 
   // Dashboard ekranı
   if (screen === 'dashboard') {
@@ -255,6 +272,7 @@ function App() {
         performanceStats={performanceStats}
         isFirstVisit={!hasSeenWelcome}
         onComplete={() => {
+          markDashboardVisited()
           setHasSeenWelcome(true)
           setScreen('home')
         }}
@@ -269,6 +287,7 @@ function App() {
       <HomeScreen
         onSelectCourse={handleSelectCourse}
         onOpenDashboard={handleOpenDashboard}
+        onOpenAdmin={handleOpenAdmin}
       />
     )
   }
@@ -291,7 +310,7 @@ function App() {
           <h2 className="nav-screen__title">Sınav Türü Seç</h2>
           <div className="nav-screen__grid">
             {examTypes.map((et) => {
-              const years = COURSES[selectedCourse]?.years?.[et] ?? []
+              const years = catalog?.[selectedCourse]?.[et] ?? []
               const locked = years.length === 0
               return (
                 <button
@@ -318,9 +337,9 @@ function App() {
     )
   }
 
-  // Yıl seçimi
+  // Yıl seçimi — sadece veritabanında GERÇEKTEN soru olan yıllar gösterilir
   if (screen === 'year') {
-    const years = COURSES[selectedCourse]?.years?.[selectedExamType] ?? []
+    const years = catalog?.[selectedCourse]?.[selectedExamType] ?? []
     return (
       <div className="app-container">
         <div className="nav-screen">
@@ -337,18 +356,24 @@ function App() {
           </div>
           <h2 className="nav-screen__title">Yıl Seç</h2>
           <div className="nav-screen__grid">
-            {years.map((year) => (
-              <button
-                key={year}
-                type="button"
-                className="nav-card"
-                onClick={() => handleSelectYear(year)}
-              >
-                <span className="nav-card__icon" aria-hidden="true">📅</span>
-                <span className="nav-card__label">{year}</span>
-                <span className="nav-card__meta">Sınav soruları</span>
-              </button>
-            ))}
+            {years.length === 0 ? (
+              <p style={{ gridColumn: '1 / -1', color: 'var(--color-neutral-mid)' }}>
+                Bu kategoriye ait henüz eklenmiş soru bulunmamaktadır.
+              </p>
+            ) : (
+              years.map((year) => (
+                <button
+                  key={year}
+                  type="button"
+                  className="nav-card"
+                  onClick={() => handleSelectYear(year)}
+                >
+                  <span className="nav-card__icon" aria-hidden="true">📅</span>
+                  <span className="nav-card__label">{year}</span>
+                  <span className="nav-card__meta">Sınav soruları</span>
+                </button>
+              ))
+            )}
           </div>
         </div>
       </div>
