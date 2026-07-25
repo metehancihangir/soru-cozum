@@ -36,6 +36,9 @@ namespace ArapcaSoruApi.Models
         [RegularExpression("^[A-E]$", ErrorMessage = "CorrectOption must be one of A, B, C, D, or E.")]
         public string CorrectOption { get; set; } = string.Empty;
 
+        // Farklı yıllarda tekrar eden soruları aynı ID altında gruplamak için
+        public int? GroupId { get; set; }
+
         // Yanlış cevap verildiğinde gösterilecek eğitici açıklama metni
         public string? Explanation { get; set; }
     }

@@ -13,6 +13,7 @@ namespace ArapcaSoruApi.Data
         public DbSet<AdminUser> AdminUsers { get; set; }
         public DbSet<YearOption> YearOptions { get; set; }
         public DbSet<AuditLog> AuditLogs { get; set; }
+        public DbSet<AiExplanation> AiExplanations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

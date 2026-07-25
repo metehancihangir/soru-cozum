@@ -237,11 +237,11 @@ function App() {
   }
 
   // ── Yapay Zekaya Sor
-  const handleAskAi = async (imagePath, correctOption) => {
+  const handleAskAi = async (imagePath, correctOption, questionId) => {
     setAiLoading(true)
     setAiResponse(null)
     try {
-      const result = await askAi(imagePath, correctOption)
+      const result = await askAi(imagePath, correctOption, questionId)
       // result = { explanation, quotaWarning, usedFallback }
       setAiResponse(result)
     } catch (err) {
