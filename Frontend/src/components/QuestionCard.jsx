@@ -233,7 +233,7 @@ function QuestionCard({
                     type="button"
                     id="ask-ai-btn"
                     className="btn btn--ask-ai"
-                    onClick={() => onAskAi(question.imagePath, question.correctOption)}
+                    onClick={() => onAskAi(question.imagePath, question.correctOption, question.id)}
                     aria-label="Bu soruyu yapay zekaya sor"
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

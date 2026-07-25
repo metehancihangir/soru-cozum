@@ -8,15 +8,16 @@ const AI_API_BASE = import.meta.env.DEV
  * Sorunun görsel yolunu ve doğru cevabını backend'e gönderir ve yapay zeka açıklamasını alır.
  * @param {string} imagePath - Soruya ait görselin yolu (örn: "/images/sorular/q1.jpg")
  * @param {string} correctOption - Sorunun doğru şıkkı (örn: "C")
+ * @param {number} questionId - Sorunun ID'si (Önbellekleme/Gruplama için)
  * @returns {Promise<{ explanation: string, quotaWarning: string|null, usedFallback: boolean }>}
  */
-export const askAi = async (imagePath, correctOption) => {
+export const askAi = async (imagePath, correctOption, questionId) => {
   let response
   try {
     response = await fetch(`${AI_API_BASE}/explain`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ imagePath, correctOption }),
+      body: JSON.stringify({ imagePath, correctOption, questionId }),
     })
   } catch (networkError) {
     throw new Error('İnternet bağlantınızı kontrol edin. Sunucuya ulaşılamadı.')

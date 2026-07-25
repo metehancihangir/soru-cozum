@@ -97,3 +97,22 @@ export const uploadCroppedQuestion = async ({ imageBase64, courseName, examType,
 
   return await response.json()
 }
+
+export const groupQuestions = async (questionIds, requesterUsername) => {
+  const url = requesterUsername
+    ? `${API_BASE}/group?requesterUsername=${encodeURIComponent(requesterUsername)}`
+    : `${API_BASE}/group`
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ questionIds }),
+  })
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}))
+    throw new Error(errorData.error || `Gruplama hatası: ${response.status}`)
+  }
+
+  return await response.json()
+}

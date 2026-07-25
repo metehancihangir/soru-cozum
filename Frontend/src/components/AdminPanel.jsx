@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { getQuestions, updateQuestion, deleteQuestion } from '../services/questionService'
+import { getQuestions, updateQuestion, deleteQuestion, groupQuestions, getQuestionCatalog } from '../services/questionService'
 import { removeQuestionStats } from '../services/statsService'
 import { getQuotaStatus } from '../services/aiService'
 import { login, logoutAdmin, getCurrentAdminUser } from '../services/authService'
@@ -24,6 +24,7 @@ function AdminPanel({ onBack }) {
   const [filterCourse, setFilterCourse] = useState('')
   const [filterExamType, setFilterExamType] = useState('')
   const [filterYear, setFilterYear] = useState('')
+  const [catalog, setCatalog] = useState({})
 
   // ── Kota ──
   const [quota, setQuota] = useState(null)
@@ -34,6 +35,21 @@ function AdminPanel({ onBack }) {
 
   // ── Silme Onayı ──
   const [deleteConfirmId, setDeleteConfirmId] = useState(null)
+
+  // ── Çoklu Seçim & Gruplama ──
+  const [selectedQuestions, setSelectedQuestions] = useState([])
+  const [groupingLoading, setGroupingLoading] = useState(false)
+
+  // ── Görsel Önizleme (Lightbox) ──
+  const [previewImage, setPreviewImage] = useState(null)
+
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === 'Escape') setPreviewImage(null)
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [])
 
   // ── Giriş İşlemi ──
   const handleLogin = async (e) => {
@@ -72,6 +88,7 @@ function AdminPanel({ onBack }) {
       console.error('Sorular yüklenemedi:', err)
     } finally {
       setLoading(false)
+      setSelectedQuestions([])
     }
   }, [filterCourse, filterExamType, filterYear])
 
@@ -85,12 +102,22 @@ function AdminPanel({ onBack }) {
     }
   }, [])
 
+  const loadCatalog = useCallback(async () => {
+    try {
+      const data = await getQuestionCatalog()
+      setCatalog(data)
+    } catch (err) {
+      console.error('Katalog alınamadı:', err)
+    }
+  }, [])
+
   useEffect(() => {
     if (currentUser && !currentUser.forcePasswordChange) {
+      loadCatalog()
       loadQuestions()
       loadQuota()
     }
-  }, [currentUser, loadQuestions, loadQuota])
+  }, [currentUser, loadCatalog, loadQuestions, loadQuota])
 
   useEffect(() => {
     if (activeTab === 'stats') {
@@ -140,6 +167,33 @@ function AdminPanel({ onBack }) {
     }
   }
 
+  // ── Gruplama İşlemi ──
+  const toggleSelectQuestion = (id) => {
+    setSelectedQuestions(prev =>
+      prev.includes(id) ? prev.filter(qId => qId !== id) : [...prev, id]
+    )
+  }
+
+  const handleGroupQuestions = async () => {
+    if (selectedQuestions.length < 2) return
+
+    if (!window.confirm('Seçilen soruları AYNI SORU olarak gruplamak istediğinize emin misiniz?')) {
+      return
+    }
+
+    setGroupingLoading(true)
+    try {
+      await groupQuestions(selectedQuestions, currentUser?.username)
+      alert('Sorular başarıyla gruplandı!')
+      setSelectedQuestions([])
+      await loadQuestions()
+    } catch (err) {
+      alert('Gruplama hatası: ' + err.message)
+    } finally {
+      setGroupingLoading(false)
+    }
+  }
+
   // ── İstatistikler ──
   const courseGroups = questions.reduce((acc, q) => {
     const key = q.courseName || 'Bilinmeyen'
@@ -162,14 +216,32 @@ function AdminPanel({ onBack }) {
     return acc
   }, {})
 
-  const uniqueCourses = [...new Set(questions.map(q => q.courseName).filter(Boolean))]
-  const uniqueExamTypes = [...new Set(questions.map(q => q.examType).filter(Boolean))]
-  const uniqueYears = [...new Set(questions.map(q => q.year).filter(Boolean))].sort()
+  const uniqueCourses = Object.keys(catalog)
+  
+  const uniqueExamTypesSet = new Set()
+  const uniqueYearsSet = new Set()
+  
+  Object.values(catalog).forEach(courseData => {
+    Object.entries(courseData).forEach(([examType, yearsArray]) => {
+      uniqueExamTypesSet.add(examType)
+      yearsArray.forEach(year => uniqueYearsSet.add(year))
+    })
+  })
+  
+  const uniqueExamTypes = [...uniqueExamTypesSet]
+  const uniqueYears = [...uniqueYearsSet].sort()
 
   const quotaBarClass = !quota ? '' :
     quota.percentage >= 100 ? 'admin__quota-bar-fill--danger' :
     quota.percentage >= 80 ? 'admin__quota-bar-fill--warning' :
     'admin__quota-bar-fill--ok'
+
+  // Grup ID'lerini 1'den başlayarak sıralı numaralandırmak için harita (map) oluşturuyoruz
+  const uniqueGroupIds = [...new Set(questions.map(q => q.groupId ?? q.id))].sort((a, b) => a - b)
+  const groupIdMapping = {}
+  uniqueGroupIds.forEach((gid, index) => {
+    groupIdMapping[gid] = index + 1
+  })
 
   // ────────────────────────────────────────────────────────
   // Giriş Ekranı
@@ -236,6 +308,7 @@ function AdminPanel({ onBack }) {
           onSuccess={() => {
             setCurrentUser({ ...currentUser, forcePasswordChange: false })
             sessionStorage.setItem('admin-user', JSON.stringify({ ...currentUser, forcePasswordChange: false }))
+            loadCatalog()
             loadQuestions()
             loadQuota()
           }}
@@ -344,6 +417,21 @@ function AdminPanel({ onBack }) {
               </button>
             </div>
 
+            {selectedQuestions.length > 1 && (
+              <div style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '12px', background: 'var(--color-surface-hover)', padding: '12px 16px', borderRadius: '8px' }}>
+                <span style={{ fontSize: '14px', fontWeight: '500' }}>{selectedQuestions.length} soru seçildi</span>
+                <button
+                  type="button"
+                  className="btn btn--primary"
+                  onClick={handleGroupQuestions}
+                  disabled={groupingLoading}
+                  style={{ padding: '6px 12px', fontSize: '13px', minHeight: 'auto' }}
+                >
+                  {groupingLoading ? 'Gruplanıyor...' : 'Seçilenleri Aynı Soru Olarak İşaretle'}
+                </button>
+              </div>
+            )}
+
             {loading ? (
               <p className="admin__empty">Yükleniyor…</p>
             ) : questions.length === 0 ? (
@@ -353,7 +441,21 @@ function AdminPanel({ onBack }) {
                 <table className="admin__table">
                   <thead>
                     <tr>
+                      <th style={{ width: '40px' }}>
+                        <input
+                          type="checkbox"
+                          checked={questions.length > 0 && selectedQuestions.length === questions.length}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setSelectedQuestions(questions.map(q => q.id))
+                            } else {
+                              setSelectedQuestions([])
+                            }
+                          }}
+                        />
+                      </th>
                       <th>ID</th>
+                      <th>Grup ID</th>
                       <th>Görsel</th>
                       <th>Ders</th>
                       <th>Sınav Türü</th>
@@ -366,12 +468,16 @@ function AdminPanel({ onBack }) {
                     {questions.map((q) => (
                       editingId === q.id ? (
                         <tr key={q.id}>
+                          <td></td>
                           <td>{q.id}</td>
+                          <td>{groupIdMapping[q.groupId ?? q.id]}</td>
                           <td>
                             <img
                               src={import.meta.env.DEV ? q.imagePath : `https://soru-cozum-production.up.railway.app${q.imagePath}`}
                               alt=""
                               className="admin__table-img"
+                              style={{ cursor: 'pointer' }}
+                              onClick={() => setPreviewImage(import.meta.env.DEV ? q.imagePath : `https://soru-cozum-production.up.railway.app${q.imagePath}`)}
                             />
                           </td>
                           <td>
@@ -421,12 +527,22 @@ function AdminPanel({ onBack }) {
                         </tr>
                       ) : (
                         <tr key={q.id}>
+                          <td>
+                            <input
+                              type="checkbox"
+                              checked={selectedQuestions.includes(q.id)}
+                              onChange={() => toggleSelectQuestion(q.id)}
+                            />
+                          </td>
                           <td>{q.id}</td>
+                          <td style={{ color: 'var(--color-neutral-mid)', fontWeight: 'bold' }}>{groupIdMapping[q.groupId ?? q.id]}</td>
                           <td>
                             <img
                               src={import.meta.env.DEV ? q.imagePath : `https://soru-cozum-production.up.railway.app${q.imagePath}`}
                               alt=""
                               className="admin__table-img"
+                              style={{ cursor: 'pointer' }}
+                              onClick={() => setPreviewImage(import.meta.env.DEV ? q.imagePath : `https://soru-cozum-production.up.railway.app${q.imagePath}`)}
                             />
                           </td>
                           <td>{q.courseName}</td>
@@ -606,6 +722,19 @@ function AdminPanel({ onBack }) {
                 Sil
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Görsel Önizleme Lightbox ── */}
+      {previewImage && (
+        <div className="admin__confirm-overlay" onClick={() => setPreviewImage(null)}>
+          <div style={{ position: 'relative', maxWidth: '90vw', maxHeight: '90vh' }} onClick={e => e.stopPropagation()}>
+            <img
+              src={previewImage}
+              alt="Soru Önizleme"
+              style={{ display: 'block', maxWidth: '100%', maxHeight: '90vh', objectFit: 'contain', borderRadius: '8px', boxShadow: '0 12px 32px rgba(0,0,0,0.2)' }}
+            />
           </div>
         </div>
       )}

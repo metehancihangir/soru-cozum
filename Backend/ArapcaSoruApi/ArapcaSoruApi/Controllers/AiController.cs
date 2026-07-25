@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ArapcaSoruApi.Services;
+using ArapcaSoruApi.Data;
+using ArapcaSoruApi.Models;
 
 namespace ArapcaSoruApi.Controllers
 {
@@ -9,11 +11,13 @@ namespace ArapcaSoruApi.Controllers
     {
         private readonly AiService _aiService;
         private readonly QuotaTracker _quotaTracker;
+        private readonly AppDbContext _context;
 
-        public AiController(AiService aiService, QuotaTracker quotaTracker)
+        public AiController(AiService aiService, QuotaTracker quotaTracker, AppDbContext context)
         {
             _aiService    = aiService;
             _quotaTracker = quotaTracker;
+            _context      = context;
         }
 
         // ──────────────────────────────────────────────────────────────
@@ -30,9 +34,40 @@ namespace ArapcaSoruApi.Controllers
             if (string.IsNullOrWhiteSpace(request.CorrectOption))
                 return BadRequest(new { error = "correctOption boş olamaz." });
 
+            if (request.QuestionId <= 0)
+                return BadRequest(new { error = "questionId geçersiz veya boş." });
+
             try
             {
+                var question = await _context.Questions.FindAsync(request.QuestionId);
+                if (question == null)
+                    return NotFound(new { error = "Soru bulunamadı." });
+
+                int groupId = question.GroupId ?? question.Id;
+
+                var existingExplanation = await _context.AiExplanations.FindAsync(groupId);
+                if (existingExplanation != null)
+                {
+                    return Ok(new
+                    {
+                        explanation  = existingExplanation.ExplanationText,
+                        modelUsed    = "cache",
+                        usedFallback = false,
+                        quotaWarning = (string?)null,
+                    });
+                }
+
                 var result = await _aiService.ExplainQuestionAsync(request.ImagePath, request.CorrectOption);
+                
+                // Başarılı ise DB'ye kaydet
+                var newExplanation = new AiExplanation
+                {
+                    GroupId = groupId,
+                    ExplanationText = result.Explanation
+                };
+                _context.AiExplanations.Add(newExplanation);
+                await _context.SaveChangesAsync();
+
                 return Ok(new
                 {
                     explanation  = result.Explanation,
@@ -116,7 +151,7 @@ namespace ArapcaSoruApi.Controllers
     }
 
     /// <summary>POST /api/ai/explain istek gövdesi.</summary>
-    public record ExplainRequest(string ImagePath, string CorrectOption);
+    public record ExplainRequest(string ImagePath, string CorrectOption, int QuestionId);
 
     /// <summary>POST /api/ai/detect-boxes istek gövdesi.</summary>
     public record DetectBoxesRequest(string ImageBase64, string MimeType);

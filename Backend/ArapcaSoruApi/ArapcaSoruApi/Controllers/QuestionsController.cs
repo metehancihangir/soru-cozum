@@ -231,7 +231,43 @@ namespace ArapcaSoruApi.Controllers
 
             return CreatedAtAction(nameof(GetQuestion), new { id = question.Id }, question);
         }
+        // ──────────────────────────────────────────────────────────────
+        // POST /api/questions/group
+        // Seçili soruları aynı "Soru Grubu" altında birleştirir
+        // ──────────────────────────────────────────────────────────────
+        [HttpPost("group")]
+        public async Task<IActionResult> GroupQuestions([FromBody] GroupQuestionsRequest request, [FromQuery] string? requesterUsername)
+        {
+            if (request.QuestionIds == null || request.QuestionIds.Count < 2)
+                return BadRequest(new { error = "En az 2 soru seçilmelidir." });
+
+            var questions = await _context.Questions
+                .Where(q => request.QuestionIds.Contains(q.Id))
+                .ToListAsync();
+
+            if (questions.Count != request.QuestionIds.Count)
+                return NotFound(new { error = "Seçilen sorulardan bazıları bulunamadı." });
+
+            int targetGroupId = questions.Min(q => q.GroupId ?? q.Id);
+
+            foreach (var q in questions)
+            {
+                q.GroupId = targetGroupId;
+            }
+
+            await _context.AuditLogs.AddAsync(new AuditLog
+            {
+                AdminUsername = requesterUsername ?? "system",
+                Action = "GROUP_QUESTIONS",
+                Details = $"Grouped questions [{string.Join(",", request.QuestionIds)}] into GroupId {targetGroupId}"
+            });
+
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true, groupId = targetGroupId });
+        }
     }
+
+    public record GroupQuestionsRequest(List<int> QuestionIds);
 
     public record UploadCroppedQuestionRequest(
         string ImageBase64,
