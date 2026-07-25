@@ -152,6 +152,11 @@ function QuestionCard({
             </svg>
             Ana menü
           </button>
+          
+          <div className="quiz__location" aria-hidden="true">
+            {question.courseName} <span className="quiz__loc-sep">/</span> {question.examType} <span className="quiz__loc-sep">/</span> {question.year}
+          </div>
+
           <p className="quiz__counter">
             Soru {currentIndex + 1} / {questionsTotal}
           </p>
