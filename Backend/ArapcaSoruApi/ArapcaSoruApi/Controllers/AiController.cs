@@ -73,7 +73,7 @@ namespace ArapcaSoruApi.Controllers
                     explanation  = result.Explanation,
                     modelUsed    = result.ModelUsed,
                     usedFallback = result.UsedFallback,
-                    quotaWarning = result.QuotaStatus.IsNearLimit
+                    quotaWarning = result.UsedFallback || result.QuotaStatus.IsNearLimit
                         ? "Yoğunluk nedeniyle yedek model kullanılıyor. Yanıt kalitesi değişebilir."
                         : null,
                 });

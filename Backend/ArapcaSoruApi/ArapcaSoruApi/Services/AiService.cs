@@ -142,15 +142,23 @@ namespace ArapcaSoruApi.Services
             {
                 explanation = await CallGeminiAsync(apiKey, modelToUse, base64Image, mimeType, correctOption);
             }
-            catch (HttpRequestException ex) when (useFallback == false)
+            catch (Exception ex) when (ex is InvalidOperationException || (ex is HttpRequestException && !useFallback))
             {
-                // Birincil model başarısız olduysa fallback'i dene
-                _logger.LogWarning(
-                    "Birincil model ({Model}) başarısız oldu, fallback deneniyor: {Fallback}. Hata: {Error}",
-                    PrimaryModel, fallbackModel, ex.Message);
+                // Limit/kota hatası veya HTTP hatası durumunda OpenRouter Fallback deneniyor
+                var openRouterApiKey = Environment.GetEnvironmentVariable("OPENROUTER_API_KEY") ?? _configuration["AiSettings:OpenRouterApiKey"];
+                if (string.IsNullOrWhiteSpace(openRouterApiKey))
+                {
+                    _logger.LogWarning("Birincil model ({Model}) başarısız oldu ancak OPENROUTER_API_KEY bulunamadı. Hata: {Error}", modelToUse, ex.Message);
+                    throw; // Eğer fallback yoksa orijinal hatayı fırlat
+                }
 
-                explanation = await CallGeminiAsync(apiKey, fallbackModel, base64Image, mimeType, correctOption);
+                _logger.LogWarning(
+                    "Birincil model ({Model}) başarısız oldu (Hata: {Error}), OpenRouter fallback modeline (google/gemma-4-26b-a4b-it) geçiliyor...",
+                    modelToUse, ex.Message);
+
+                explanation = await CallOpenRouterAsync(openRouterApiKey, base64Image, mimeType, correctOption);
                 useFallback = true;
+                modelToUse = "google/gemma-4-26b-a4b-it";
             }
 
             // ── 5. Format doğrulama ─────────────────────────────────────
@@ -496,6 +504,72 @@ namespace ArapcaSoruApi.Services
 
             return explanationText ?? "Yapay zekadan yanıt alınamadı.";
         }
+
+        /// <summary>OpenRouter API'ye (Fallback) istek gönderir ve yanıt metnini döner.</summary>
+        private async Task<string> CallOpenRouterAsync(
+            string apiKey, string base64Image, string mimeType, string correctOption)
+        {
+            var requestBody = new
+            {
+                model = "google/gemma-4-26b-a4b-it",
+                messages = new object[]
+                {
+                    new
+                    {
+                        role = "system",
+                        content = SystemPrompt
+                    },
+                    new
+                    {
+                        role = "user",
+                        content = new object[]
+                        {
+                            new
+                            {
+                                type = "text",
+                                text = $"Bu sorunun doğru cevabı {correctOption} şıkkıdır. " +
+                                       "Önce doğru cevabın neden doğru olduğunu teyit et, " +
+                                       "sonra çözüm adımlarını bu doğrultuda oluştur."
+                            },
+                            new
+                            {
+                                type = "image_url",
+                                image_url = new
+                                {
+                                    url = $"data:{mimeType};base64,{base64Image}"
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            var json = JsonSerializer.Serialize(requestBody);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using var openRouterClient = _httpClientFactory.CreateClient();
+            openRouterClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
+
+            var response = await openRouterClient.PostAsync("https://openrouter.ai/api/v1/chat/completions", content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorBody = await response.Content.ReadAsStringAsync();
+                throw new HttpRequestException($"OpenRouter API hatası ({(int)response.StatusCode}): {errorBody}");
+            }
+
+            var responseJson = await response.Content.ReadAsStringAsync();
+            using var doc = JsonDocument.Parse(responseJson);
+
+            var explanationText = doc.RootElement
+                .GetProperty("choices")[0]
+                .GetProperty("message")
+                .GetProperty("content")
+                .GetString();
+
+            return explanationText ?? "Yapay zekadan yanıt alınamadı (OpenRouter).";
+        }
+
 
         /// <summary>
         /// Yanıtın beklenen formata uyup uymadığını kontrol eder.
