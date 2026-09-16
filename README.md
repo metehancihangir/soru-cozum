@@ -1,178 +1,178 @@
-# Arapça Soru Çözüm Platformu
+# Arabic Question Solution Platform
 
-Modern ve kullanıcı dostu bir web uygulaması ile geçmiş sınavlarda çıkmış Arapça sorularını çözün, anlık geri bildirim alın.
+Solve Arabic exam questions from past exams with a modern and user-friendly web application, and receive instant feedback.
 
-## 📋 İçindekiler
+## 📋 Table of Contents
 
-- [Genel Bakış](#genel-bakış)
-- [Özellikler](#özellikler)
-- [Teknoloji Yığını](#teknoloji-yığını)
-- [Kurulum](#kurulum)
-- [Kullanım](#kullanım)
-- [Proje Yapısı](#proje-yapısı)
-- [API Endpointleri](#api-endpointleri)
-- [Geliştirme](#geliştirme)
-- [Katkıda Bulunma](#katkıda-bulunma)
-- [Lisans](#lisans)
+- [Overview](#overview)
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [API Endpoints](#api-endpoints)
+- [Development](#development)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Genel Bakış
+## Overview
 
-**ArapçaSoru**, üniversite sınavları, YÖK sınavları ve diğer Arapça dil sınavlarına hazırlanan öğrenciler için geliştirilmiş bir dijital soru çözüm platformudur. Uygulama, geçmiş yıllarda çıkmış gerçek sınav sorularını interaktif bir şekilde sunar ve yanlış cevap verildiğinde anında açıklama göstererek öğrenmeyi destekler.
+**ArabicQuestion** is a digital question-solving platform developed for students preparing for university exams, YÖK exams, and other Arabic language exams. The application presents real exam questions from previous years in an interactive way and supports learning by instantly showing explanations when incorrect answers are given.
 
-### Hedef Kitle
+### Target Audience
 
-- Üniversite ve YÖK sınav adayları (AUZEF, DGS, YDS vb.)
-- İlahiyat fakültesi ve Arapça bölümü öğrencileri
-- Dil kursu katılımcıları
-- Arapça öğrenmek isteyen bireyler
+- University and YÖK exam candidates (AUZEF, DGS, YDS, etc.)
+- Faculty of Theology and Arabic department students
+- Language course participants
+- Individuals wanting to learn Arabic
 
-## Özellikler
+## Features
 
-✨ **Temel Özellikler**
+✨ **Core Features**
 
-- 📚 **Geniş Soru Havuzu:** Geçmiş yıllarda çıkmış gerçek sınav soruları
-- ⚡ **Anlık Geri Bildirim:** Cevapladığınız anda doğru/yanlış kontrolü
-- 🎯 **Detaylı Çözümler:** Yanlış cevaplarda açıklayıcı çözüm metinleri
-- 🌐 **RTL Desteği:** Arapça metinler için tam sağdan-sola yazım desteği
-- 🔍 **Filtreleme:** Ders, sınav türü ve yıla göre soruları filtreleme
-- 📱 **Responsive Tasarım:** Mobil ve masaüstü uyumlu arayüz
+- 📚 **Extensive Question Pool:** Real exam questions from previous years
+- ⚡ **Instant Feedback:** Right/wrong check as soon as you answer
+- 🎯 **Detailed Solutions:** Explanatory solution texts for incorrect answers
+- 🌐 **RTL Support:** Full right-to-left writing support for Arabic texts
+- 🔍 **Filtering:** Filter questions by course, exam type, and year
+- 📱 **Responsive Design:** Mobile and desktop compatible interface
 
-🚀 **Planlanan Özellikler**
+🚀 **Planned Features**
 
-- Kullanıcı hesabı ve ilerleme takibi
-- Skor tablosu ve istatistikler
-- Konu bazlı soru kategorileri
-- Quiz modu (belirli sayıda soruluk oturumlar)
-- Soru içe aktarma (Excel/JSON)
-- Dark mode desteği
+- User account and progress tracking
+- Scoreboard and statistics
+- Topic-based question categories
+- Quiz mode (sessions with a specific number of questions)
+- Question import (Excel/JSON)
+- Dark mode support
 
-## Teknoloji Yığını
+## Technology Stack
 
-| Katman | Teknoloji | Versiyon |
+| Layer | Technology | Version |
 |--------|-----------|----------|
 | **Backend** | .NET Core Web API | 8.0 / 9.0 |
 | **Frontend** | React.js | 18+ |
-| **Veritabanı** | MySQL | 8.0+ |
+| **Database** | MySQL | 8.0+ |
 | **ORM** | Entity Framework Core | 8.0 |
-| **Dil** | C#, JavaScript | - |
-| **Encoding** | utf8mb4 | Arapça karakter desteği |
+| **Language** | C#, JavaScript | - |
+| **Encoding** | utf8mb4 | Arabic character support |
 
-## Kurulum
+## Installation
 
-### Gereksinimler
+### Requirements
 
-- .NET SDK 8.0 veya üzeri
-- Node.js 18+ ve npm
-- MySQL 8.0 veya üzeri
+- .NET SDK 8.0 or higher
+- Node.js 18+ and npm
+- MySQL 8.0 or higher
 
-### Backend Kurulumu
+### Backend Installation
 
 ```bash
-# Backend klasörüne git
+# Navigate to backend folder
 cd Backend/ArapcaSoruApi/ArapcaSoruApi
 
-# Bağımlılıkları yükle
+# Restore dependencies
 dotnet restore
 
-# appsettings.json dosyasını düzenle (MySQL bağlantı bilgileri)
+# Edit appsettings.json (MySQL connection information)
 
-# Veritabanı migration'larını uygula
+# Apply database migrations
 dotnet ef database update
 
-# API'yi çalıştır
+# Run the API
 dotnet run
 ```
 
-API varsayılan olarak `https://localhost:5001` adresinde çalışacaktır.
+The API will run by default at `https://localhost:5001`.
 
-### Frontend Kurulumu
+### Frontend Installation
 
 ```bash
-# Frontend klasörüne git
+# Navigate to frontend folder
 cd Frontend
 
-# Bağımlılıkları yükle
+# Install dependencies
 npm install
 
-# .env dosyasını oluştur ve API URL'sini ayarla
+# Create .env file and set API URL
 echo "VITE_API_URL=https://localhost:5001" > .env
 
-# Geliştirme sunucusunu başlat
+# Start development server
 npm run dev
 ```
 
-Frontend uygulama `http://localhost:5173` adresinde erişilebilir olacaktır.
+The frontend application will be accessible at `http://localhost:5173`.
 
-### Veritabanı Ayarları
+### Database Setup
 
-MySQL veritabanınızda aşağıdaki ayarları yapın:
+Configure your MySQL database with the following settings:
 
 ```sql
 CREATE DATABASE ArabicQuiz CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
-> **Önemli:** Arapça karakterlerin doğru saklanması için `utf8mb4` encoding kullanılmalıdır.
+> **Important:** `utf8mb4` encoding must be used for correct storage of Arabic characters.
 
-## Kullanım
+## Usage
 
-1. Uygulamayı tarayıcınızda açın (`http://localhost:5173`)
-2. Ana sayfadan ders seçin (Arapça-2 veya Arapça-4)
-3. Sınav türünü seçin (Vize, Final, Yaz Okulu vb.)
-4. Yıl seçin
-5. Soruları çözmeye başlayın
-6. Bir şıkka tıkladığınızda:
-   - ✅ **Doğru cevap:** Yeşil renkle vurgulanır
-   - ❌ **Yanlış cevap:** Kırmızı renkle vurgulanır ve doğru cevap gösterilir
-   - 💡 **Çözüm:** Açıklama metni otomatik olarak görüntülenir
+1. Open the application in your browser (`http://localhost:5173`)
+2. Select a course from the homepage (Arabic-2 or Arabic-4)
+3. Select exam type (Midterm, Final, Summer School, etc.)
+4. Select year
+5. Start solving questions
+6. When you click on an option:
+   - ✅ **Correct answer:** Highlighted in green
+   - ❌ **Incorrect answer:** Highlighted in red and the correct answer is shown
+   - 💡 **Solution:** Explanation text is automatically displayed
 
-## Proje Yapısı
+## Project Structure
 
 ```
 soru-cozum/
 ├── Backend/
 │   └── ArapcaSoruApi/
 │       └── ArapcaSoruApi/
-│           ├── Controllers/      # API endpointleri
+│           ├── Controllers/      # API endpoints
 │           │   └── QuestionsController.cs
-│           ├── Models/           # Veri modelleri
+│           ├── Models/           # Data models
 │           │   └── Question.cs
-│           ├── Data/             # Veritabanı context
+│           ├── Data/             # Database context
 │           │   └── AppDbContext.cs
-│           └── Program.cs        # Uygulama giriş noktası
+│           └── Program.cs        # Application entry point
 ├── Frontend/
 │   └── src/
-│       ├── components/           # React bileşenleri
+│       ├── components/           # React components
 │       │   ├── HomeScreen.jsx
 │       │   ├── QuestionCard.jsx
 │       │   └── ...
-│       ├── services/             # API servisleri
+│       ├── services/             # API services
 │       │   └── questionService.js
-│       ├── App.jsx               # Ana uygulama
-│       └── main.jsx              # Giriş noktası
-├── docs/                         # Dokümantasyon
-└── README.md                     # Bu dosya
+│       ├── App.jsx               # Main application
+│       └── main.jsx              # Entry point
+├── docs/                         # Documentation
+└── README.md                     # This file
 ```
 
-## API Endpointleri
+## API Endpoints
 
-### Sorular
+### Questions
 
-| Method | Endpoint | Açıklama |
+| Method | Endpoint | Description |
 |--------|----------|----------|
-| GET | `/api/questions` | Tüm soruları getirir |
-| GET | `/api/questions?course=Arapca-2&examType=Final&year=2021` | Filtrelenmiş soruları getirir |
-| GET | `/api/questions/{id}` | Belirli bir soruyu getirir |
-| POST | `/api/questions` | Yeni soru ekler (Admin) |
-| PUT | `/api/questions/{id}` | Soruyu günceller (Admin) |
-| DELETE | `/api/questions/{id}` | Soruyu siler (Admin) |
+| GET | `/api/questions` | Get all questions |
+| GET | `/api/questions?course=Arapca-2&examType=Final&year=2021` | Get filtered questions |
+| GET | `/api/questions/{id}` | Get a specific question |
+| POST | `/api/questions` | Add new question (Admin) |
+| PUT | `/api/questions/{id}` | Update question (Admin) |
+| DELETE | `/api/questions/{id}` | Delete question (Admin) |
 
-### Örnek İstek
+### Example Request
 
 ```bash
 curl -X GET "https://localhost:5001/api/questions?course=Arapca-2&examType=Final&year=2021"
 ```
 
-### Örnek Yanıt
+### Example Response
 
 ```json
 {
@@ -182,45 +182,45 @@ curl -X GET "https://localhost:5001/api/questions?course=Arapca-2&examType=Final
   "year": 2021,
   "imagePath": "/images/soru1.png",
   "correctOption": "C",
-  "explanation": "Bu soruda geçen kelime..."
+  "explanation": "The word in this question..."
 }
 ```
 
-## Geliştirme
+## Development
 
-### Kod Kalitesi
+### Code Quality
 
 - Backend: ESLint + Prettier
 - Frontend: ESLint + Prettier
 
-### Test
+### Testing
 
 ```bash
-# Backend testleri
+# Backend tests
 cd Backend/ArapcaSoruApi/ArapcaSoruApi
 dotnet test
 
-# Frontend testleri
+# Frontend tests
 cd Frontend
 npm test
 ```
 
-## Katkıda Bulunma
+## Contributing
 
-Katkılarınızı bekliyoruz! Lütfen şu adımları izleyin:
+We welcome your contributions! Please follow these steps:
 
-1. Projeyi fork edin
-2. Yeni bir branch oluşturun (`git checkout -b feature/YeniOzellik`)
-3. Değişikliklerinizi commit edin (`git commit -m 'Yeni özellik eklendi'`)
-4. Branch'inizi push edin (`git push origin feature/YeniOzellik`)
-5. Pull Request oluşturun
+1. Fork the project
+2. Create a new branch (`git checkout -b feature/NewFeature`)
+3. Commit your changes (`git commit -m 'Add new feature'`)
+4. Push your branch (`git push origin feature/NewFeature`)
+5. Create a Pull Request
 
-## Lisans
+## License
 
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
-**İletişim:** Proje hakkında sorularınız için issue açabilirsiniz.
+**Contact:** You can open an issue for questions about the project.
 
-**Keyifli öğrenmeler! 🎓**
+**Happy learning! 🎓**
